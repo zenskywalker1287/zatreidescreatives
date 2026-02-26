@@ -1,12 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Nav from "../components/Nav";
+import HeroSection from "../components/HeroSection";
+import ComparisonSection from "../components/ComparisonSection";
+import PipelineSection from "../components/PipelineSection";
+import MadcowSection from "../components/MadcowSection";
+import CampaignSection from "../components/CampaignSection";
+import TouchpointsSection from "../components/TouchpointsSection";
+import StatsSection from "../components/StatsSection";
+import PortfolioStrip from "../components/PortfolioStrip";
+import ContactSection from "../components/ContactSection";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background relative">
+      {/* Film grain overlay */}
+      <div className="film-grain" />
+
+      <Nav />
+      <HeroSection />
+      <ComparisonSection />
+      <PipelineSection />
+      <MadcowSection />
+      <CampaignSection />
+      <TouchpointsSection />
+      <StatsSection />
+      <PortfolioStrip />
+      <ContactSection />
+
+      {/* Footer */}
+      <footer className="border-t border-foreground/5 px-6 md:px-12 lg:px-20 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <span className="meta-label text-primary">CMD.CTRL</span>
+        <span className="meta-label text-muted-foreground/40">
+          © 2026 — CREATIVE BACKEND SYSTEMS
+        </span>
+      </footer>
     </div>
   );
 };
