@@ -206,7 +206,7 @@ const PipelineSection = () => {
         </div>
 
         {/* USP Cards */}
-        <div className="mt-16 space-y-4">
+        <div className={`space-y-4 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[5000px] opacity-100 mt-16"}`}>
           {usps.map((usp, i) => {
             const visible = i < visibleCards;
             const formatVisible = i < showFormats;
