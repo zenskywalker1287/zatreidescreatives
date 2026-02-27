@@ -28,9 +28,9 @@ const HeroSection = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? 120 : 240;
-  const CARD_WIDTH_CENTER = isMobile ? 150 : 300;
-  const CARD_GAP = isMobile ? 8 : 24;
+  const CARD_WIDTH = isMobile ? 180 : 240;
+  const CARD_WIDTH_CENTER = isMobile ? 220 : 300;
+  const CARD_GAP = isMobile ? 12 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
@@ -256,7 +256,7 @@ const HeroSection = () => {
                     src={card.image}
                     alt={card.label}
                     className="w-full h-auto block"
-                    style={{ borderRadius: '12px', maxHeight: isMobile ? '220px' : '500px' }}
+                    style={{ maxHeight: isMobile ? '380px' : '500px' }}
                     loading="lazy"
                     draggable={false}
                   />
