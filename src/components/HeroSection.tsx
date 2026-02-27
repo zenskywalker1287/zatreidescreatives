@@ -125,26 +125,53 @@ const HeroSection = () => {
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 pt-24 pb-8">
       <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           <h1 className="leading-[0.85] tracking-tight mb-6 animate-fade-up relative">
-            {/* Background glow blur */}
-            <div className="absolute inset-0 blur-[120px] opacity-20 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse at center, hsl(var(--primary)), transparent 70%)' }}
+            {/* Deep background glow */}
+            <div className="absolute -inset-20 blur-[180px] opacity-30 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)' }}
             />
-            {/* Ghost text echo layer */}
-            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true">
-              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[6px] opacity-[0.15]">
+            {/* Secondary ambient glow */}
+            <div className="absolute -inset-10 blur-[100px] opacity-15 pointer-events-none"
+              style={{ background: 'radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.6), transparent 50%), radial-gradient(circle at 70% 50%, hsl(var(--foreground) / 0.1), transparent 50%)' }}
+            />
+
+            {/* Far ghost echo — very blurred */}
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.04)' }}>
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[18px] opacity-[0.08]">
                 I BUILD THE INVISIBLE
               </span>
-              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[6px] opacity-[0.15]">
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[18px] opacity-[0.08]">
                 CLOSERS.
               </span>
             </span>
+
+            {/* Near ghost echo — medium blur */}
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.015)' }}>
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[8px] opacity-[0.15]">
+                I BUILD THE INVISIBLE
+              </span>
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[8px] opacity-[0.15]">
+                CLOSERS.
+              </span>
+            </span>
+
+            {/* Stroke/outline echo layer */}
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true">
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-transparent block" style={{ WebkitTextStroke: '1px hsl(var(--foreground) / 0.15)' }}>
+                I BUILD THE INVISIBLE
+              </span>
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-transparent block" style={{ WebkitTextStroke: '1px hsl(var(--foreground) / 0.15)' }}>
+                CLOSERS.
+              </span>
+            </span>
+
+            {/* Main text */}
             <span className="relative z-10 block">
-              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white inline">I BUILD THE </span>
-              <span className="font-serif-thin italic text-[clamp(2.8rem,10vw,10rem)] text-foreground inline" style={{ lineHeight: '1' }}>
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white inline" style={{ textShadow: '0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1)' }}>I BUILD THE </span>
+              <span className="font-serif-thin italic text-[clamp(2.8rem,10vw,10rem)] text-foreground inline" style={{ lineHeight: '1', textShadow: '0 0 60px hsl(var(--foreground) / 0.2)' }}>
                 INVISIBLE
               </span>
             </span>
-            <span className="relative z-10 font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block">
+            <span className="relative z-10 font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block" style={{ textShadow: '0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1)' }}>
               CLOSERS.
             </span>
           </h1>
