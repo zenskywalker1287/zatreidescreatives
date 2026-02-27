@@ -29,7 +29,7 @@ const HeroSection = () => {
 
   const isMobile = containerWidth < 640;
   const CARD_WIDTH = isMobile ? 260 : 240;
-  const CARD_WIDTH_CENTER = isMobile ? 280 : 300;
+  const CARD_WIDTH_CENTER = isMobile ? 260 : 300;
   const CARD_GAP = isMobile ? 16 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
@@ -119,7 +119,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-[120vh] sm:min-h-screen flex flex-col overflow-hidden"
     >
       {/* Vignette */}
       <div
@@ -239,7 +239,7 @@ const HeroSection = () => {
             const absDist = Math.abs(clampedDist);
             const rotation = isMobile ? clampedDist * 2 : clampedDist * 4;
             const lift = Math.max(0, (isMobile ? 20 : 30) - absDist * (isMobile ? 10 : 15));
-            const scale = 1 + Math.max(0, (1 - absDist * 0.3)) * (isMobile ? 0.12 : 0.08);
+            const scale = 1 + Math.max(0, (1 - absDist * 0.3)) * 0.08;
             const isCenter = Math.abs(dist) < 0.6;
             const isHovered = hoveredCard === card.id;
             const cardOpacity = isMobile ? Math.max(0.3, 1 - absDist * 0.25) : 1;
@@ -249,7 +249,7 @@ const HeroSection = () => {
                 key={card.id}
                 className="flex-shrink-0 relative"
                 style={{
-                  width: isCenter ? CARD_WIDTH_CENTER : CARD_WIDTH,
+                  width: CARD_WIDTH,
                   opacity: cardOpacity,
                   transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
                   transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease',
