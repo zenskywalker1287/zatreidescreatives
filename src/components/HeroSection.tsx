@@ -195,7 +195,7 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 h-[520px] md:h-[620px] cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up"
+        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-8"
         style={{ animationDelay: "0.8s" }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -204,7 +204,7 @@ const HeroSection = () => {
         onWheel={handleWheel}
       >
         <div
-          className="absolute top-0 flex items-end h-full"
+          className="flex items-end"
           style={{
             transform: `translateX(${scrollX}px)`,
             transition: isDragging ? 'none' : 'transform 0.1s ease-out',
@@ -228,7 +228,6 @@ const HeroSection = () => {
                 className="flex-shrink-0 relative"
                 style={{
                   width: isCenter ? CARD_WIDTH_CENTER : CARD_WIDTH,
-                  height: 480,
                   transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
                   transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
                   zIndex: isHovered ? 50 : (isCenter ? 10 : 1),
@@ -245,15 +244,16 @@ const HeroSection = () => {
                 )}
 
                 <div
-                  className="relative w-full h-full border border-foreground/20 overflow-hidden flex items-center justify-center"
-                  style={{ backgroundColor: '#0a0a0a', borderRadius: '16px' }}
+                  className="relative w-full overflow-hidden"
+                  style={{ backgroundColor: '#0a0a0a', borderRadius: '16px', border: '1px solid hsl(var(--foreground) / 0.2)' }}
                 >
                   <img
                     src={card.image}
                     alt={card.label}
-                    className="w-full h-full"
-                    style={{ objectFit: 'contain', objectPosition: 'center' }}
+                    className="w-full h-auto block"
+                    style={{ borderRadius: '16px' }}
                     loading="lazy"
+                    draggable={false}
                   />
 
                   {/* Dark overlay for non-center cards */}
