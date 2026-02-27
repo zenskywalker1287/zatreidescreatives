@@ -28,9 +28,10 @@ const HeroSection = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? 260 : 240;
-  const CARD_WIDTH_CENTER = isMobile ? 260 : 300;
-  const CARD_GAP = isMobile ? 16 : 24;
+  // On mobile: card takes ~70% of viewport so side cards barely peek
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.7) : 240;
+  const CARD_WIDTH_CENTER = isMobile ? CARD_WIDTH : 300;
+  const CARD_GAP = isMobile ? 12 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
@@ -119,7 +120,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[120vh] sm:min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-[140vh] sm:min-h-screen flex flex-col overflow-hidden"
     >
       {/* Vignette */}
       <div
@@ -274,7 +275,7 @@ const HeroSection = () => {
                     src={card.image}
                     alt={card.label}
                     className="w-full h-auto block"
-                    style={{ maxHeight: isMobile ? '380px' : '500px' }}
+                    style={{ maxHeight: isMobile ? '480px' : '500px' }}
                     loading="lazy"
                     draggable={false}
                   />
