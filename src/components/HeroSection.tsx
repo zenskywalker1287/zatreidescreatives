@@ -28,9 +28,9 @@ const HeroSection = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.65) : 240;
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 240;
   const CARD_WIDTH_CENTER = isMobile ? CARD_WIDTH : 300;
-  const CARD_GAP = isMobile ? 14 : 24;
+  const CARD_GAP = isMobile ? 10 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
@@ -239,12 +239,12 @@ const HeroSection = () => {
             if (dist < -totalCards / 2) dist += totalCards;
             const clampedDist = Math.max(-4, Math.min(4, dist));
             const absDist = Math.abs(clampedDist);
-            const rotation = isMobile ? clampedDist * 2 : clampedDist * 4;
-            const lift = Math.max(0, (isMobile ? 20 : 30) - absDist * (isMobile ? 10 : 15));
-            const scale = 1 + Math.max(0, (1 - absDist * 0.3)) * 0.08;
+            const rotation = isMobile ? clampedDist * 1 : clampedDist * 4;
+            const lift = isMobile ? 0 : Math.max(0, 30 - absDist * 15);
+            const scale = isMobile ? 1 : 1 + Math.max(0, (1 - absDist * 0.3)) * 0.08;
             const isCenter = Math.abs(dist) < 0.6;
             const isHovered = hoveredCard === card.id;
-            const cardOpacity = isMobile ? Math.max(0.3, 1 - absDist * 0.25) : 1;
+            const cardOpacity = isMobile ? Math.max(0.4, 1 - absDist * 0.2) : 1;
 
             return (
               <div
@@ -272,9 +272,9 @@ const HeroSection = () => {
                   className="relative w-full overflow-hidden"
                   style={{
                     backgroundColor: '#0a0a0a',
-                    borderRadius: isMobile ? '16px' : '16px',
+                    borderRadius: isMobile ? '20px' : '16px',
                     border: '1px solid hsl(var(--foreground) / 0.2)',
-                    aspectRatio: isMobile ? '3 / 5' : undefined,
+                    aspectRatio: isMobile ? '9 / 16' : undefined,
                   }}
                 >
                   <img
