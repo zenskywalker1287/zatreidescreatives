@@ -30,14 +30,14 @@ const panels = [
 
 /* ── MARQUEE ── */
 const Marquee = () => (
-  <div className="relative w-full border-y border-foreground/15 overflow-hidden py-3">
+  <div className="relative w-full border-y border-primary/40 overflow-hidden py-3" style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.05)' }}>
     <div className="flex whitespace-nowrap animate-[marquee_40s_linear_infinite]">
       {[0, 1, 2].map((i) => (
-        <span key={i} className="font-mono text-xs md:text-sm text-foreground/80 tracking-wide mr-0">
+        <span key={i} className="font-mono text-xs md:text-sm text-primary tracking-wide mr-0" style={{ textShadow: '0 0 20px hsl(var(--primary) / 0.5)' }}>
           {tickerItems.map((item, j) => (
             <span key={j}>
               {item}
-              <span className="text-primary mx-4">→</span>
+              <span className="text-primary/60 mx-4">→</span>
             </span>
           ))}
         </span>
@@ -58,15 +58,36 @@ const GiantNumbers = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   const rafRef = useRef<number>(0);
+  const autoScrollRef = useRef<number>(0);
+  const isUserInteracting = useRef(false);
 
   const PANEL_WIDTH = typeof window !== "undefined" ? window.innerWidth * 0.55 : 700;
   const TOTAL_WIDTH = panels.length * PANEL_WIDTH;
   const maxScroll = -(TOTAL_WIDTH - (typeof window !== "undefined" ? window.innerWidth : 1200));
 
-  const clampScroll = (v: number) => Math.min(0, Math.max(maxScroll, v));
+  const clampScroll = useCallback((v: number) => Math.min(0, Math.max(maxScroll, v)), [maxScroll]);
+
+  // Auto-scroll
+  useEffect(() => {
+    const speed = -0.4; // px per frame
+    const tick = () => {
+      if (!isUserInteracting.current) {
+        setScrollX((prev) => {
+          const next = prev + speed;
+          // loop back when reaching end
+          if (next < maxScroll) return 0;
+          return next;
+        });
+      }
+      autoScrollRef.current = requestAnimationFrame(tick);
+    };
+    autoScrollRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(autoScrollRef.current);
+  }, [maxScroll]);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
+      isUserInteracting.current = true;
       setIsDragging(true);
       setStartX(e.clientX);
       setScrollStart(scrollX);
@@ -98,13 +119,16 @@ const GiantNumbers = () => {
     setIsDragging(false);
     let v = velocityRef.current * 15;
     const decay = () => {
-      if (Math.abs(v) < 0.5) return;
+      if (Math.abs(v) < 0.5) {
+        isUserInteracting.current = false;
+        return;
+      }
       v *= 0.93;
       setScrollX((prev) => clampScroll(prev + v));
       rafRef.current = requestAnimationFrame(decay);
     };
     rafRef.current = requestAnimationFrame(decay);
-  }, [maxScroll]);
+  }, [maxScroll, clampScroll]);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
