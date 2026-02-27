@@ -253,7 +253,7 @@ const HeroSection = () => {
                 style={{
                   width: CARD_WIDTH,
                   opacity: cardOpacity,
-                  transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
+                  transform: `rotate(${isHovered && !isMobile ? 0 : rotation}deg) translateY(${isHovered && !isMobile ? -40 : -lift}px) scale(${isHovered && !isMobile ? 1.12 : scale})`,
                   transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease',
                   zIndex: isHovered ? 50 : isCenter ? 10 : 1,
                   transformOrigin: 'bottom center'
