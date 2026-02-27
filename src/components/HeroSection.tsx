@@ -251,7 +251,7 @@ const HeroSection = () => {
                     src={card.image}
                     alt={card.label}
                     className="w-full h-auto block"
-                    style={{ borderRadius: '16px' }}
+                    style={{ borderRadius: '16px', maxHeight: '500px' }}
                     loading="lazy"
                     draggable={false}
                   />
