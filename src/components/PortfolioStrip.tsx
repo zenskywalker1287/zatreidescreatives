@@ -34,7 +34,7 @@ const PortfolioStrip = () => {
         {emailHeroes.map((hero, i) => (
           <div
             key={hero.id}
-            className={`flex-shrink-0 w-[300px] md:w-[400px] h-[550px] md:h-[700px] border border-foreground/15 rounded-xl relative overflow-hidden cursor-pointer group transition-all duration-500 ${
+            className={`flex-shrink-0 w-[300px] md:w-[400px] h-[620px] md:h-[820px] border border-foreground/15 rounded-xl relative overflow-hidden cursor-pointer group transition-all duration-500 ${
               inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
             style={{ transitionDelay: `${i * 100}ms` }}
@@ -43,7 +43,7 @@ const PortfolioStrip = () => {
           >
             {/* Email hero image */}
             <div className="absolute inset-0">
-              <img src={hero.image} alt={`Email Hero ${hero.id}`} className="w-full h-full object-cover object-top" loading="lazy" />
+              <img src={hero.image} alt={`Email Hero ${hero.id}`} className="w-full h-full object-contain object-top bg-background p-3" loading="lazy" />
             </div>
 
             {/* Hover overlay */}
@@ -71,7 +71,7 @@ const PortfolioStrip = () => {
         {/* End CTA */}
         <a
           href="/portfolio"
-          className="flex-shrink-0 w-[300px] h-[550px] md:h-[700px] border border-foreground/15 rounded-xl flex items-center justify-center group hover:border-primary/40 transition-all duration-300"
+          className="flex-shrink-0 w-[300px] h-[620px] md:h-[820px] border border-foreground/15 rounded-xl flex items-center justify-center group hover:border-primary/40 transition-all duration-300"
         >
           <span className="btn-brutal">[ VIEW FULL 30-DAY LOGIC ]</span>
         </a>

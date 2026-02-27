@@ -194,7 +194,7 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 h-[320px] md:h-[380px] cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up"
+        className="relative z-10 h-[520px] md:h-[620px] cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up"
         style={{ animationDelay: "0.8s" }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -244,7 +244,7 @@ const HeroSection = () => {
                 )}
 
                 <div className="relative w-full h-full border border-foreground/20 bg-secondary overflow-hidden rounded-xl">
-                  <img src={card.image} alt={card.label} className="w-full h-full object-cover object-top" loading="lazy" />
+                  <img src={card.image} alt={card.label} className="w-full h-full object-contain object-top bg-background p-2" loading="lazy" />
 
                   {/* Hover metadata overlay */}
                   <div className={`absolute inset-0 bg-background/90 flex flex-col justify-end p-4 transition-opacity duration-300 ${
