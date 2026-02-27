@@ -28,9 +28,9 @@ const HeroSection = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? 180 : 240;
-  const CARD_WIDTH_CENTER = isMobile ? 220 : 300;
-  const CARD_GAP = isMobile ? 12 : 24;
+  const CARD_WIDTH = isMobile ? 260 : 240;
+  const CARD_WIDTH_CENTER = isMobile ? 280 : 300;
+  const CARD_GAP = isMobile ? 16 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
@@ -63,6 +63,18 @@ const HeroSection = () => {
     }
   }, [containerWidth, TOTAL_WIDTH]);
 
+  // Wrap scroll position for infinite looping
+  const wrapScroll = useCallback((x: number) => {
+    const min = -(TOTAL_WIDTH - containerWidth / 2);
+    const max = containerWidth / 2;
+    const range = max - min;
+    if (range <= 0) return x;
+    let wrapped = x;
+    while (wrapped < min) wrapped += range;
+    while (wrapped > max) wrapped -= range;
+    return wrapped;
+  }, [TOTAL_WIDTH, containerWidth]);
+
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     setIsDragging(true);
     setStartX(e.clientX);
@@ -82,26 +94,25 @@ const HeroSection = () => {
     if (dt > 0) velocityRef.current = dx / dt;
     lastXRef.current = e.clientX;
     lastTimeRef.current = now;
-    setScrollX(scrollStart + (e.clientX - startX));
-  }, [isDragging, scrollStart, startX]);
+    setScrollX(wrapScroll(scrollStart + (e.clientX - startX)));
+  }, [isDragging, scrollStart, startX, wrapScroll]);
 
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);
-    // Inertia
     let v = velocityRef.current * 15;
     const decay = () => {
       if (Math.abs(v) < 0.5) return;
       v *= 0.95;
-      setScrollX(prev => prev + v);
+      setScrollX(prev => wrapScroll(prev + v));
       rafRef.current = requestAnimationFrame(decay);
     };
     rafRef.current = requestAnimationFrame(decay);
-  }, []);
+  }, [wrapScroll]);
 
   const handleWheel = useCallback((e: React.WheelEvent) => {
     e.preventDefault();
-    setScrollX(prev => prev - e.deltaY * 1.5);
-  }, []);
+    setScrollX(prev => wrapScroll(prev - e.deltaY * 1.5));
+  }, [wrapScroll]);
 
   const centerOffset = containerWidth / 2;
 
@@ -219,13 +230,19 @@ const HeroSection = () => {
           {emailCards.map((card, i) => {
             const cardCenter = i * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
             const viewCenter = -scrollX + centerOffset;
-            const dist = (cardCenter - viewCenter) / (CARD_WIDTH + CARD_GAP);
+            let dist = (cardCenter - viewCenter) / (CARD_WIDTH + CARD_GAP);
+            // Wrap distance for circular effect
+            const totalCards = emailCards.length;
+            if (dist > totalCards / 2) dist -= totalCards;
+            if (dist < -totalCards / 2) dist += totalCards;
             const clampedDist = Math.max(-4, Math.min(4, dist));
-            const rotation = clampedDist * 4;
-            const lift = Math.max(0, 30 - Math.abs(clampedDist) * 15);
-            const scale = 1 + Math.max(0, (1 - Math.abs(clampedDist) * 0.3)) * 0.08;
+            const absDist = Math.abs(clampedDist);
+            const rotation = isMobile ? clampedDist * 2 : clampedDist * 4;
+            const lift = Math.max(0, (isMobile ? 20 : 30) - absDist * (isMobile ? 10 : 15));
+            const scale = 1 + Math.max(0, (1 - absDist * 0.3)) * (isMobile ? 0.12 : 0.08);
             const isCenter = Math.abs(dist) < 0.6;
             const isHovered = hoveredCard === card.id;
+            const cardOpacity = isMobile ? Math.max(0.3, 1 - absDist * 0.25) : 1;
 
             return (
               <div
@@ -233,8 +250,9 @@ const HeroSection = () => {
                 className="flex-shrink-0 relative"
                 style={{
                   width: isCenter ? CARD_WIDTH_CENTER : CARD_WIDTH,
+                  opacity: cardOpacity,
                   transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
-                  transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                  transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease',
                   zIndex: isHovered ? 50 : (isCenter ? 10 : 1),
                   transformOrigin: 'bottom center',
                 }}
