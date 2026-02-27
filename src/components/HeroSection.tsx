@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
 const emailCards = [
-  { id: 1, label: "EMAIL CREATIVE 01", persona: "TACTICAL GUARDIAN", trigger: "FEAR OF LOSS", usp: "DURABILITY", image: "/images/email-01.png" },
-  { id: 2, label: "EMAIL CREATIVE 02", persona: "GEAR SNOB", trigger: "STATUS SIGNALING", usp: "EXCLUSIVITY", image: "/images/email-02.png" },
-  { id: 3, label: "EMAIL CREATIVE 03", persona: "WEEKEND WARRIOR", trigger: "ADVENTURE IDENTITY", usp: "VERSATILITY", image: "/images/email-03.png" },
-  { id: 4, label: "EMAIL CREATIVE 04", persona: "TACTICAL GUARDIAN", trigger: "PARENTAL INSTINCT", usp: "PROTECTION", image: "/images/email-04.png" },
-  { id: 5, label: "EMAIL CREATIVE 05", persona: "GEAR SNOB", trigger: "SUPERIORITY", usp: "CRAFTSMANSHIP", image: "/images/email-05.png" },
-  { id: 6, label: "EMAIL CREATIVE 06", persona: "WEEKEND WARRIOR", trigger: "FREEDOM", usp: "WATERPROOF", image: "/images/email-06.png" },
-  { id: 7, label: "EMAIL CREATIVE 07", persona: "TACTICAL GUARDIAN", trigger: "AUTHORITY", usp: "MIL-SPEC", image: "/images/email-01.png" },
-  { id: 8, label: "EMAIL CREATIVE 08", persona: "GEAR SNOB", trigger: "SOCIAL PROOF", usp: "DESIGN", image: "/images/email-02.png" },
-  { id: 9, label: "EMAIL CREATIVE 09", persona: "WEEKEND WARRIOR", trigger: "BELONGING", usp: "ALL-TERRAIN", image: "/images/email-03.png" },
-  { id: 10, label: "EMAIL CREATIVE 10", persona: "TACTICAL GUARDIAN", trigger: "SAFETY", usp: "STRENGTH", image: "/images/email-04.png" },
-];
+{ id: 1, label: "EMAIL CREATIVE 01", persona: "TACTICAL GUARDIAN", trigger: "FEAR OF LOSS", usp: "DURABILITY", image: "/images/email-01.png" },
+{ id: 2, label: "EMAIL CREATIVE 02", persona: "GEAR SNOB", trigger: "STATUS SIGNALING", usp: "EXCLUSIVITY", image: "/images/email-02.png" },
+{ id: 3, label: "EMAIL CREATIVE 03", persona: "WEEKEND WARRIOR", trigger: "ADVENTURE IDENTITY", usp: "VERSATILITY", image: "/images/email-03.png" },
+{ id: 4, label: "EMAIL CREATIVE 04", persona: "TACTICAL GUARDIAN", trigger: "PARENTAL INSTINCT", usp: "PROTECTION", image: "/images/email-04.png" },
+{ id: 5, label: "EMAIL CREATIVE 05", persona: "GEAR SNOB", trigger: "SUPERIORITY", usp: "CRAFTSMANSHIP", image: "/images/email-05.png" },
+{ id: 6, label: "EMAIL CREATIVE 06", persona: "WEEKEND WARRIOR", trigger: "FREEDOM", usp: "WATERPROOF", image: "/images/email-06.png" },
+{ id: 7, label: "EMAIL CREATIVE 07", persona: "TACTICAL GUARDIAN", trigger: "AUTHORITY", usp: "MIL-SPEC", image: "/images/email-01.png" },
+{ id: 8, label: "EMAIL CREATIVE 08", persona: "GEAR SNOB", trigger: "SOCIAL PROOF", usp: "DESIGN", image: "/images/email-02.png" },
+{ id: 9, label: "EMAIL CREATIVE 09", persona: "WEEKEND WARRIOR", trigger: "BELONGING", usp: "ALL-TERRAIN", image: "/images/email-03.png" },
+{ id: 10, label: "EMAIL CREATIVE 10", persona: "TACTICAL GUARDIAN", trigger: "SAFETY", usp: "STRENGTH", image: "/images/email-04.png" }];
+
 
 const HeroSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
@@ -42,7 +42,7 @@ const HeroSection = () => {
       });
     };
     window.addEventListener("mousemove", handleMouse);
-    return () => { window.removeEventListener("mousemove", handleMouse); cancelAnimationFrame(rafId); };
+    return () => {window.removeEventListener("mousemove", handleMouse);cancelAnimationFrame(rafId);};
   }, []);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const HeroSection = () => {
     const decay = () => {
       if (Math.abs(v) < 0.5) return;
       v *= 0.95;
-      setScrollX(prev => wrapScroll(prev + v));
+      setScrollX((prev) => wrapScroll(prev + v));
       rafRef.current = requestAnimationFrame(decay);
     };
     rafRef.current = requestAnimationFrame(decay);
@@ -113,7 +113,7 @@ const HeroSection = () => {
 
   const handleWheel = useCallback((e: React.WheelEvent) => {
     e.preventDefault();
-    setScrollX(prev => wrapScroll(prev - e.deltaY * 1.5));
+    setScrollX((prev) => wrapScroll(prev - e.deltaY * 1.5));
   }, [wrapScroll]);
 
   const centerOffset = containerWidth / 2;
@@ -121,24 +121,24 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative flex flex-col overflow-hidden"
-    >
+      className="relative flex flex-col overflow-hidden">
+
       {/* Vignette */}
       <div
         className="absolute inset-0 pointer-events-none transition-all duration-700"
         style={{
           background: `radial-gradient(ellipse at ${mousePos.x * 100}% ${mousePos.y * 100}%, transparent 0%, hsl(var(--background)) 70%)`,
-          opacity: 0.5,
-        }}
-      />
+          opacity: 0.5
+        }} />
+
 
       {/* Grid lines */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }}
-      />
+      style={{
+        backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+        backgroundSize: '80px 80px'
+      }} />
+
 
       {/* TOP HALF — Headline */}
       <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 pt-24 pb-4 min-h-[60vh] sm:min-h-[50vh]">
@@ -146,12 +146,12 @@ const HeroSection = () => {
           <h1 className="leading-[0.85] tracking-tight mb-6 animate-fade-up relative">
             {/* Deep background glow */}
             <div className="absolute -inset-20 blur-[180px] opacity-30 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)' }}
-            />
+            style={{ background: 'radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)' }} />
+
             {/* Secondary ambient glow */}
             <div className="absolute -inset-10 blur-[100px] opacity-15 pointer-events-none"
-              style={{ background: 'radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.6), transparent 50%), radial-gradient(circle at 70% 50%, hsl(var(--foreground) / 0.1), transparent 50%)' }}
-            />
+            style={{ background: 'radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.6), transparent 50%), radial-gradient(circle at 70% 50%, hsl(var(--foreground) / 0.1), transparent 50%)' }} />
+
 
             {/* Far ghost echo — very blurred */}
             <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.04)' }}>
@@ -196,15 +196,15 @@ const HeroSection = () => {
           </h1>
           <p
             className="font-mono text-sm md:text-base text-muted-foreground max-w-2xl mb-8 opacity-0 animate-fade-up"
-            style={{ animationDelay: "0.3s" }}
-          >
+            style={{ animationDelay: "0.3s" }}>
+
             The creative backend that owns mental real estate — long after the ad spend stops.
           </p>
           <a
             href="#comparison"
             className="btn-brutal inline-block opacity-0 animate-fade-up"
-            style={{ animationDelay: "0.6s" }}
-          >
+            style={{ animationDelay: "0.6s" }}>
+
             [ ENTER THE ENGINE ]
           </a>
         </div>
@@ -213,22 +213,22 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-12"
+        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-12 py-[63px]"
         style={{ animationDelay: "0.8s" }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        onWheel={handleWheel}
-      >
+        onWheel={handleWheel}>
+
         <div
           className="flex items-end"
           style={{
             transform: `translateX(${scrollX}px)`,
             transition: isDragging ? 'none' : 'transform 0.1s ease-out',
-            gap: `${CARD_GAP}px`,
-          }}
-        >
+            gap: `${CARD_GAP}px`
+          }}>
+
           {emailCards.map((card, i) => {
             const cardCenter = i * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
             const viewCenter = -scrollX + centerOffset;
@@ -241,7 +241,7 @@ const HeroSection = () => {
             const absDist = Math.abs(clampedDist);
             const rotation = isMobile ? clampedDist * 1 : clampedDist * 4;
             const lift = isMobile ? 0 : Math.max(0, 30 - absDist * 15);
-            const scale = isMobile ? 1 : 1 + Math.max(0, (1 - absDist * 0.3)) * 0.08;
+            const scale = isMobile ? 1 : 1 + Math.max(0, 1 - absDist * 0.3) * 0.08;
             const isCenter = Math.abs(dist) < 0.6;
             const isHovered = hoveredCard === card.id;
             const cardOpacity = isMobile ? Math.max(0.4, 1 - absDist * 0.2) : 1;
@@ -255,18 +255,18 @@ const HeroSection = () => {
                   opacity: cardOpacity,
                   transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
                   transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease',
-                  zIndex: isHovered ? 50 : (isCenter ? 10 : 1),
-                  transformOrigin: 'bottom center',
+                  zIndex: isHovered ? 50 : isCenter ? 10 : 1,
+                  transformOrigin: 'bottom center'
                 }}
                 onMouseEnter={() => setHoveredCard(card.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
+                onMouseLeave={() => setHoveredCard(null)}>
+
                 {/* Red glow for center card */}
-                {isCenter && !isHovered && (
-                  <div className="absolute -inset-4 rounded-2xl opacity-30 pointer-events-none blur-2xl"
-                    style={{ background: 'hsl(var(--primary) / 0.4)' }}
-                  />
-                )}
+                {isCenter && !isHovered &&
+                <div className="absolute -inset-4 rounded-2xl opacity-30 pointer-events-none blur-2xl"
+                style={{ background: 'hsl(var(--primary) / 0.4)' }} />
+
+                }
 
                 <div
                   className="relative w-full overflow-hidden"
@@ -274,9 +274,9 @@ const HeroSection = () => {
                     backgroundColor: '#0a0a0a',
                     borderRadius: isMobile ? '20px' : '16px',
                     border: '1px solid hsl(var(--foreground) / 0.2)',
-                    aspectRatio: isMobile ? '9 / 16' : undefined,
-                  }}
-                >
+                    aspectRatio: isMobile ? '9 / 16' : undefined
+                  }}>
+
                   <img
                     src={card.image}
                     alt={card.label}
@@ -285,24 +285,24 @@ const HeroSection = () => {
                       height: isMobile ? '100%' : 'auto',
                       objectFit: isMobile ? 'cover' : undefined,
                       objectPosition: 'top center',
-                      maxHeight: isMobile ? undefined : '500px',
+                      maxHeight: isMobile ? undefined : '500px'
                     }}
                     loading="lazy"
-                    draggable={false}
-                  />
+                    draggable={false} />
+
 
                   {/* Dark overlay for non-center cards */}
-                  {!isCenter && !isHovered && (
-                    <div className="absolute inset-0 bg-black/40 pointer-events-none" style={{ borderRadius: '16px' }} />
-                  )}
+                  {!isCenter && !isHovered &&
+                  <div className="absolute inset-0 bg-black/40 pointer-events-none" style={{ borderRadius: '16px' }} />
+                  }
 
                   {/* Hover metadata overlay */}
                   <div
                     className={`absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300 ${
-                      isHovered ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    style={{ backgroundColor: 'rgba(10,10,10,0.9)', borderRadius: '16px' }}
-                  >
+                    isHovered ? 'opacity-100' : 'opacity-0'}`
+                    }
+                    style={{ backgroundColor: 'rgba(10,10,10,0.9)', borderRadius: '16px' }}>
+
                     <div className="space-y-2">
                       <div>
                         <span className="meta-label text-primary">PERSONA:</span>
@@ -319,8 +319,8 @@ const HeroSection = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            );
+              </div>);
+
           })}
         </div>
       </div>
@@ -330,8 +330,8 @@ const HeroSection = () => {
         <span className="meta-label">[EST. CREATIVE BACKEND SYSTEMS]</span>
         <span className="meta-label">[SPECIALITY: EMAIL · ADS · STRATEGY]</span>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default HeroSection;
