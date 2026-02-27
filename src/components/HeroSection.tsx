@@ -28,10 +28,9 @@ const HeroSection = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  // On mobile: card takes ~70% of viewport so side cards barely peek
-  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.7) : 240;
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.65) : 240;
   const CARD_WIDTH_CENTER = isMobile ? CARD_WIDTH : 300;
-  const CARD_GAP = isMobile ? 12 : 24;
+  const CARD_GAP = isMobile ? 14 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
@@ -57,12 +56,14 @@ const HeroSection = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Center the strip initially
+  // Center on a specific card (middle of the array)
   useEffect(() => {
     if (containerWidth > 0) {
-      setScrollX(-(TOTAL_WIDTH / 2 - containerWidth / 2));
+      const centerCardIndex = Math.floor(emailCards.length / 2);
+      const cardCenterPos = centerCardIndex * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
+      setScrollX(-(cardCenterPos - containerWidth / 2));
     }
-  }, [containerWidth, TOTAL_WIDTH]);
+  }, [containerWidth, CARD_WIDTH, CARD_GAP]);
 
   // Wrap scroll position for infinite looping
   const wrapScroll = useCallback((x: number) => {
@@ -120,7 +121,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[140vh] sm:min-h-screen flex flex-col overflow-hidden"
+      className="relative flex flex-col overflow-hidden"
     >
       {/* Vignette */}
       <div
@@ -140,7 +141,7 @@ const HeroSection = () => {
       />
 
       {/* TOP HALF — Headline */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 pt-24 pb-8">
+      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 pt-24 pb-4 min-h-[60vh] sm:min-h-[50vh]">
       <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           <h1 className="leading-[0.85] tracking-tight mb-6 animate-fade-up relative">
             {/* Deep background glow */}
@@ -212,7 +213,7 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-8"
+        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-12"
         style={{ animationDelay: "0.8s" }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -269,13 +270,23 @@ const HeroSection = () => {
 
                 <div
                   className="relative w-full overflow-hidden"
-                  style={{ backgroundColor: '#0a0a0a', borderRadius: isMobile ? '10px' : '16px', border: '1px solid hsl(var(--foreground) / 0.2)' }}
+                  style={{
+                    backgroundColor: '#0a0a0a',
+                    borderRadius: isMobile ? '16px' : '16px',
+                    border: '1px solid hsl(var(--foreground) / 0.2)',
+                    aspectRatio: isMobile ? '3 / 5' : undefined,
+                  }}
                 >
                   <img
                     src={card.image}
                     alt={card.label}
-                    className="w-full h-auto block"
-                    style={{ maxHeight: isMobile ? '480px' : '500px' }}
+                    className="w-full block"
+                    style={{
+                      height: isMobile ? '100%' : 'auto',
+                      objectFit: isMobile ? 'cover' : undefined,
+                      objectPosition: 'top center',
+                      maxHeight: isMobile ? undefined : '500px',
+                    }}
                     loading="lazy"
                     draggable={false}
                   />
