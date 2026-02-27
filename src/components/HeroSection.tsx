@@ -13,6 +13,10 @@ const emailCards = [
   { id: 10, label: "EMAIL CREATIVE 10", persona: "TACTICAL GUARDIAN", trigger: "SAFETY", usp: "STRENGTH", image: "/images/email-04.png" },
 ];
 
+const CARD_WIDTH = 200;
+const CARD_GAP = 16;
+const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
+
 const HeroSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const stripRef = useRef<HTMLDivElement>(null);
@@ -26,11 +30,6 @@ const HeroSection = () => {
   const rafRef = useRef<number>(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
-
-  const CARD_WIDTH = 240;
-  const CARD_WIDTH_CENTER = 300;
-  const CARD_GAP = 24;
-  const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
@@ -56,7 +55,21 @@ const HeroSection = () => {
     if (containerWidth > 0) {
       setScrollX(-(TOTAL_WIDTH / 2 - containerWidth / 2));
     }
-  }, [containerWidth, TOTAL_WIDTH]);
+  }, [containerWidth]);
+
+  // Snap to nearest card center
+  const snapToNearest = useCallback((currentScrollX: number) => {
+    const viewCenter = -currentScrollX + containerWidth / 2;
+    let closestIdx = 0;
+    let closestDist = Infinity;
+    emailCards.forEach((_, i) => {
+      const cardCenter = i * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
+      const d = Math.abs(cardCenter - viewCenter);
+      if (d < closestDist) { closestDist = d; closestIdx = i; }
+    });
+    const targetCenter = closestIdx * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
+    return -(targetCenter - containerWidth / 2);
+  }, [containerWidth]);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     setIsDragging(true);
@@ -82,20 +95,29 @@ const HeroSection = () => {
 
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);
-    // Inertia
     let v = velocityRef.current * 15;
+    let currentX = scrollX;
     const decay = () => {
-      if (Math.abs(v) < 0.5) return;
-      v *= 0.95;
-      setScrollX(prev => prev + v);
+      if (Math.abs(v) < 0.5) {
+        // Snap when momentum ends
+        const target = snapToNearest(currentX);
+        setScrollX(target);
+        return;
+      }
+      v *= 0.94;
+      currentX += v;
+      setScrollX(currentX);
       rafRef.current = requestAnimationFrame(decay);
     };
     rafRef.current = requestAnimationFrame(decay);
-  }, []);
+  }, [scrollX, snapToNearest]);
 
   const handleWheel = useCallback((e: React.WheelEvent) => {
     e.preventDefault();
-    setScrollX(prev => prev - e.deltaY * 1.5);
+    setScrollX(prev => {
+      const next = prev - e.deltaY * 1.2;
+      return next;
+    });
   }, []);
 
   const centerOffset = containerWidth / 2;
@@ -195,8 +217,8 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 h-[520px] md:h-[620px] cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up"
-        style={{ animationDelay: "0.8s" }}
+        className="relative z-10 h-[480px] md:h-[560px] cursor-grab active:cursor-grabbing select-none overflow-visible opacity-0 animate-fade-up"
+        style={{ animationDelay: "0.8s", perspective: '1200px' }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -204,10 +226,10 @@ const HeroSection = () => {
         onWheel={handleWheel}
       >
         <div
-          className="absolute top-0 flex items-end h-full"
+          className="absolute top-0 flex items-center justify-start h-full"
           style={{
             transform: `translateX(${scrollX}px)`,
-            transition: isDragging ? 'none' : 'transform 0.1s ease-out',
+            transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
             gap: `${CARD_GAP}px`,
           }}
         >
@@ -215,38 +237,43 @@ const HeroSection = () => {
             const cardCenter = i * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
             const viewCenter = -scrollX + centerOffset;
             const dist = (cardCenter - viewCenter) / (CARD_WIDTH + CARD_GAP);
-            const clampedDist = Math.max(-4, Math.min(4, dist));
-            const rotation = clampedDist * 4;
-            const lift = Math.max(0, 30 - Math.abs(clampedDist) * 15);
-            const scale = 1 + Math.max(0, (1 - Math.abs(clampedDist) * 0.3)) * 0.08;
-            const isCenter = Math.abs(dist) < 0.6;
+            const absDist = Math.abs(dist);
+            const isCenter = absDist < 0.6;
+            const isAdjacent = absDist >= 0.6 && absDist < 1.6;
             const isHovered = hoveredCard === card.id;
+
+            // Perspective tilt
+            const rotateY = isCenter ? 0 : (dist < 0 ? 8 : -8);
+            // Scale: center 1.08, others 0.92
+            const cardScale = isCenter ? 1.08 : 0.92;
+            // Overlay darkness increases with distance
+            const overlayOpacity = isCenter ? 0 : Math.min(0.6, absDist * 0.2 + 0.3);
 
             return (
               <div
                 key={card.id}
                 className="flex-shrink-0 relative"
                 style={{
-                  width: isCenter ? CARD_WIDTH_CENTER : CARD_WIDTH,
-                  height: 480,
-                  transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
-                  transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                  width: CARD_WIDTH,
+                  height: 440,
+                  transform: `scale(${isHovered ? 1.12 : cardScale}) rotateY(${isHovered ? 0 : rotateY}deg)`,
+                  transition: isDragging ? 'none' : 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
                   zIndex: isHovered ? 50 : (isCenter ? 10 : 1),
-                  transformOrigin: 'bottom center',
+                  transformOrigin: 'center center',
                 }}
                 onMouseEnter={() => setHoveredCard(card.id)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 {/* Red glow for center card */}
                 {isCenter && !isHovered && (
-                  <div className="absolute -inset-4 rounded-2xl opacity-30 pointer-events-none blur-2xl"
-                    style={{ background: 'hsl(var(--primary) / 0.4)' }}
+                  <div className="absolute -inset-4 opacity-30 pointer-events-none blur-2xl"
+                    style={{ background: 'hsl(var(--primary) / 0.4)', borderRadius: '24px' }}
                   />
                 )}
 
                 <div
                   className="relative w-full h-full border border-foreground/20 overflow-hidden flex items-center justify-center"
-                  style={{ backgroundColor: '#0a0a0a', borderRadius: '16px' }}
+                  style={{ backgroundColor: '#0a0a0a', borderRadius: '20px' }}
                 >
                   <img
                     src={card.image}
@@ -254,11 +281,15 @@ const HeroSection = () => {
                     className="w-full h-full"
                     style={{ objectFit: 'contain', objectPosition: 'center' }}
                     loading="lazy"
+                    draggable={false}
                   />
 
                   {/* Dark overlay for non-center cards */}
                   {!isCenter && !isHovered && (
-                    <div className="absolute inset-0 bg-black/40 pointer-events-none" style={{ borderRadius: '16px' }} />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ backgroundColor: `rgba(0,0,0,${overlayOpacity})`, borderRadius: '20px' }}
+                    />
                   )}
 
                   {/* Hover metadata overlay */}
@@ -266,7 +297,7 @@ const HeroSection = () => {
                     className={`absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300 ${
                       isHovered ? 'opacity-100' : 'opacity-0'
                     }`}
-                    style={{ backgroundColor: 'rgba(10,10,10,0.9)', borderRadius: '16px' }}
+                    style={{ backgroundColor: 'rgba(10,10,10,0.9)', borderRadius: '20px' }}
                   >
                     <div className="space-y-2">
                       <div>
