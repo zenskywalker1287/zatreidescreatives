@@ -54,7 +54,7 @@ const CampaignSection = () => {
         <p className="meta-label mb-16">[ONE EXTRACTION PROCESS. EVERY CHANNEL.]</p>
 
         {/* Panels */}
-        <div className="flex flex-col md:flex-row gap-1 min-h-[400px]">
+        <div className="flex flex-col md:flex-row gap-1 md:min-h-[400px]">
           {panels.map((panel, i) => {
             const isActive = activePanel === i;
             const Icon = panel.icon;

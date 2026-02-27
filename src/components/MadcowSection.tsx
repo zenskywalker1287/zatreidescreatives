@@ -351,16 +351,16 @@ const MadcowSection = () => {
               <div className="border border-foreground/10 p-5">
                 <span className="meta-label block mb-4">PSYCHOLOGICAL LEVERS</span>
                 <div className="space-y-2 font-mono text-xs">
-                  <div className="flex gap-3">
-                    <span className="text-muted-foreground">PRIMARY DESIRE:</span>
+                  <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
+                    <span className="text-muted-foreground whitespace-nowrap">PRIMARY DESIRE:</span>
                     <span className="text-primary">[{p.desire}]</span>
                   </div>
-                  <div className="flex gap-3">
-                    <span className="text-muted-foreground">PRIMARY FEAR:</span>
+                  <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
+                    <span className="text-muted-foreground whitespace-nowrap">PRIMARY FEAR:</span>
                     <span className="text-foreground/70">[{p.fear}]</span>
                   </div>
-                  <div className="flex gap-3">
-                    <span className="text-muted-foreground">OBJECTION TO OVERCOME:</span>
+                  <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
+                    <span className="text-muted-foreground whitespace-nowrap">OBJECTION:</span>
                     <span className="text-foreground/70">[{p.objection}]</span>
                   </div>
                 </div>

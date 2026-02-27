@@ -61,7 +61,7 @@ const GiantNumbers = () => {
   const autoScrollRef = useRef<number>(0);
   const isUserInteracting = useRef(false);
 
-  const PANEL_WIDTH = typeof window !== "undefined" ? window.innerWidth * 0.55 : 700;
+  const PANEL_WIDTH = typeof window !== "undefined" ? (window.innerWidth < 640 ? window.innerWidth * 0.85 : window.innerWidth * 0.55) : 700;
   const TOTAL_WIDTH = panels.length * PANEL_WIDTH;
   const maxScroll = -(TOTAL_WIDTH - (typeof window !== "undefined" ? window.innerWidth : 1200));
 
@@ -181,7 +181,7 @@ const GiantNumbers = () => {
 
               <span
                 className="font-display text-pure-white leading-none relative z-10"
-                style={{ fontSize: "clamp(140px, 22vw, 280px)" }}
+                style={{ fontSize: "clamp(80px, 18vw, 280px)" }}
               >
                 {panel.number}
               </span>

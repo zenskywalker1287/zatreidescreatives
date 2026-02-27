@@ -104,11 +104,11 @@ const ClientsSection = () => {
           const absOffset = Math.abs(offset);
 
           // Positioning
-          const translateX = offset * 220;
+          const translateX = offset * (typeof window !== "undefined" && window.innerWidth < 640 ? 140 : 220);
           const translateZ = isActive ? 60 : -(absOffset * 80);
           const rotateY = offset * -12;
           const scale = isActive ? 1 : 0.78 - absOffset * 0.04;
-          const cardWidth = isActive ? 340 : 200;
+          const cardWidth = isActive ? (typeof window !== "undefined" && window.innerWidth < 640 ? 260 : 340) : (typeof window !== "undefined" && window.innerWidth < 640 ? 140 : 200);
           const zIndex = 10 - absOffset;
           const brightness = isActive ? 1 : 0.4 - absOffset * 0.08;
 
