@@ -213,7 +213,7 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-12 py-[63px]"
+        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-12 my-[4px] py-[111px]"
         style={{ animationDelay: "0.8s" }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
