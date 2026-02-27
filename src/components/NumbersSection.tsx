@@ -59,9 +59,9 @@ const GiantNumbers = () => {
   const lastTimeRef = useRef(0);
   const rafRef = useRef<number>(0);
 
-  const PANEL_WIDTH = typeof window !== "undefined" ? window.innerWidth : 1200;
+  const PANEL_WIDTH = typeof window !== "undefined" ? window.innerWidth * 0.55 : 700;
   const TOTAL_WIDTH = panels.length * PANEL_WIDTH;
-  const maxScroll = -(TOTAL_WIDTH - PANEL_WIDTH);
+  const maxScroll = -(TOTAL_WIDTH - (typeof window !== "undefined" ? window.innerWidth : 1200));
 
   const clampScroll = (v: number) => Math.min(0, Math.max(maxScroll, v));
 
