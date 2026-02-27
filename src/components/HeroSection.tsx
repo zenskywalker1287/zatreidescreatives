@@ -28,9 +28,9 @@ const HeroSection = () => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? 160 : 240;
-  const CARD_WIDTH_CENTER = isMobile ? 200 : 300;
-  const CARD_GAP = isMobile ? 12 : 24;
+  const CARD_WIDTH = isMobile ? 120 : 240;
+  const CARD_WIDTH_CENTER = isMobile ? 150 : 300;
+  const CARD_GAP = isMobile ? 8 : 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
@@ -246,13 +246,13 @@ const HeroSection = () => {
 
                 <div
                   className="relative w-full overflow-hidden"
-                  style={{ backgroundColor: '#0a0a0a', borderRadius: '16px', border: '1px solid hsl(var(--foreground) / 0.2)' }}
+                  style={{ backgroundColor: '#0a0a0a', borderRadius: isMobile ? '10px' : '16px', border: '1px solid hsl(var(--foreground) / 0.2)' }}
                 >
                   <img
                     src={card.image}
                     alt={card.label}
                     className="w-full h-auto block"
-                    style={{ borderRadius: '16px', maxHeight: isMobile ? '320px' : '500px' }}
+                    style={{ borderRadius: '12px', maxHeight: isMobile ? '220px' : '500px' }}
                     loading="lazy"
                     draggable={false}
                   />
