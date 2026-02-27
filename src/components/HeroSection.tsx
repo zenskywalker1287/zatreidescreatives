@@ -27,7 +27,8 @@ const HeroSection = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
-  const CARD_WIDTH = 220;
+  const CARD_WIDTH = 240;
+  const CARD_WIDTH_CENTER = 300;
   const CARD_GAP = 24;
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
@@ -226,10 +227,10 @@ const HeroSection = () => {
                 key={card.id}
                 className="flex-shrink-0 relative"
                 style={{
-                  width: CARD_WIDTH,
-                  height: 420,
+                  width: isCenter ? CARD_WIDTH_CENTER : CARD_WIDTH,
+                  height: 480,
                   transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
-                  transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                  transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), width 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
                   zIndex: isHovered ? 50 : (isCenter ? 10 : 1),
                   transformOrigin: 'bottom center',
                 }}
@@ -238,18 +239,35 @@ const HeroSection = () => {
               >
                 {/* Red glow for center card */}
                 {isCenter && !isHovered && (
-                  <div className="absolute -inset-4 rounded-xl opacity-30 pointer-events-none blur-2xl"
+                  <div className="absolute -inset-4 rounded-2xl opacity-30 pointer-events-none blur-2xl"
                     style={{ background: 'hsl(var(--primary) / 0.4)' }}
                   />
                 )}
 
-                <div className="relative w-full h-full border border-foreground/20 bg-secondary overflow-hidden rounded-xl">
-                  <img src={card.image} alt={card.label} className="w-full h-full object-contain object-top bg-background p-2" loading="lazy" />
+                <div
+                  className="relative w-full h-full border border-foreground/20 overflow-hidden flex items-center justify-center"
+                  style={{ backgroundColor: '#0a0a0a', borderRadius: '16px' }}
+                >
+                  <img
+                    src={card.image}
+                    alt={card.label}
+                    className="w-full h-full"
+                    style={{ objectFit: 'contain', objectPosition: 'center' }}
+                    loading="lazy"
+                  />
+
+                  {/* Dark overlay for non-center cards */}
+                  {!isCenter && !isHovered && (
+                    <div className="absolute inset-0 bg-black/40 pointer-events-none" style={{ borderRadius: '16px' }} />
+                  )}
 
                   {/* Hover metadata overlay */}
-                  <div className={`absolute inset-0 bg-background/90 flex flex-col justify-end p-4 transition-opacity duration-300 ${
-                    isHovered ? 'opacity-100' : 'opacity-0'
-                  }`}>
+                  <div
+                    className={`absolute inset-0 flex flex-col justify-end p-4 transition-opacity duration-300 ${
+                      isHovered ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    style={{ backgroundColor: 'rgba(10,10,10,0.9)', borderRadius: '16px' }}
+                  >
                     <div className="space-y-2">
                       <div>
                         <span className="meta-label text-primary">PERSONA:</span>
