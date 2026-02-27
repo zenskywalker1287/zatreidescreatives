@@ -34,11 +34,15 @@ const HeroSection = () => {
   const TOTAL_WIDTH = emailCards.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
+    let rafId: number;
     const handleMouse = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+      });
     };
     window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
+    return () => { window.removeEventListener("mousemove", handleMouse); cancelAnimationFrame(rafId); };
   }, []);
 
   useEffect(() => {

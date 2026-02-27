@@ -49,17 +49,19 @@ const Marquee = () => (
 /* ── GIANT NUMBERS SCROLL ── */
 const GiantNumbers = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollX, setScrollX] = useState(0);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const scrollXRef = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollStart, setScrollStart] = useState(0);
   const [showHint, setShowHint] = useState(true);
+  const startXRef = useRef(0);
+  const scrollStartRef = useRef(0);
   const velocityRef = useRef(0);
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   const rafRef = useRef<number>(0);
   const autoScrollRef = useRef<number>(0);
   const isUserInteracting = useRef(false);
+  const isDraggingRef = useRef(false);
 
   const PANEL_WIDTH = typeof window !== "undefined" ? (window.innerWidth < 640 ? window.innerWidth * 0.85 : window.innerWidth * 0.55) : 700;
   const TOTAL_WIDTH = panels.length * PANEL_WIDTH;
@@ -67,56 +69,67 @@ const GiantNumbers = () => {
 
   const clampScroll = useCallback((v: number) => Math.min(0, Math.max(maxScroll, v)), [maxScroll]);
 
-  // Auto-scroll
+  const applyTransform = useCallback((x: number) => {
+    if (stripRef.current) {
+      stripRef.current.style.transform = `translateX(${x}px)`;
+    }
+  }, []);
+
+  // Auto-scroll using refs only — no state updates
   useEffect(() => {
-    const speed = -0.4; // px per frame
+    const speed = -0.4;
     const tick = () => {
       if (!isUserInteracting.current) {
-        setScrollX((prev) => {
-          const next = prev + speed;
-          // loop back when reaching end
-          if (next < maxScroll) return 0;
-          return next;
-        });
+        let next = scrollXRef.current + speed;
+        if (next < maxScroll) next = 0;
+        scrollXRef.current = next;
+        applyTransform(next);
       }
       autoScrollRef.current = requestAnimationFrame(tick);
     };
     autoScrollRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(autoScrollRef.current);
-  }, [maxScroll]);
+  }, [maxScroll, applyTransform]);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
       isUserInteracting.current = true;
+      isDraggingRef.current = true;
       setIsDragging(true);
-      setStartX(e.clientX);
-      setScrollStart(scrollX);
+      startXRef.current = e.clientX;
+      scrollStartRef.current = scrollXRef.current;
       lastXRef.current = e.clientX;
       lastTimeRef.current = Date.now();
       velocityRef.current = 0;
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       (e.target as HTMLElement).setPointerCapture(e.pointerId);
       if (showHint) setShowHint(false);
+      // Remove transition during drag
+      if (stripRef.current) stripRef.current.style.transition = 'none';
     },
-    [scrollX, showHint]
+    [showHint]
   );
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
-      if (!isDragging) return;
+      if (!isDraggingRef.current) return;
       const now = Date.now();
       const dt = now - lastTimeRef.current;
       const dx = e.clientX - lastXRef.current;
       if (dt > 0) velocityRef.current = dx / dt;
       lastXRef.current = e.clientX;
       lastTimeRef.current = now;
-      setScrollX(clampScroll(scrollStart + (e.clientX - startX)));
+      const newX = clampScroll(scrollStartRef.current + (e.clientX - startXRef.current));
+      scrollXRef.current = newX;
+      applyTransform(newX);
     },
-    [isDragging, scrollStart, startX, maxScroll]
+    [clampScroll, applyTransform]
   );
 
   const handlePointerUp = useCallback(() => {
+    isDraggingRef.current = false;
     setIsDragging(false);
+    if (stripRef.current) stripRef.current.style.transition = 'transform 0.15s ease-out';
     let v = velocityRef.current * 15;
     const decay = () => {
       if (Math.abs(v) < 0.5) {
@@ -124,19 +137,24 @@ const GiantNumbers = () => {
         return;
       }
       v *= 0.93;
-      setScrollX((prev) => clampScroll(prev + v));
+      scrollXRef.current = clampScroll(scrollXRef.current + v);
+      applyTransform(scrollXRef.current);
       rafRef.current = requestAnimationFrame(decay);
     };
     rafRef.current = requestAnimationFrame(decay);
-  }, [maxScroll, clampScroll]);
+  }, [clampScroll, applyTransform]);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
       e.preventDefault();
-      setScrollX((prev) => clampScroll(prev - e.deltaY * 2));
+      isUserInteracting.current = true;
+      scrollXRef.current = clampScroll(scrollXRef.current - e.deltaY * 2);
+      applyTransform(scrollXRef.current);
       if (showHint) setShowHint(false);
+      // Resume auto-scroll after a delay
+      setTimeout(() => { isUserInteracting.current = false; }, 2000);
     },
-    [maxScroll, showHint]
+    [clampScroll, showHint, applyTransform]
   );
 
   return (
@@ -151,53 +169,34 @@ const GiantNumbers = () => {
       onWheel={handleWheel}
     >
       <div
+        ref={stripRef}
         className="absolute top-0 left-0 h-full flex"
-        style={{
-          transform: `translateX(${scrollX}px)`,
-          transition: isDragging ? "none" : "transform 0.15s ease-out",
-        }}
+        style={{ transition: "transform 0.15s ease-out" }}
       >
-        {panels.map((panel, i) => {
-          // Visibility ratio for glow
-          const panelCenter = i * PANEL_WIDTH + PANEL_WIDTH / 2;
-          const viewCenter = -scrollX + PANEL_WIDTH / 2;
-          const dist = Math.abs(panelCenter - viewCenter) / PANEL_WIDTH;
-          const glowOpacity = Math.max(0, 0.25 - dist * 0.2);
-
-          return (
-            <div
-              key={i}
-              className="flex-shrink-0 flex flex-col items-center justify-center relative"
-              style={{ width: PANEL_WIDTH }}
+        {panels.map((panel, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 flex flex-col items-center justify-center relative"
+            style={{ width: PANEL_WIDTH }}
+          >
+            <span
+              className="font-display text-pure-white leading-none relative z-10"
+              style={{ fontSize: "clamp(80px, 18vw, 280px)" }}
             >
-              {/* Red glow */}
-              <div
-                className="absolute inset-0 pointer-events-none blur-[120px] transition-opacity duration-700"
-                style={{
-                  background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 65%)",
-                  opacity: glowOpacity,
-                }}
-              />
+              {panel.number}
+            </span>
 
-              <span
-                className="font-display text-pure-white leading-none relative z-10"
-                style={{ fontSize: "clamp(80px, 18vw, 280px)" }}
-              >
-                {panel.number}
+            <span className="meta-label text-foreground/60 mt-4 max-w-md text-center relative z-10 px-4">
+              [{panel.label}]
+            </span>
+
+            {panel.subline && (
+              <span className="font-serif-thin italic text-foreground/50 text-lg md:text-xl mt-3 relative z-10">
+                {panel.subline}
               </span>
-
-              <span className="meta-label text-foreground/60 mt-4 max-w-md text-center relative z-10 px-4">
-                [{panel.label}]
-              </span>
-
-              {panel.subline && (
-                <span className="font-serif-thin italic text-foreground/50 text-lg md:text-xl mt-3 relative z-10">
-                  {panel.subline}
-                </span>
-              )}
-            </div>
-          );
-        })}
+            )}
+          </div>
+        ))}
       </div>
 
       {/* Scroll hint */}
