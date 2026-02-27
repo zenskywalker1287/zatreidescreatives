@@ -122,16 +122,29 @@ const HeroSection = () => {
       />
 
       {/* TOP HALF — Headline */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-24 pb-8">
-        <div className="max-w-[1400px]">
-          <h1 className="leading-[0.9] tracking-tight mb-6 animate-fade-up">
-            <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block">
-              I BUILD THE
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 pt-24 pb-8">
+      <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
+          <h1 className="leading-[0.85] tracking-tight mb-6 animate-fade-up relative">
+            {/* Background glow blur */}
+            <div className="absolute inset-0 blur-[120px] opacity-20 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at center, hsl(var(--primary)), transparent 70%)' }}
+            />
+            {/* Ghost text echo layer */}
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true">
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[6px] opacity-[0.15]">
+                I BUILD THE INVISIBLE
+              </span>
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block blur-[6px] opacity-[0.15]">
+                CLOSERS.
+              </span>
             </span>
-            <span className="font-serif-thin italic text-[clamp(2.5rem,9vw,9rem)] text-foreground block" style={{ lineHeight: '1' }}>
-              INVISIBLE
+            <span className="relative z-10 block">
+              <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white inline">I BUILD THE </span>
+              <span className="font-serif-thin italic text-[clamp(2.8rem,10vw,10rem)] text-foreground inline" style={{ lineHeight: '1' }}>
+                INVISIBLE
+              </span>
             </span>
-            <span className="font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block">
+            <span className="relative z-10 font-display text-[clamp(3rem,11vw,11rem)] text-pure-white block">
               CLOSERS.
             </span>
           </h1>
