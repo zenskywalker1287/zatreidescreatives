@@ -73,19 +73,26 @@ const FormatBadge = ({ label, example }: { label: string; example: string }) => 
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className="relative group"
+      className={`inline-flex items-center border rounded-full cursor-default transition-all duration-400 ease-out overflow-hidden ${
+        hovered
+          ? "border-primary/50 bg-primary/5 max-w-[500px] px-4 py-2 gap-3"
+          : "border-foreground/20 max-w-[180px] px-3 py-1 gap-0"
+      }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <span className="inline-block border border-foreground/20 px-3 py-1 text-[9px] tracking-[0.2em] font-mono text-muted-foreground uppercase cursor-default transition-all duration-300 hover:border-primary/50 hover:text-primary rounded-full">
+      <span className={`text-[9px] tracking-[0.2em] font-mono uppercase whitespace-nowrap flex-shrink-0 transition-colors duration-300 ${
+        hovered ? "text-primary" : "text-muted-foreground"
+      }`}>
         {label}
       </span>
-      {hovered && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[280px] border border-foreground/15 bg-background p-3 z-50 transition-all duration-200 animate-fade-in">
-          <span className="meta-label text-primary block mb-1">{label}</span>
-          <p className="font-mono text-[11px] text-foreground/80 whitespace-pre-line leading-relaxed">"{example}"</p>
-        </div>
-      )}
+      <span
+        className={`font-mono text-[10px] text-foreground/70 whitespace-nowrap transition-all duration-400 ${
+          hovered ? "opacity-100 max-w-[350px]" : "opacity-0 max-w-0"
+        }`}
+      >
+        — "{example}"
+      </span>
     </div>
   );
 };
