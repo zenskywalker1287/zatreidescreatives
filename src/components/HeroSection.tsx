@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
 const emailCards = [
-  { id: 1, label: "EMAIL CREATIVE 01", persona: "TACTICAL GUARDIAN", trigger: "FEAR OF LOSS", usp: "DURABILITY" },
-  { id: 2, label: "EMAIL CREATIVE 02", persona: "GEAR SNOB", trigger: "STATUS SIGNALING", usp: "EXCLUSIVITY" },
-  { id: 3, label: "EMAIL CREATIVE 03", persona: "WEEKEND WARRIOR", trigger: "ADVENTURE IDENTITY", usp: "VERSATILITY" },
-  { id: 4, label: "EMAIL CREATIVE 04", persona: "TACTICAL GUARDIAN", trigger: "PARENTAL INSTINCT", usp: "PROTECTION" },
-  { id: 5, label: "EMAIL CREATIVE 05", persona: "GEAR SNOB", trigger: "SUPERIORITY", usp: "CRAFTSMANSHIP" },
-  { id: 6, label: "EMAIL CREATIVE 06", persona: "WEEKEND WARRIOR", trigger: "FREEDOM", usp: "WATERPROOF" },
-  { id: 7, label: "EMAIL CREATIVE 07", persona: "TACTICAL GUARDIAN", trigger: "AUTHORITY", usp: "MIL-SPEC" },
-  { id: 8, label: "EMAIL CREATIVE 08", persona: "GEAR SNOB", trigger: "SOCIAL PROOF", usp: "DESIGN" },
-  { id: 9, label: "EMAIL CREATIVE 09", persona: "WEEKEND WARRIOR", trigger: "BELONGING", usp: "ALL-TERRAIN" },
-  { id: 10, label: "EMAIL CREATIVE 10", persona: "TACTICAL GUARDIAN", trigger: "SAFETY", usp: "STRENGTH" },
+  { id: 1, label: "EMAIL CREATIVE 01", persona: "TACTICAL GUARDIAN", trigger: "FEAR OF LOSS", usp: "DURABILITY", image: "/images/email-01.png" },
+  { id: 2, label: "EMAIL CREATIVE 02", persona: "GEAR SNOB", trigger: "STATUS SIGNALING", usp: "EXCLUSIVITY", image: "/images/email-02.png" },
+  { id: 3, label: "EMAIL CREATIVE 03", persona: "WEEKEND WARRIOR", trigger: "ADVENTURE IDENTITY", usp: "VERSATILITY", image: "/images/email-03.png" },
+  { id: 4, label: "EMAIL CREATIVE 04", persona: "TACTICAL GUARDIAN", trigger: "PARENTAL INSTINCT", usp: "PROTECTION", image: "/images/email-04.png" },
+  { id: 5, label: "EMAIL CREATIVE 05", persona: "GEAR SNOB", trigger: "SUPERIORITY", usp: "CRAFTSMANSHIP", image: "/images/email-05.png" },
+  { id: 6, label: "EMAIL CREATIVE 06", persona: "WEEKEND WARRIOR", trigger: "FREEDOM", usp: "WATERPROOF", image: "/images/email-06.png" },
+  { id: 7, label: "EMAIL CREATIVE 07", persona: "TACTICAL GUARDIAN", trigger: "AUTHORITY", usp: "MIL-SPEC", image: "/images/email-01.png" },
+  { id: 8, label: "EMAIL CREATIVE 08", persona: "GEAR SNOB", trigger: "SOCIAL PROOF", usp: "DESIGN", image: "/images/email-02.png" },
+  { id: 9, label: "EMAIL CREATIVE 09", persona: "WEEKEND WARRIOR", trigger: "BELONGING", usp: "ALL-TERRAIN", image: "/images/email-03.png" },
+  { id: 10, label: "EMAIL CREATIVE 10", persona: "TACTICAL GUARDIAN", trigger: "SAFETY", usp: "STRENGTH", image: "/images/email-04.png" },
 ];
 
 const HeroSection = () => {
@@ -243,11 +243,8 @@ const HeroSection = () => {
                   />
                 )}
 
-                <div className="relative w-full h-full border border-foreground/20 bg-secondary flex flex-col items-center justify-center overflow-hidden">
-                  <span className="font-display text-5xl text-foreground/10">
-                    {String(card.id).padStart(2, '0')}
-                  </span>
-                  <span className="meta-label text-foreground/25 mt-2">{card.label}</span>
+                <div className="relative w-full h-full border border-foreground/20 bg-secondary overflow-hidden">
+                  <img src={card.image} alt={card.label} className="absolute inset-0 w-full h-full object-cover object-top" loading="lazy" />
 
                   {/* Hover metadata overlay */}
                   <div className={`absolute inset-0 bg-background/90 flex flex-col justify-end p-4 transition-opacity duration-300 ${
