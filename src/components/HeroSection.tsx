@@ -227,7 +227,7 @@ const HeroSection = () => {
                 className="flex-shrink-0 relative"
                 style={{
                   width: CARD_WIDTH,
-                  height: 300,
+                  height: 380,
                   transform: `rotate(${isHovered ? 0 : rotation}deg) translateY(${isHovered ? -40 : -lift}px) scale(${isHovered ? 1.12 : scale})`,
                   transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
                   zIndex: isHovered ? 50 : (isCenter ? 10 : 1),
@@ -238,13 +238,13 @@ const HeroSection = () => {
               >
                 {/* Red glow for center card */}
                 {isCenter && !isHovered && (
-                  <div className="absolute -inset-4 rounded-sm opacity-30 pointer-events-none blur-2xl"
+                  <div className="absolute -inset-4 rounded-xl opacity-30 pointer-events-none blur-2xl"
                     style={{ background: 'hsl(var(--primary) / 0.4)' }}
                   />
                 )}
 
-                <div className="relative w-full h-full border border-foreground/20 bg-secondary overflow-hidden">
-                  <img src={card.image} alt={card.label} className="absolute inset-0 w-full h-full object-cover object-top" loading="lazy" />
+                <div className="relative w-full h-full border border-foreground/20 bg-secondary overflow-hidden rounded-xl">
+                  <img src={card.image} alt={card.label} className="w-full h-full object-contain" loading="lazy" />
 
                   {/* Hover metadata overlay */}
                   <div className={`absolute inset-0 bg-background/90 flex flex-col justify-end p-4 transition-opacity duration-300 ${

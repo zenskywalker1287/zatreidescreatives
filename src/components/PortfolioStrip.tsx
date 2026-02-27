@@ -2,16 +2,16 @@ import { useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 const emailHeroes = [
-  { id: 1, persona: "TACTICAL", usp: "DURABILITY", trigger: "FEAR OF LOSS", color: "bg-secondary" },
-  { id: 2, persona: "GEAR SNOB", usp: "EXCLUSIVITY", trigger: "STATUS SIGNALING", color: "bg-muted" },
-  { id: 3, persona: "WEEKEND WARRIOR", usp: "VERSATILITY", trigger: "ADVENTURE IDENTITY", color: "bg-secondary" },
-  { id: 4, persona: "TACTICAL", usp: "PROTECTION", trigger: "PARENTAL INSTINCT", color: "bg-muted" },
-  { id: 5, persona: "GEAR SNOB", usp: "CRAFTSMANSHIP", trigger: "SUPERIORITY", color: "bg-secondary" },
-  { id: 6, persona: "WEEKEND WARRIOR", usp: "WATERPROOF", trigger: "FREEDOM", color: "bg-muted" },
-  { id: 7, persona: "TACTICAL", usp: "MIL-SPEC", trigger: "AUTHORITY", color: "bg-secondary" },
-  { id: 8, persona: "GEAR SNOB", usp: "DESIGN", trigger: "SOCIAL PROOF", color: "bg-muted" },
-  { id: 9, persona: "WEEKEND WARRIOR", usp: "ALL-TERRAIN", trigger: "BELONGING", color: "bg-secondary" },
-  { id: 10, persona: "TACTICAL", usp: "STRENGTH", trigger: "SAFETY", color: "bg-muted" },
+  { id: 1, persona: "TACTICAL", usp: "DURABILITY", trigger: "FEAR OF LOSS", image: "/images/email-01.png" },
+  { id: 2, persona: "GEAR SNOB", usp: "EXCLUSIVITY", trigger: "STATUS SIGNALING", image: "/images/email-02.png" },
+  { id: 3, persona: "WEEKEND WARRIOR", usp: "VERSATILITY", trigger: "ADVENTURE IDENTITY", image: "/images/email-03.png" },
+  { id: 4, persona: "TACTICAL", usp: "PROTECTION", trigger: "PARENTAL INSTINCT", image: "/images/email-04.png" },
+  { id: 5, persona: "GEAR SNOB", usp: "CRAFTSMANSHIP", trigger: "SUPERIORITY", image: "/images/email-05.png" },
+  { id: 6, persona: "WEEKEND WARRIOR", usp: "WATERPROOF", trigger: "FREEDOM", image: "/images/email-06.png" },
+  { id: 7, persona: "TACTICAL", usp: "MIL-SPEC", trigger: "AUTHORITY", image: "/images/email-01.png" },
+  { id: 8, persona: "GEAR SNOB", usp: "DESIGN", trigger: "SOCIAL PROOF", image: "/images/email-02.png" },
+  { id: 9, persona: "WEEKEND WARRIOR", usp: "ALL-TERRAIN", trigger: "BELONGING", image: "/images/email-03.png" },
+  { id: 10, persona: "TACTICAL", usp: "STRENGTH", trigger: "SAFETY", image: "/images/email-04.png" },
 ];
 
 const PortfolioStrip = () => {
@@ -34,21 +34,16 @@ const PortfolioStrip = () => {
         {emailHeroes.map((hero, i) => (
           <div
             key={hero.id}
-            className={`flex-shrink-0 w-[300px] md:w-[400px] h-[400px] md:h-[500px] border border-foreground/15 relative overflow-hidden cursor-pointer group transition-all duration-500 ${
+            className={`flex-shrink-0 w-[300px] md:w-[400px] h-[400px] md:h-[500px] border border-foreground/15 rounded-xl relative overflow-hidden cursor-pointer group transition-all duration-500 ${
               inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
             style={{ transitionDelay: `${i * 100}ms` }}
             onMouseEnter={() => setHoveredCard(hero.id)}
             onMouseLeave={() => setHoveredCard(null)}
           >
-            {/* Placeholder email hero visual */}
-            <div className={`absolute inset-0 ${hero.color} flex items-center justify-center`}>
-              <div className="text-center p-8">
-                <span className="font-display text-6xl text-foreground/10 block mb-4">
-                  {String(hero.id).padStart(2, '0')}
-                </span>
-                <span className="meta-label text-foreground/20">EMAIL HERO {hero.id}</span>
-              </div>
+            {/* Email hero image */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img src={hero.image} alt={`Email Hero ${hero.id}`} className="w-full h-full object-contain" loading="lazy" />
             </div>
 
             {/* Hover overlay */}
