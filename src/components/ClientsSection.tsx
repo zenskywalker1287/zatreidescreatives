@@ -2,41 +2,54 @@ import { useState, useCallback, useRef } from "react";
 
 const brands = [
   {
-    name: "GRUNT STYLE",
-    niche: "MEN'S PERFORMANCE",
-    stat: "$340K GENERATED",
-    slug: "/portfolio#grunt-style",
+    name: "XYKO",
+    niche: "FASHION & LIFESTYLE",
+    stat: "FULL BRAND OVERHAUL",
+    slug: "/case-studies/xyko",
+    image: "/images/brand-xyko.png",
   },
   {
-    name: "MADCOW COLLARS",
+    name: "MADCOW",
     niche: "PET ACCESSORIES",
     stat: "40% REVENUE FROM EMAIL",
-    slug: "/portfolio#madcow",
+    slug: "/case-studies/madcow",
+    image: "/images/brand-madcow.png",
   },
   {
     name: "FLATPACK",
     niche: "HOME & LIFESTYLE",
     stat: "$100K IN ONE MONTH",
-    slug: "/portfolio#flatpack",
+    slug: "/case-studies/flatpack",
+    image: "/images/brand-flatpack.png",
   },
   {
-    name: "BRAND 04",
-    niche: "COMING SOON",
-    stat: "—",
-    slug: "#",
+    name: "4AM SKIN",
+    niche: "SKINCARE & BEAUTY",
+    stat: "FULL BRAND SYSTEM",
+    slug: "/case-studies/4am-skin",
+    image: "/images/brand-4amskin.png",
   },
   {
-    name: "BRAND 05",
-    niche: "COMING SOON",
-    stat: "—",
-    slug: "#",
+    name: "MKTG",
+    niche: "8-FIGURE KLAVIYO AGENCY",
+    stat: "$1M GENERATED · 12+ BRANDS",
+    slug: "/case-studies/mktg",
+    image: null,
+  },
+  {
+    name: "ADSUMO DIGITAL",
+    niche: "AGENCY — MULTIPLE BRANDS",
+    stat: "HIGH 6-FIGURE CAMPAIGNS",
+    slug: "/case-studies/adsumo",
+    image: null,
   },
 ];
 
 const ClientsSection = () => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const dragStartX = useRef(0);
   const dragStartActive = useRef(0);
 
@@ -92,8 +105,8 @@ const ClientsSection = () => {
       {/* Carousel */}
       <div
         ref={containerRef}
-        className="relative w-full flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
-        style={{ height: "clamp(420px, 60vh, 640px)", perspective: "1200px" }}
+        className="relative w-full flex items-end justify-center cursor-grab active:cursor-grabbing select-none"
+        style={{ height: "clamp(480px, 65vh, 700px)", perspective: "1200px" }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
@@ -101,16 +114,21 @@ const ClientsSection = () => {
         {brands.map((brand, i) => {
           const offset = i - active;
           const isActive = offset === 0;
+          const isHovered = hoveredCard === i;
           const absOffset = Math.abs(offset);
 
-          // Positioning
-          const translateX = offset * (typeof window !== "undefined" && window.innerWidth < 640 ? 140 : 220);
+          const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+          const translateX = offset * (isMobile ? 140 : 220);
           const translateZ = isActive ? 60 : -(absOffset * 80);
           const rotateY = offset * -12;
           const scale = isActive ? 1 : 0.78 - absOffset * 0.04;
-          const cardWidth = isActive ? (typeof window !== "undefined" && window.innerWidth < 640 ? 260 : 340) : (typeof window !== "undefined" && window.innerWidth < 640 ? 140 : 200);
+          const cardWidth = isActive ? (isMobile ? 260 : 340) : (isMobile ? 140 : 200);
           const zIndex = 10 - absOffset;
           const brightness = isActive ? 1 : 0.4 - absOffset * 0.08;
+
+          // Pop-out image heights
+          const imageHeight = isActive ? "150%" : isHovered ? "150%" : "130%";
+          const overlayOpacity = isActive ? 0 : isHovered ? 0.2 : 0.45;
 
           return (
             <div
@@ -118,34 +136,91 @@ const ClientsSection = () => {
               className="absolute transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{
                 width: cardWidth,
-                height: "100%",
+                height: "75%",
+                bottom: "8%",
                 transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                 zIndex,
                 filter: `brightness(${Math.max(0.15, brightness)})`,
-                cursor: isActive ? "default" : "pointer",
+                cursor: isActive ? "pointer" : "pointer",
+                overflow: "visible",
               }}
-              onClick={() => !isActive && setActive(i)}
+              onClick={() => {
+                if (isActive) {
+                  window.location.href = brand.slug;
+                } else {
+                  setActive(i);
+                }
+              }}
+              onMouseEnter={() => setHoveredCard(i)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Red glow behind active */}
               {isActive && (
                 <div
-                  className="absolute -inset-8 blur-[80px] opacity-30 pointer-events-none rounded-sm"
+                  className="absolute -inset-8 blur-[80px] opacity-30 pointer-events-none"
                   style={{ background: "hsl(var(--primary))" }}
                 />
               )}
 
-              {/* Card */}
-              <div className="relative w-full h-full border border-foreground/15 overflow-hidden bg-secondary">
-                {/* Placeholder hero image area */}
-                <div className="absolute inset-0 bg-gradient-to-b from-foreground/5 to-background/80" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-foreground/[0.06] text-[100px] leading-none select-none">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+              {/* Card container with visible overflow for pop-out */}
+              <div
+                className="relative w-full h-full transition-all duration-500"
+                style={{
+                  borderRadius: "16px",
+                  border: `1px solid ${isActive ? "hsl(var(--primary))" : "rgba(255,255,255,0.15)"}`,
+                  overflow: "hidden",
+                  background: "#0a0a0a",
+                }}
+              >
+                {/* Pop-out image wrapper — bleeds above card */}
+                <div
+                  className="absolute left-0 right-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  style={{
+                    bottom: 0,
+                    height: imageHeight,
+                    overflow: "visible",
+                    zIndex: 1,
+                  }}
+                >
+                  {brand.image ? (
+                    <img
+                      src={brand.image}
+                      alt={brand.name}
+                      className="w-full h-full transition-transform duration-700"
+                      style={{
+                        objectFit: "cover",
+                        objectPosition: "top center",
+                        transform: isActive ? "scale(1.05)" : "scale(1)",
+                      }}
+                      loading="lazy"
+                    />
+                  ) : (
+                    /* Dark editorial placeholder for MKTG / ADSUMO */
+                    <div className="w-full h-full bg-gradient-to-b from-foreground/5 to-background flex items-center justify-center">
+                      <span className="font-display text-foreground/[0.08] text-[80px] md:text-[120px] leading-none select-none">
+                        {brand.name}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Dark overlay for inactive cards */}
+                  <div
+                    className="absolute inset-0 bg-background transition-opacity duration-500 pointer-events-none"
+                    style={{ opacity: overlayOpacity }}
+                  />
+
+                  {/* Bottom gradient for readability */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                    style={{
+                      height: "60%",
+                      background: "linear-gradient(to bottom, transparent 0%, #0a0a0a 100%)",
+                    }}
+                  />
                 </div>
 
-                {/* Bottom overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-background via-background/90 to-transparent">
+                {/* Bottom content — always visible */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
                   <h3
                     className={`font-display text-pure-white leading-none transition-all duration-500 ${
                       isActive
@@ -161,7 +236,7 @@ const ClientsSection = () => {
 
                   {/* Stat badge */}
                   <div
-                    className={`mt-3 inline-block border border-primary/40 px-3 py-1 transition-all duration-500 ${
+                    className={`mt-3 inline-block border border-primary/40 px-3 py-1 rounded-full transition-all duration-500 ${
                       isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     }`}
                   >
@@ -176,12 +251,9 @@ const ClientsSection = () => {
                       isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
                     }`}
                   >
-                    <a
-                      href={brand.slug}
-                      className="btn-brutal inline-block text-[10px] py-2 px-4"
-                    >
+                    <span className="btn-brutal inline-block text-[10px] py-2 px-4">
                       [ VIEW CASE STUDY → ]
-                    </a>
+                    </span>
                   </div>
                 </div>
               </div>
