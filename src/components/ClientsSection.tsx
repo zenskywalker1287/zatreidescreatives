@@ -166,10 +166,11 @@ const ClientsSection = () => {
               <div
                 className="relative w-full h-full transition-all duration-500"
                 style={{
-                  borderRadius: "16px",
+                  borderRadius: "4px",
                   border: `1px solid ${isActive ? "hsl(var(--primary))" : "rgba(255,255,255,0.15)"}`,
                   overflow: "hidden",
                   background: "#0a0a0a",
+                  transform: "skewX(-4deg)",
                 }}
               >
                 {/* Pop-out image wrapper — bleeds above card */}
@@ -180,6 +181,7 @@ const ClientsSection = () => {
                     height: imageHeight,
                     overflow: "visible",
                     zIndex: 1,
+                    transform: "skewX(4deg)",
                   }}
                 >
                   {brand.image ? (
@@ -220,7 +222,7 @@ const ClientsSection = () => {
                 </div>
 
                 {/* Bottom content — always visible */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10" style={{ transform: "skewX(4deg)" }}>
                   <h3
                     className={`font-display text-pure-white leading-none transition-all duration-500 ${
                       isActive
