@@ -106,7 +106,7 @@ const ClientsSection = () => {
       <div
         ref={containerRef}
         className="relative w-full flex items-end justify-center cursor-grab active:cursor-grabbing select-none"
-        style={{ height: "clamp(480px, 65vh, 700px)", perspective: "1200px" }}
+        style={{ height: "clamp(550px, 75vh, 850px)", perspective: "1200px" }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
@@ -122,7 +122,7 @@ const ClientsSection = () => {
           const translateZ = isActive ? 60 : -(absOffset * 80);
           const rotateY = offset * -12;
           const scale = isActive ? 1 : 0.78 - absOffset * 0.04;
-          const cardWidth = isActive ? (isMobile ? 260 : 340) : (isMobile ? 140 : 200);
+          const cardWidth = isActive ? (isMobile ? 280 : 380) : (isMobile ? 160 : 220);
           const zIndex = 10 - absOffset;
           const brightness = isActive ? 1 : 0.4 - absOffset * 0.08;
 
@@ -136,7 +136,7 @@ const ClientsSection = () => {
               className="absolute transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{
                 width: cardWidth,
-                height: "75%",
+                height: "85%",
                 bottom: "8%",
                 transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                 zIndex,
