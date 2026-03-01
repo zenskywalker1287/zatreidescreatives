@@ -106,7 +106,7 @@ const ClientsSection = () => {
       <div
         ref={containerRef}
         className="relative w-full flex items-end justify-center cursor-grab active:cursor-grabbing select-none"
-        style={{ height: "clamp(550px, 75vh, 850px)", perspective: "1200px" }}
+        style={{ height: "clamp(500px, 70vh, 750px)", perspective: "1200px" }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
@@ -118,16 +118,14 @@ const ClientsSection = () => {
           const absOffset = Math.abs(offset);
 
           const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-          const translateX = offset * (isMobile ? 140 : 220);
-          const translateZ = isActive ? 60 : -(absOffset * 80);
-          const rotateY = offset * -12;
-          const scale = isActive ? 1 : 0.78 - absOffset * 0.04;
-          const cardWidth = isActive ? (isMobile ? 280 : 380) : (isMobile ? 160 : 220);
+          const translateX = offset * (isMobile ? 130 : 200);
+          const translateZ = isActive ? 60 : -(absOffset * 60);
+          const rotateY = offset * -8;
+          const scale = isActive ? 1 : 0.85 - absOffset * 0.03;
+          const cardWidth = isActive ? (isMobile ? 260 : 340) : (isMobile ? 150 : 200);
           const zIndex = 10 - absOffset;
-          const brightness = isActive ? 1 : 0.4 - absOffset * 0.08;
+          const brightness = isActive ? 1 : 0.45 - absOffset * 0.08;
 
-          // Pop-out image heights
-          const imageHeight = isActive ? "150%" : isHovered ? "150%" : "130%";
           const overlayOpacity = isActive ? 0 : isHovered ? 0.2 : 0.45;
 
           return (
@@ -136,12 +134,12 @@ const ClientsSection = () => {
               className="absolute transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{
                 width: cardWidth,
-                height: "85%",
-                bottom: "8%",
+                height: "80%",
+                bottom: "5%",
                 transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
                 zIndex,
                 filter: `brightness(${Math.max(0.15, brightness)})`,
-                cursor: isActive ? "pointer" : "pointer",
+                cursor: "pointer",
                 overflow: "visible",
               }}
               onClick={() => {
@@ -154,7 +152,7 @@ const ClientsSection = () => {
               onMouseEnter={() => setHoveredCard(i)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Red glow behind active */}
+              {/* Glow behind active */}
               {isActive && (
                 <div
                   className="absolute -inset-8 blur-[80px] opacity-30 pointer-events-none"
@@ -162,83 +160,71 @@ const ClientsSection = () => {
                 />
               )}
 
-              {/* Card container with visible overflow for pop-out */}
+              {/* Rounded card */}
               <div
                 className="relative w-full h-full transition-all duration-500"
                 style={{
-                  borderRadius: "4px",
-                  border: `1px solid ${isActive ? "hsl(var(--primary))" : "rgba(255,255,255,0.15)"}`,
+                  borderRadius: "24px",
+                  border: `2px solid ${isActive ? "hsl(var(--primary))" : "rgba(255,255,255,0.1)"}`,
                   overflow: "hidden",
                   background: "#0a0a0a",
-                  transform: "skewX(-4deg)",
                 }}
               >
-                {/* Pop-out image wrapper — bleeds above card */}
-                <div
-                  className="absolute left-0 right-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  style={{
-                    bottom: 0,
-                    height: imageHeight,
-                    overflow: "visible",
-                    zIndex: 1,
-                    transform: "skewX(4deg)",
-                  }}
-                >
-                  {brand.image ? (
-                    <img
-                      src={brand.image}
-                      alt={brand.name}
-                      className="w-full h-full transition-transform duration-700"
-                      style={{
-                        objectFit: "cover",
-                        objectPosition: "top center",
-                        transform: isActive ? "scale(1.05)" : "scale(1)",
-                      }}
-                      loading="lazy"
-                    />
-                  ) : (
-                    /* Dark editorial placeholder for MKTG / ADSUMO */
-                    <div className="w-full h-full bg-gradient-to-b from-foreground/5 to-background flex items-center justify-center">
-                      <span className="font-display text-foreground/[0.08] text-[80px] md:text-[120px] leading-none select-none">
-                        {brand.name}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Dark overlay for inactive cards */}
-                  <div
-                    className="absolute inset-0 bg-background transition-opacity duration-500 pointer-events-none"
-                    style={{ opacity: overlayOpacity }}
-                  />
-
-                  {/* Bottom gradient for readability */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                {/* Image — full bleed, no crop on top */}
+                {brand.image ? (
+                  <img
+                    src={brand.image}
+                    alt={brand.name}
+                    className="absolute inset-0 w-full h-full transition-transform duration-700"
                     style={{
-                      height: "60%",
-                      background: "linear-gradient(to bottom, transparent 0%, #0a0a0a 100%)",
+                      objectFit: "cover",
+                      objectPosition: "center 20%",
+                      transform: isActive ? "scale(1.05)" : "scale(1)",
                     }}
+                    loading="lazy"
                   />
-                </div>
+                ) : (
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-foreground/5 to-background flex items-center justify-center">
+                    <span className="font-display text-foreground/[0.08] text-[60px] md:text-[90px] leading-none select-none">
+                      {brand.name}
+                    </span>
+                  </div>
+                )}
 
-                {/* Bottom content — always visible */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10" style={{ transform: "skewX(4deg)" }}>
+                {/* Dark overlay for inactive */}
+                <div
+                  className="absolute inset-0 bg-background transition-opacity duration-500 pointer-events-none"
+                  style={{ opacity: overlayOpacity, borderRadius: "24px" }}
+                />
+
+                {/* Bottom gradient */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                  style={{
+                    height: "55%",
+                    background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.85) 100%)",
+                    borderRadius: "0 0 24px 24px",
+                  }}
+                />
+
+                {/* Bottom content */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
                   <h3
                     className={`font-display text-pure-white leading-none transition-all duration-500 ${
                       isActive
-                        ? "text-[clamp(1.8rem,4vw,3rem)] translate-y-0 opacity-100"
-                        : "text-lg translate-y-2 opacity-70"
+                        ? "text-[clamp(1.6rem,3.5vw,2.5rem)] translate-y-0 opacity-100"
+                        : "text-base translate-y-2 opacity-70"
                     }`}
                   >
                     {brand.name}
                   </h3>
-                  <span className="meta-label text-muted-foreground mt-2 block">
+                  <span className="meta-label text-muted-foreground mt-1 block text-[10px]">
                     [{brand.niche}]
                   </span>
 
                   {/* Stat badge */}
                   <div
-                    className={`mt-3 inline-block border border-primary/40 px-3 py-1 rounded-full transition-all duration-500 ${
+                    className={`mt-2 inline-block border border-primary/40 px-3 py-1 rounded-full transition-all duration-500 ${
                       isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     }`}
                   >
@@ -247,9 +233,9 @@ const ClientsSection = () => {
                     </span>
                   </div>
 
-                  {/* CTA — active only */}
+                  {/* CTA */}
                   <div
-                    className={`mt-4 transition-all duration-500 ${
+                    className={`mt-3 transition-all duration-500 ${
                       isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
                     }`}
                   >
