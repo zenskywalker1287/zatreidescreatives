@@ -1,116 +1,291 @@
 import { useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
-import { Film, Mail, Camera, Play, LayoutGrid } from "lucide-react";
+import { Radio, Workflow, FolderOpen } from "lucide-react";
 
-const panels = [
+const columns = [
   {
-    title: "AD CREATIVE",
-    icon: Film,
-    description:
-      "The hooks, angles, and psychological triggers that stop the scroll and start the sale.",
+    lane: "LANE 01 — FRONT END",
+    icon: Radio,
+    title: "FRONT END.",
+    oneLiner: "Stops the scroll.\nFills the funnel.\nStays on their FYP.",
+    deliverables: [
+      "Static Ads",
+      "Short Form Content",
+      "Campaign Creatives",
+      "TikTok · Reels · Shorts",
+      "UGC Direction & Scripts",
+      "Limited Series Concepts",
+    ],
+    bottomLine: "FIRST IMPRESSION.\nENGINEERED.",
   },
   {
-    title: "EMAIL CREATIVE",
-    icon: Mail,
-    description:
-      "Sequences built around real customer psychology. Not templates. Not AI. Actual creative.",
+    lane: "LANE 02 — BACKEND",
+    icon: Workflow,
+    title: "BACKEND.",
+    oneLiner:
+      "Captures the 99% who don't buy.\nNurtures. Retargets. Closes.\nRunning 24/7 without you.",
+    deliverables: [
+      "Email Flows — 10 Pre & Post Purchase",
+      "SMS Sequences",
+      "Weekly Campaigns",
+      "Abandoned Cart Recovery",
+      "Winback Sequences",
+      "Welcome Flows",
+      "Best Emails → Ad Creatives",
+    ],
+    bottomLine: "THE INVISIBLE MACHINE.\nALWAYS ON.",
   },
   {
-    title: "UGC DIRECTION",
-    icon: Camera,
-    description:
-      "Scripts and briefs that tell your creators exactly what angle to hit and why.",
+    lane: "LANE 03 — IN-HOUSE",
+    icon: FolderOpen,
+    title: "IN-HOUSE.",
+    oneLiner:
+      "Everything your team needs\nto never guess again.\nBuilt on your brand. Forever.",
+    deliverables: [
+      "Brand Guidelines",
+      "Campaign Calendars",
+      "Hooks Library",
+      "AI Built On Your Brand",
+      "SOPs",
+      "Content Briefs",
+      "Prompt Libraries",
+      "Moodboards",
+    ],
+    bottomLine: "YOUR BRAND.\nON AUTOPILOT.",
   },
-  {
-    title: "LIMITED SERIES",
-    icon: Play,
-    description:
-      "Film, docuseries, reels. Your brand's story told in episodes, not ads.",
-  },
-  {
-    title: "CAMPAIGN ARCHITECTURE",
-    icon: LayoutGrid,
-    description:
-      "The 30-day calendar, the touchpoint map, the congruency system that ties it all together.",
-  },
+];
+
+const connectors = [
+  { label: "DRIVES TRAFFIC INTO →" },
+  { label: "POWERS THE TEAM WITH →" },
 ];
 
 const CampaignSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, 0.1);
-  const [activePanel, setActivePanel] = useState<number | null>(null);
+  const inView = useInView(ref, 0.08);
+  const [hoveredCol, setHoveredCol] = useState<number | null>(null);
 
   return (
     <section className="section-border" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
         {/* Header */}
-        <span className="meta-label text-primary">[05] THE CREATIVE STACK</span>
-        <h2 className="font-display text-[clamp(2rem,6vw,6rem)] leading-[0.95] text-pure-white mt-4 mb-2">
-          WE DON'T MAKE CONTENT.
-        </h2>
-        <p className="font-serif-thin text-[clamp(1.1rem,2.5vw,2rem)] text-foreground italic mb-4">
-          We build the intelligence behind it.
-        </p>
-        <p className="meta-label mb-16">[ONE EXTRACTION PROCESS. EVERY CHANNEL.]</p>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span
+            className={`meta-label text-primary block mb-6 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            [THE SYSTEM — HOW IT ALL CONNECTS]
+          </span>
 
-        {/* Panels */}
-        <div className="flex flex-col md:flex-row gap-1 md:min-h-[400px]">
-          {panels.map((panel, i) => {
-            const isActive = activePanel === i;
-            const Icon = panel.icon;
+          <h2
+            className={`font-display text-[clamp(2.2rem,6vw,5.5rem)] leading-[0.95] text-pure-white transition-all duration-700 delay-100 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
+            ONE BRAND.
+            <br />
+            THREE LANES.
+            <br />
+            ZERO GAPS.
+          </h2>
+
+          <p
+            className={`font-serif-thin text-[clamp(1rem,2vw,1.4rem)] text-foreground italic mt-6 leading-relaxed transition-all duration-700 delay-200 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            Every deliverable connects.
+            <br />
+            Every format feeds the next.
+            <br />
+            Nothing exists in isolation.
+          </p>
+
+          <div
+            className={`w-full h-px bg-foreground/15 my-8 transition-all duration-700 delay-300 ${
+              inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+            }`}
+          />
+
+          <p
+            className={`font-display text-[clamp(1.1rem,2.5vw,2rem)] leading-[1.1] text-primary transition-all duration-700 delay-[400ms] ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            THE FRONT END FILLS IT.
+            <br />
+            THE BACKEND KEEPS IT.
+            <br />
+            THE IN-HOUSE RUNS IT.
+          </p>
+
+          <div
+            className={`w-full h-px bg-foreground/15 mt-8 transition-all duration-700 delay-500 ${
+              inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+            }`}
+          />
+        </div>
+
+        {/* Three Columns with Connectors */}
+        <div className="relative flex flex-col lg:flex-row items-stretch justify-center gap-0 lg:gap-0 max-w-6xl mx-auto">
+          {columns.map((col, i) => {
+            const Icon = col.icon;
+            const isHovered = hoveredCol === i;
+            const isDimmed = hoveredCol !== null && hoveredCol !== i;
+
             return (
-              <div
-                key={i}
-                onMouseEnter={() => setActivePanel(i)}
-                onMouseLeave={() => setActivePanel(null)}
-                className={`relative border cursor-pointer flex flex-col items-center justify-center text-center transition-all duration-500 overflow-hidden ${
-                  isActive
-                    ? "border-primary/50 shadow-[0_0_20px_hsl(var(--primary)/0.15)] md:flex-[3]"
-                    : "border-foreground/15 hover:border-foreground/30 md:flex-1"
-                } ${
-                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: `${i * 80}ms`,
-                  minHeight: isActive ? "280px" : "120px",
-                }}
-              >
-                <div className="p-6 md:p-8 flex flex-col items-center gap-4">
-                  <Icon
-                    size={isActive ? 32 : 24}
-                    className={`transition-all duration-300 ${
-                      isActive ? "text-primary" : "text-foreground/50"
-                    }`}
-                  />
-                  <h3
-                    className={`font-display tracking-wide transition-all duration-300 ${
-                      isActive ? "text-xl md:text-2xl text-pure-white" : "text-sm md:text-base text-foreground/70"
-                    }`}
-                  >
-                    {panel.title}
-                  </h3>
-                  <p
-                    className={`font-mono text-xs md:text-sm text-muted-foreground leading-relaxed max-w-[280px] transition-all duration-400 ${
-                      isActive
-                        ? "opacity-100 max-h-40 mt-2"
-                        : "opacity-0 max-h-0 overflow-hidden"
+              <div key={i} className="flex items-stretch">
+                {/* Column Card */}
+                <div
+                  onMouseEnter={() => setHoveredCol(i)}
+                  onMouseLeave={() => setHoveredCol(null)}
+                  className={`relative flex flex-col rounded-lg overflow-hidden transition-all duration-500 cursor-default flex-1 ${
+                    inView
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  } ${isDimmed ? "opacity-60" : "opacity-100"}`}
+                  style={{
+                    transitionDelay: inView ? `${600 + i * 200}ms` : "0ms",
+                    background: "#0a0a0a",
+                    border: `1px solid ${
+                      isHovered
+                        ? "hsl(var(--primary))"
+                        : "hsl(var(--foreground) / 0.15)"
+                    }`,
+                    minWidth: 0,
+                    width: "100%",
+                    maxWidth: "380px",
+                  }}
+                >
+                  {/* Red top accent bar */}
+                  <div
+                    className={`h-7 flex items-center px-4 transition-all duration-300 ${
+                      isHovered ? "bg-primary" : "bg-primary/80"
                     }`}
                   >
-                    {panel.description}
-                  </p>
+                    <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-primary-foreground font-medium">
+                      {col.lane}
+                    </span>
+                  </div>
+
+                  <div className="p-6 md:p-8 flex flex-col flex-1">
+                    {/* Icon */}
+                    <div className="flex justify-center mb-5">
+                      <Icon
+                        size={28}
+                        className={`transition-colors duration-300 ${
+                          isHovered ? "text-primary" : "text-foreground/60"
+                        }`}
+                      />
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-display text-2xl md:text-3xl text-pure-white text-center mb-4">
+                      {col.title}
+                    </h3>
+
+                    {/* One liner */}
+                    <p className="font-serif-thin text-foreground italic text-sm md:text-base text-center leading-relaxed mb-6 whitespace-pre-line">
+                      {col.oneLiner}
+                    </p>
+
+                    <div className="w-full h-px bg-foreground/10 mb-6" />
+
+                    {/* Deliverables */}
+                    <ul className="space-y-2.5 mb-6 flex-1">
+                      {col.deliverables.map((item, j) => (
+                        <li
+                          key={j}
+                          className={`font-mono text-xs text-foreground/80 flex items-start gap-2 transition-all duration-300 ${
+                            isHovered
+                              ? "translate-x-0 opacity-100"
+                              : "translate-x-0 opacity-80"
+                          }`}
+                          style={{
+                            transitionDelay: isHovered ? `${j * 50}ms` : "0ms",
+                          }}
+                        >
+                          <span className="text-primary shrink-0">[→]</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="w-full h-px bg-foreground/10 mb-6" />
+
+                    {/* Bottom line */}
+                    <p
+                      className={`font-display text-lg md:text-xl text-pure-white text-center whitespace-pre-line leading-tight transition-transform duration-300 ${
+                        isHovered ? "scale-105" : "scale-100"
+                      }`}
+                    >
+                      {col.bottomLine}
+                    </p>
+                  </div>
                 </div>
+
+                {/* Connector Arrow between columns (desktop only) */}
+                {i < 2 && (
+                  <div className="hidden lg:flex flex-col items-center justify-center w-16 shrink-0">
+                    <span className="meta-label text-muted-foreground/60 text-center text-[8px] leading-tight mb-2 whitespace-nowrap">
+                      {connectors[i].label}
+                    </span>
+                    <div className="relative w-10 h-[2px] overflow-hidden">
+                      <div
+                        className="absolute inset-0 bg-primary"
+                        style={{
+                          animation: "pulse-arrow 2s ease-in-out infinite",
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
 
-        {/* Bottom quote */}
-        <div className="mt-16 pt-8 border-t border-foreground/10 text-center">
-          <p className="font-serif-thin text-foreground italic text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            "Most agencies pick one channel. We build the system that feeds all of them."
+        {/* Mobile connectors */}
+        <div className="flex lg:hidden flex-col items-center gap-6 my-6">
+          {/* Already handled inline for desktop; on mobile columns stack */}
+        </div>
+
+        {/* Bottom strip */}
+        <div
+          className={`mt-16 pt-8 border-t border-foreground/10 flex flex-col lg:flex-row items-center justify-between gap-8 transition-all duration-700 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+          style={{ transitionDelay: "1200ms" }}
+        >
+          <span className="meta-label text-muted-foreground/60 shrink-0">
+            [3 LANES · 1 SYSTEM · ZERO GUESSWORK]
+          </span>
+
+          <p className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white text-center leading-[1.05]">
+            SAME ANGLES.
+            <br />
+            EVERY CHANNEL.
+            <br />
+            NOTHING WASTED.
           </p>
+
+          <a
+            href="#process"
+            className="btn-brutal whitespace-nowrap hover:bg-primary hover:text-primary-foreground"
+          >
+            SEE HOW IT ALL WORKS →
+          </a>
         </div>
       </div>
+
+      {/* Pulse arrow animation */}
+      <style>{`
+        @keyframes pulse-arrow {
+          0%, 100% { opacity: 0.3; transform: scaleX(0.6); transform-origin: left; }
+          50% { opacity: 1; transform: scaleX(1); transform-origin: left; }
+        }
+      `}</style>
     </section>
   );
 };
