@@ -92,163 +92,69 @@ const brandBibleRows = [
   },
 ];
 
-/* ───── VISUALS ───── */
+/* ───── COMPACT VISUALS (for bottom preview) ───── */
 
-const Visual01 = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
-  return (
-    <div className="h-full flex flex-col justify-center">
-      <div className="grid grid-cols-2 gap-[1px] bg-foreground/10">
-        {lf8Grid.map((cell, i) => (
-          <div
-            key={cell.label}
-            className="bg-background border border-foreground/10 p-4 md:p-6 cursor-pointer transition-all duration-300 hover:border-primary group relative min-h-[80px] md:min-h-[100px]"
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="font-display text-sm md:text-base text-pure-white">{cell.label}</span>
-            {hovered === i && (
-              <p className="font-serif text-[11px] md:text-xs italic text-foreground/70 mt-2 whitespace-pre-line animate-fade-in">
-                {cell.usp}
-              </p>
-            )}
-          </div>
-        ))}
+const MiniVisual01 = () => (
+  <div className="grid grid-cols-4 gap-[1px]">
+    {lf8Grid.map((cell) => (
+      <div key={cell.label} className="border border-foreground/10 bg-background px-2 py-2 hover:border-primary transition-colors group">
+        <span className="font-display text-[9px] md:text-[10px] text-pure-white">{cell.label}</span>
       </div>
-      <p className="meta-label text-center mt-4">[100+ ANGLES. ALL ROOTED IN HUMAN DESIRE.]</p>
-    </div>
-  );
-};
-
-const Visual02 = () => (
-  <div className="h-full flex flex-col justify-center items-center">
-    <div className="flex gap-8 md:gap-12 mb-8">
-      {personas.map((p) => (
-        <div key={p.trigger} className="flex flex-col items-center text-center max-w-[160px]">
-          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-foreground/30 mb-4" />
-          <p className="font-serif text-[10px] md:text-xs italic text-foreground/60 whitespace-pre-line mb-3 min-h-[40px]">
-            "{p.thought}"
-          </p>
-          <span className="font-display text-sm text-primary">[{p.trigger}]</span>
-        </div>
-      ))}
-    </div>
-    <p className="meta-label">[WE WRITE TO THE FEAR. NOT THE DEMOGRAPHIC.]</p>
+    ))}
   </div>
 );
 
-const Visual03 = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
-  return (
-    <div className="h-full flex flex-col justify-center">
-      <div className="grid grid-cols-10 gap-[1px]">
-        {calendarDays.map((d, i) => {
-          const dotColor =
-            d.type === "primary" ? "bg-primary" :
-            d.type === "amber" ? "bg-amber-500" :
-            d.type === "white" ? "bg-pure-white" : "bg-blue-500";
-          return (
-            <div
-              key={i}
-              className="border border-foreground/10 p-1 md:p-2 text-center cursor-pointer hover:border-primary transition-colors relative group"
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-            >
-              <span className="font-mono text-[7px] md:text-[8px] text-muted-foreground">D{String(d.day).padStart(2, "0")}</span>
-              <div className={`w-1.5 h-1.5 rounded-full ${dotColor} mx-auto mt-1`} />
-              {hovered === i && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-card border border-foreground/20 p-2 text-[8px] font-mono text-foreground whitespace-nowrap z-10">
-                  DAY {d.day} · [{d.type.toUpperCase()}]
-                </div>
-              )}
-            </div>
-          );
-        })}
+const MiniVisual02 = () => (
+  <div className="flex gap-6 justify-center">
+    {personas.map((p) => (
+      <div key={p.trigger} className="flex flex-col items-center text-center max-w-[120px]">
+        <div className="w-8 h-8 rounded-full border border-foreground/30 mb-2" />
+        <span className="font-display text-[9px] text-primary">[{p.trigger}]</span>
       </div>
-      <div className="flex gap-4 mt-4 justify-center">
-        {calendarLegend.map((l) => (
-          <div key={l.label} className="flex items-center gap-1.5">
-            <div className={`w-2 h-2 rounded-full ${l.color}`} />
-            <span className="font-mono text-[8px] text-muted-foreground">{l.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+    ))}
+  </div>
+);
 
-const Visual04 = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
-  return (
-    <div className="h-full flex flex-col justify-center">
-      <div className="grid grid-cols-3 gap-[1px]">
-        {moodboardCells.map((cell, i) => (
-          <div
-            key={cell.label}
-            className="border border-foreground/10 bg-background p-4 md:p-6 cursor-pointer hover:border-primary transition-all duration-300 min-h-[100px] md:min-h-[120px] flex flex-col justify-center"
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            {hovered === i ? (
-              <span className="font-display text-2xl md:text-4xl text-pure-white animate-fade-in">{cell.word}</span>
-            ) : (
-              <span className="meta-label text-foreground/60">{cell.label}</span>
-            )}
-          </div>
-        ))}
-      </div>
-      <p className="meta-label text-center mt-4">[VIBES AREN'T RANDOM. WE MAP THEM FIRST.]</p>
-    </div>
-  );
-};
+const MiniVisual03 = () => (
+  <div className="grid grid-cols-10 gap-[1px]">
+    {calendarDays.slice(0, 20).map((d, i) => {
+      const dotColor =
+        d.type === "primary" ? "bg-primary" :
+        d.type === "amber" ? "bg-amber-500" :
+        d.type === "white" ? "bg-pure-white" : "bg-blue-500";
+      return (
+        <div key={i} className="border border-foreground/10 p-1 text-center">
+          <div className={`w-1 h-1 rounded-full ${dotColor} mx-auto`} />
+        </div>
+      );
+    })}
+  </div>
+);
 
-const Visual05 = () => {
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-  const [hoveredSide, setHoveredSide] = useState<"do" | "dont" | null>(null);
-  return (
-    <div className="h-full flex flex-col justify-center">
-      <div className="grid grid-cols-2 gap-0">
-        <div className="font-display text-sm text-primary border-b border-foreground/10 pb-2 mb-2">DO ↓</div>
-        <div className="font-display text-sm text-primary border-b border-foreground/10 pb-2 mb-2 text-right">DON'T ↓</div>
-        {brandBibleRows.map((row, i) => (
-          <>
-            <div
-              key={`do-${i}`}
-              className={`border-b border-foreground/5 py-3 pr-4 cursor-pointer transition-all duration-300 relative ${
-                hoveredRow === i && hoveredSide === "do" ? "bg-foreground/5" : ""
-              }`}
-              onMouseEnter={() => { setHoveredRow(i); setHoveredSide("do"); }}
-              onMouseLeave={() => { setHoveredRow(null); setHoveredSide(null); }}
-            >
-              <p className="font-serif text-[11px] md:text-xs italic text-foreground/70 whitespace-pre-line">{row.doText}</p>
-              {hoveredRow === i && hoveredSide === "do" && (
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-cream text-xs">[✓]</span>
-              )}
-            </div>
-            <div
-              key={`dont-${i}`}
-              className={`border-b border-foreground/5 py-3 pl-4 cursor-pointer transition-all duration-300 relative ${
-                hoveredRow === i && hoveredSide === "dont" ? "bg-primary/5" : ""
-              }`}
-              onMouseEnter={() => { setHoveredRow(i); setHoveredSide("dont"); }}
-              onMouseLeave={() => { setHoveredRow(null); setHoveredSide(null); }}
-            >
-              <p className="font-serif text-[11px] md:text-xs italic text-foreground/70 whitespace-pre-line">{row.dontText}</p>
-              {hoveredRow === i && hoveredSide === "dont" && (
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-primary text-xs">[✗]</span>
-              )}
-            </div>
-          </>
-        ))}
+const MiniVisual04 = () => (
+  <div className="grid grid-cols-3 gap-[1px]">
+    {moodboardCells.map((cell) => (
+      <div key={cell.label} className="border border-foreground/10 bg-background px-2 py-2 hover:border-primary transition-colors">
+        <span className="meta-label text-foreground/40 text-[7px]">{cell.label}</span>
       </div>
-      <p className="meta-label text-center mt-4 whitespace-pre-line">
-        {"[YOUR BRAND'S CONSTITUTION.\nWRITTEN ONCE. REFERENCED FOREVER.]"}
-      </p>
-    </div>
-  );
-};
+    ))}
+  </div>
+);
 
-const visuals = [Visual01, Visual02, Visual03, Visual04, Visual05];
+const MiniVisual05 = () => (
+  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+    <span className="font-display text-[9px] text-primary">DO ↓</span>
+    <span className="font-display text-[9px] text-primary text-right">DON'T ↓</span>
+    {brandBibleRows.slice(0, 3).map((row, i) => (
+      <div key={i} className="contents">
+        <p className="font-serif text-[8px] italic text-foreground/50 border-b border-foreground/5 py-1">{row.doText.split("\n")[0]}</p>
+        <p className="font-serif text-[8px] italic text-foreground/50 border-b border-foreground/5 py-1 text-right">{row.dontText.split("\n")[0]}</p>
+      </div>
+    ))}
+  </div>
+);
+
+const miniVisuals = [MiniVisual01, MiniVisual02, MiniVisual03, MiniVisual04, MiniVisual05];
 
 /* ───── MAIN ───── */
 
@@ -258,80 +164,86 @@ interface Phase01Props {
 
 const Phase01PreFlight = ({ isActive }: Phase01Props) => {
   const [activeCard, setActiveCard] = useState(0);
-  const ActiveVisual = visuals[activeCard];
+  const ActiveMiniVisual = miniVisuals[activeCard];
 
   return (
     <div className="w-screen h-screen flex-shrink-0 flex flex-col overflow-hidden snap-start">
-      {/* Main content */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-        {/* LEFT — Cards */}
-        <div className="w-full lg:w-[40%] h-1/2 lg:h-full flex flex-col px-6 md:px-10 py-6 md:py-10 overflow-y-auto">
-          <h2
-            className={`font-display text-[clamp(1.8rem,4vw,3.5rem)] leading-[0.95] text-pure-white mb-3 transition-all duration-700 ${
-              isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
-            WE BUILD THE BRAIN
-            <br />
-            BEFORE WE WRITE
-            <br />
-            A SINGLE WORD.
-          </h2>
-          <p
-            className={`font-serif text-sm md:text-base italic text-foreground/60 mb-6 transition-all duration-700 delay-200 ${
-              isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            Most creatives open a doc and start typing.
-            <br />
-            We open your reviews.
-          </p>
+      {/* Main content — single column: cards left-aligned, visual below */}
+      <div className="flex-1 flex flex-col overflow-hidden px-6 md:px-10 pt-14 md:pt-16">
+        {/* Headline */}
+        <h2
+          className={`font-display text-[clamp(1.6rem,3.5vw,3rem)] leading-[0.95] text-pure-white mb-2 transition-all duration-700 ${
+            isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          WE BUILD THE BRAIN
+          <br />
+          BEFORE WE WRITE
+          <br />
+          A SINGLE WORD.
+        </h2>
+        <p
+          className={`font-serif text-xs md:text-sm italic text-foreground/60 mb-4 transition-all duration-700 delay-200 ${
+            isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          Most creatives open a doc and start typing. We open your reviews.
+        </p>
 
-          <div className="flex flex-col gap-2 flex-1">
-            {deliverables.map((d, i) => {
-              const isSelected = activeCard === i;
-              const Icon = d.icon;
-              return (
-                <button
-                  key={i}
-                  onClick={() => setActiveCard(i)}
-                  className={`flex items-center gap-4 border px-4 py-3 md:py-4 text-left transition-all duration-300 ${
-                    isSelected
-                      ? "border-primary bg-primary/5"
-                      : "border-foreground/10 bg-background opacity-40 hover:opacity-70 hover:border-foreground/20"
-                  }`}
-                  style={{
-                    transitionDelay: isActive ? `${300 + i * 100}ms` : "0ms",
-                    opacity: isActive ? undefined : 0,
-                    transform: isActive ? undefined : "translateX(-20px)",
-                  }}
-                >
+        {/* Deliverable cards — left column */}
+        <div className="flex flex-col gap-1.5 mb-4 max-w-[600px]">
+          {deliverables.map((d, i) => {
+            const isSelected = activeCard === i;
+            const Icon = d.icon;
+            return (
+              <button
+                key={i}
+                onClick={() => setActiveCard(i)}
+                className={`flex items-center gap-3 border px-3 py-2.5 text-left transition-all duration-300 ${
+                  isSelected
+                    ? "border-primary bg-primary/10 shadow-[0_0_15px_hsl(var(--primary)/0.15)]"
+                    : "border-foreground/10 bg-card hover:border-foreground/20 hover:bg-card/80"
+                }`}
+                style={{
+                  transitionDelay: isActive ? `${300 + i * 80}ms` : "0ms",
+                  opacity: isActive ? undefined : 0,
+                  transform: isActive ? undefined : "translateX(-20px)",
+                }}
+              >
+                <div className={`w-8 h-8 flex items-center justify-center rounded-sm transition-colors ${
+                  isSelected ? "bg-primary/20" : "bg-foreground/5"
+                }`}>
                   <Icon
-                    size={18}
+                    size={15}
                     className={`flex-shrink-0 transition-colors ${isSelected ? "text-primary" : "text-foreground/40"}`}
                   />
-                  <div className="flex-1 min-w-0">
-                    <span className={`font-display text-sm md:text-base block ${isSelected ? "text-pure-white" : "text-foreground/60"}`}>
-                      {d.title}
-                    </span>
-                    <span className="font-mono text-[8px] md:text-[9px] tracking-wider text-muted-foreground block mt-0.5">
-                      {d.oneLiner}
-                    </span>
-                  </div>
-                  <ArrowRight size={14} className={`flex-shrink-0 ${isSelected ? "text-primary" : "text-foreground/20"}`} />
-                </button>
-              );
-            })}
-          </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className={`font-display text-xs md:text-sm block ${isSelected ? "text-pure-white" : "text-foreground/50"}`}>
+                    {d.title}
+                  </span>
+                  <span className="font-mono text-[7px] md:text-[8px] tracking-wider text-muted-foreground block mt-0.5">
+                    {d.oneLiner}
+                  </span>
+                </div>
+                <ArrowRight size={12} className={`flex-shrink-0 transition-colors ${isSelected ? "text-primary" : "text-foreground/15"}`} />
+              </button>
+            );
+          })}
         </div>
 
-        {/* RIGHT — Dynamic visual */}
-        <div className="w-full lg:w-[60%] h-1/2 lg:h-full border-t lg:border-t-0 lg:border-l border-foreground/10 px-6 md:px-10 py-6 md:py-10 overflow-y-auto relative">
-          <div className="absolute top-4 right-6 md:top-6 md:right-10 meta-label text-muted-foreground/50">
-            [DELIVERABLE {String(activeCard + 1).padStart(2, "0")} OF 05]
+        {/* Mini visual preview — bottom area */}
+        <div className="flex-1 min-h-0 flex flex-col">
+          <div className="flex items-center justify-between mb-2">
+            <span className="meta-label text-muted-foreground/50">
+              [DELIVERABLE {String(activeCard + 1).padStart(2, "0")} OF 05]
+            </span>
+            <button className="meta-label text-primary hover:text-pure-white transition-colors">
+              [ SEE EXAMPLE → ]
+            </button>
           </div>
-          <div className="h-full">
-            <ActiveVisual />
+          <div className="flex-1 border border-foreground/10 bg-card/50 rounded-sm p-4 overflow-hidden">
+            <ActiveMiniVisual />
           </div>
         </div>
       </div>
