@@ -92,7 +92,7 @@ const ProcessSection = () => {
   }, [isPaused, scrollToPhase]);
 
   return (
-    <section id="process" className="relative">
+    <section id="process" className="relative overflow-hidden max-w-[100vw]">
       {/* Phase label — fixed within section */}
       <div className="absolute top-4 left-6 md:top-6 md:left-10 z-20 pointer-events-none">
         <span className="meta-label text-primary transition-all duration-500" key={activePhase}>
@@ -121,7 +121,7 @@ const ProcessSection = () => {
       {/* Horizontal scroll track */}
       <div
         ref={trackRef}
-        className="flex w-screen h-screen overflow-x-auto overflow-y-hidden"
+        className="flex w-full h-screen overflow-x-auto overflow-y-hidden"
         style={{
           scrollSnapType: "x mandatory",
           scrollBehavior: "smooth",

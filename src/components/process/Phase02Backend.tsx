@@ -89,12 +89,14 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
             return (
               <div
                 key={i}
-                className={`bg-card border border-foreground/10 rounded-xl p-5 text-center transition-all duration-500 ${
+                className={`bg-card border border-foreground/15 rounded-xl p-5 text-center transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_25px_hsl(var(--primary)/0.1)] ${
                   isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
                 style={{ transitionDelay: isActive ? `${400 + i * 150}ms` : "0ms" }}
               >
-                <Icon size={20} className="text-primary mx-auto mb-3" />
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                  <Icon size={20} className="text-primary" />
+                </div>
                 <h3 className="font-display text-lg md:text-xl text-pure-white whitespace-pre-line mb-2">
                   {card.stat}
                 </h3>
