@@ -39,9 +39,9 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
   if (!images.length) return null;
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
+    <div className="relative w-full overflow-hidden">
       {/* Carousel container */}
-      <div className="relative flex items-center justify-center" style={{ height: "clamp(350px, 55vh, 550px)" }}>
+      <div className="relative flex items-center justify-center" style={{ height: "clamp(400px, 60vh, 600px)" }}>
         {images.map((img, i) => {
           const offset = i - active;
           const normalized = ((offset + images.length) % images.length);
@@ -54,11 +54,11 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
               key={i}
               className="absolute transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{
-                width: "clamp(200px, 40vw, 320px)",
+                width: "clamp(220px, 28vw, 380px)",
                 aspectRatio: "9/16",
-                transform: `translateX(${pos * 120}px) scale(${isActive ? 1 : 0.85 - absPos * 0.05}) translateY(${absPos * 15}px)`,
+                transform: `translateX(${pos * (window.innerWidth < 640 ? 130 : 200)}px) scale(${isActive ? 1 : 0.85 - absPos * 0.05}) translateY(${absPos * 15}px)`,
                 zIndex: 10 - absPos,
-                opacity: absPos > 1 ? 0 : 1,
+                opacity: absPos > 2 ? 0 : 1,
                 filter: isActive ? "brightness(1)" : "brightness(0.4)",
               }}
               onClick={() => setActive(i)}
@@ -157,7 +157,7 @@ const CaseStudy = () => {
 
       {/* Hero Images Carousel */}
       {study.heroImages.length > 0 && (
-        <div className="px-6 md:px-12 lg:px-20 pb-16">
+        <div className="pb-16">
           <HeroCarousel images={study.heroImages} />
         </div>
       )}
