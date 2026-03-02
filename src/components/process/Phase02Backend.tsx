@@ -83,7 +83,7 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
         <div className={`w-full h-[1px] bg-foreground/15 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
 
         {/* Three cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mb-8">
+        <div className="grid grid-cols-3 gap-4 w-full mb-8">
           {cards.map((card, i) => {
             const Icon = card.icon;
             return (
