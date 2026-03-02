@@ -38,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "Turning a dog collar brand into a direct-response machine.",
     context: "Madcow came to us with a great product and zero email infrastructure. We built the entire backend — flows, campaigns, personas, and a 30-day calendar — from scratch.",
     image: "/images/brand-madcow.png",
-    heroImages: ["/images/email-01.png", "/images/email-02.png", "/images/email-03.png"],
+    heroImages: ["/images/email-01.png", "/images/email-02.png", "/images/email-03.png", "/images/email-04.png", "/images/email-05.png", "/images/email-06.png"],
     deliverables: [
       { icon: ClipboardList, label: "USP EXTRACTION" },
       { icon: User, label: "PERSONA BUILD" },
@@ -71,7 +71,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "A complete brand identity and email creative system — from zero.",
     context: "XYKO needed more than email. They needed a visual language, a brand bible, and a creative direction that could scale across every touchpoint.",
     image: "/images/brand-xyko.png",
-    heroImages: ["/images/email-04.png", "/images/email-05.png", "/images/email-06.png"],
+    heroImages: ["/images/email-04.png", "/images/email-05.png", "/images/email-06.png", "/images/email-01.png", "/images/email-02.png", "/images/email-03.png"],
     deliverables: [
       { icon: Palette, label: "BRAND OVERHAUL" },
       { icon: PenTool, label: "EMAIL CREATIVES" },
@@ -104,7 +104,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "$100K in one month — powered by email alone.",
     context: "Flatpack had traffic but no conversion infrastructure. We built a full email backend and launched a 30-day campaign calendar that generated $100K in its first month.",
     image: "/images/brand-flatpack.png",
-    heroImages: ["/images/email-01.png", "/images/email-03.png", "/images/email-05.png"],
+    heroImages: ["/images/email-01.png", "/images/email-03.png", "/images/email-05.png", "/images/email-02.png", "/images/email-04.png", "/images/email-06.png"],
     deliverables: [
       { icon: ClipboardList, label: "USP EXTRACTION" },
       { icon: Mail, label: "EMAIL FLOWS" },
@@ -137,7 +137,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "A brand intelligence system built for scale.",
     context: "4AM SKIN needed a complete brand foundation — from persona research to a 30-day content calendar — before writing a single email.",
     image: "/images/brand-4amskin.png",
-    heroImages: ["/images/email-02.png", "/images/email-04.png", "/images/email-06.png"],
+    heroImages: ["/images/email-02.png", "/images/email-04.png", "/images/email-06.png", "/images/email-01.png", "/images/email-03.png", "/images/email-05.png"],
     deliverables: [
       { icon: ClipboardList, label: "100+ USPS" },
       { icon: BookOpen, label: "BRAND BIBLE" },
@@ -170,7 +170,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "$1M generated across 12+ brands in a single quarter.",
     context: "MKTG is an 8-figure Klaviyo agency. They brought us in to write high-converting email copy across their entire portfolio — fast.",
     image: null,
-    heroImages: ["/images/email-01.png", "/images/email-02.png", "/images/email-03.png"],
+    heroImages: ["/images/email-01.png", "/images/email-02.png", "/images/email-03.png", "/images/email-04.png", "/images/email-05.png", "/images/email-06.png"],
     deliverables: [
       { icon: DollarSign, label: "$1M GENERATED" },
       { icon: Building2, label: "8-FIG AGENCY" },
@@ -203,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "High 6-figure campaigns — built on copy that converts.",
     context: "Adsumo Digital is a performance agency. We partnered with them to produce campaign and flow copy across multiple DTC brands.",
     image: null,
-    heroImages: ["/images/email-04.png", "/images/email-05.png", "/images/email-06.png"],
+    heroImages: ["/images/email-04.png", "/images/email-05.png", "/images/email-06.png", "/images/email-01.png", "/images/email-02.png", "/images/email-03.png"],
     deliverables: [
       { icon: Sun, label: "SUMMER CAMPAIGNS" },
       { icon: RefreshCw, label: "FLOW COPY" },
