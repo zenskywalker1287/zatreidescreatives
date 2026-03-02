@@ -128,7 +128,7 @@ const CampaignSection = () => {
         </div>
 
         {/* Three Columns with Connectors */}
-        <div className="relative flex flex-col lg:flex-row items-stretch justify-center gap-0 lg:gap-0 max-w-6xl mx-auto">
+        <div className="relative flex flex-row items-stretch justify-center gap-0 max-w-6xl mx-auto">
           {columns.map((col, i) => {
             const Icon = col.icon;
             const isHovered = hoveredCol === i;
@@ -227,7 +227,7 @@ const CampaignSection = () => {
 
                 {/* Connector Arrow between columns (desktop only) */}
                 {i < 2 && (
-                  <div className="hidden lg:flex flex-col items-center justify-center w-16 shrink-0">
+                  <div className="flex flex-col items-center justify-center w-16 shrink-0">
                     <span className="meta-label text-muted-foreground/60 text-center text-[8px] leading-tight mb-2 whitespace-nowrap">
                       {connectors[i].label}
                     </span>
