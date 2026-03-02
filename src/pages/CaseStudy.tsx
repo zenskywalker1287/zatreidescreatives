@@ -1,8 +1,7 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { getCaseStudyBySlug, getAdjacentStudies } from "@/data/caseStudyData";
 import type { Deliverable } from "@/data/caseStudyData";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const DeliverableIcon = ({ item }: { item: Deliverable }) => {
   const Icon = item.icon;
@@ -26,89 +25,178 @@ const DeliverableIcon = ({ item }: { item: Deliverable }) => {
 };
 
 const HeroCarousel = ({ images }: { images: string[] }) => {
-  const [active, setActive] = useState(0);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const [scrollX, setScrollX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollStart, setScrollStart] = useState(0);
+  const velocityRef = useRef(0);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const rafRef = useRef<number>(0);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
 
-  const next = useCallback(() => setActive((p) => (p + 1) % images.length), [images.length]);
-  const prev = useCallback(() => setActive((p) => (p - 1 + images.length) % images.length), [images.length]);
+  const isMobile = containerWidth < 640;
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 240;
+  const CARD_GAP = isMobile ? 10 : 24;
+  const TOTAL_WIDTH = images.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
-    const interval = setInterval(next, 4000);
-    return () => clearInterval(interval);
-  }, [next]);
+    if (stripRef.current) setContainerWidth(stripRef.current.offsetWidth);
+    const handleResize = () => {
+      if (stripRef.current) setContainerWidth(stripRef.current.offsetWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (containerWidth > 0) {
+      const centerCardIndex = Math.floor(images.length / 2);
+      const cardCenterPos = centerCardIndex * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
+      setScrollX(-(cardCenterPos - containerWidth / 2));
+    }
+  }, [containerWidth, CARD_WIDTH, CARD_GAP, images.length]);
+
+  const wrapScroll = useCallback((x: number) => {
+    const min = -(TOTAL_WIDTH - containerWidth / 2);
+    const max = containerWidth / 2;
+    const range = max - min;
+    if (range <= 0) return x;
+    let wrapped = x;
+    while (wrapped < min) wrapped += range;
+    while (wrapped > max) wrapped -= range;
+    return wrapped;
+  }, [TOTAL_WIDTH, containerWidth]);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    setIsDragging(true);
+    setStartX(e.clientX);
+    setScrollStart(scrollX);
+    lastXRef.current = e.clientX;
+    lastTimeRef.current = Date.now();
+    velocityRef.current = 0;
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  }, [scrollX]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!isDragging) return;
+    const now = Date.now();
+    const dt = now - lastTimeRef.current;
+    const dx = e.clientX - lastXRef.current;
+    if (dt > 0) velocityRef.current = dx / dt;
+    lastXRef.current = e.clientX;
+    lastTimeRef.current = now;
+    setScrollX(wrapScroll(scrollStart + (e.clientX - startX)));
+  }, [isDragging, scrollStart, startX, wrapScroll]);
+
+  const handlePointerUp = useCallback(() => {
+    setIsDragging(false);
+    let v = velocityRef.current * 15;
+    const decay = () => {
+      if (Math.abs(v) < 0.5) return;
+      v *= 0.95;
+      setScrollX((prev) => wrapScroll(prev + v));
+      rafRef.current = requestAnimationFrame(decay);
+    };
+    rafRef.current = requestAnimationFrame(decay);
+  }, [wrapScroll]);
+
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    e.preventDefault();
+    setScrollX((prev) => wrapScroll(prev - e.deltaY * 1.5));
+  }, [wrapScroll]);
 
   if (!images.length) return null;
 
+  const centerOffset = containerWidth / 2;
+
   return (
-    <div className="relative w-full overflow-hidden">
-      {/* Carousel container */}
-      <div className="relative flex items-center justify-center" style={{ height: "clamp(400px, 60vh, 600px)" }}>
+    <div
+      ref={stripRef}
+      className="relative cursor-grab active:cursor-grabbing select-none overflow-hidden py-16"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onWheel={handleWheel}
+    >
+      <div
+        className="flex items-end"
+        style={{
+          transform: `translateX(${scrollX}px)`,
+          transition: isDragging ? "none" : "transform 0.1s ease-out",
+          gap: `${CARD_GAP}px`,
+        }}
+      >
         {images.map((img, i) => {
-          const offset = i - active;
-          const normalized = ((offset + images.length) % images.length);
-          const pos = normalized > images.length / 2 ? normalized - images.length : normalized;
-          const absPos = Math.abs(pos);
-          const isActive = pos === 0;
+          const cardCenter = i * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
+          const viewCenter = -scrollX + centerOffset;
+          let dist = (cardCenter - viewCenter) / (CARD_WIDTH + CARD_GAP);
+          const totalCards = images.length;
+          if (dist > totalCards / 2) dist -= totalCards;
+          if (dist < -totalCards / 2) dist += totalCards;
+          const clampedDist = Math.max(-4, Math.min(4, dist));
+          const absDist = Math.abs(clampedDist);
+          const rotation = isMobile ? clampedDist * 1 : clampedDist * 4;
+          const lift = isMobile ? 0 : Math.max(0, 30 - absDist * 15);
+          const scale = isMobile ? 1 : 1 + Math.max(0, 1 - absDist * 0.3) * 0.08;
+          const isCenter = Math.abs(dist) < 0.6;
+          const isHovered = hoveredCard === i;
+          const cardOpacity = isMobile ? Math.max(0.4, 1 - absDist * 0.2) : 1;
 
           return (
             <div
               key={i}
-              className="absolute transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              className="flex-shrink-0 relative"
               style={{
-                width: "clamp(220px, 28vw, 380px)",
-                aspectRatio: "9/16",
-                transform: `translateX(${pos * (window.innerWidth < 640 ? 130 : 200)}px) scale(${isActive ? 1 : 0.85 - absPos * 0.05}) translateY(${absPos * 15}px)`,
-                zIndex: 10 - absPos,
-                opacity: absPos > 2 ? 0 : 1,
-                filter: isActive ? "brightness(1)" : "brightness(0.4)",
+                width: CARD_WIDTH,
+                opacity: cardOpacity,
+                transform: `rotate(${isHovered && !isMobile ? 0 : rotation}deg) translateY(${isHovered && !isMobile ? -40 : -lift}px) scale(${isHovered && !isMobile ? 1.12 : scale})`,
+                transition: isDragging ? "none" : "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease",
+                zIndex: isHovered ? 50 : isCenter ? 10 : 1,
+                transformOrigin: "bottom center",
               }}
-              onClick={() => setActive(i)}
+              onMouseEnter={() => setHoveredCard(i)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
-              {isActive && (
+              {isCenter && !isHovered && (
                 <div
-                  className="absolute -inset-4 blur-[40px] opacity-20 pointer-events-none rounded-2xl"
-                  style={{ background: "hsl(var(--primary))" }}
+                  className="absolute -inset-4 rounded-2xl opacity-30 pointer-events-none blur-2xl"
+                  style={{ background: "hsl(var(--primary) / 0.4)" }}
                 />
               )}
               <div
-                className="relative w-full h-full overflow-hidden"
+                className="relative w-full overflow-hidden"
                 style={{
-                  borderRadius: "16px",
-                  border: `1.5px solid ${isActive ? "hsl(var(--primary))" : "rgba(255,255,255,0.06)"}`,
+                  backgroundColor: "#0a0a0a",
+                  borderRadius: isMobile ? "20px" : "16px",
+                  border: `1px solid hsl(var(--foreground) / 0.2)`,
+                  aspectRatio: isMobile ? "9 / 16" : undefined,
                 }}
               >
                 <img
                   src={img}
                   alt={`Email creative ${i + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full block"
+                  style={{
+                    height: isMobile ? "100%" : "auto",
+                    objectFit: isMobile ? "cover" : undefined,
+                    objectPosition: "top center",
+                    maxHeight: isMobile ? undefined : "500px",
+                  }}
                   loading="lazy"
+                  draggable={false}
                 />
+                {!isCenter && !isHovered && (
+                  <div className="absolute inset-0 bg-black/40 pointer-events-none" style={{ borderRadius: "16px" }} />
+                )}
               </div>
             </div>
           );
         })}
-      </div>
-
-      {/* Nav arrows */}
-      <div className="flex justify-center gap-4 mt-4">
-        <button
-          onClick={prev}
-          className="w-8 h-8 border border-foreground/15 flex items-center justify-center hover:border-primary transition-colors"
-        >
-          <ChevronLeft size={16} className="text-foreground/50" />
-        </button>
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`w-2 h-2 my-auto transition-all duration-300 ${i === active ? "bg-primary scale-125" : "bg-foreground/20"}`}
-          />
-        ))}
-        <button
-          onClick={next}
-          className="w-8 h-8 border border-foreground/15 flex items-center justify-center hover:border-primary transition-colors"
-        >
-          <ChevronRight size={16} className="text-foreground/50" />
-        </button>
       </div>
     </div>
   );
