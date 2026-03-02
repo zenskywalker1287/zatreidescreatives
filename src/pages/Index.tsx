@@ -1,6 +1,11 @@
 import Nav from "../components/Nav";
 import HeroSection from "../components/HeroSection";
 import NumbersSection from "../components/NumbersSection";
+import LogoTicker from "../components/LogoTicker";
+import SocialProofCarousel from "../components/SocialProofCarousel";
+import FeaturedAlongside from "../components/FeaturedAlongside";
+import SecondNumbersWall from "../components/SecondNumbersWall";
+import ProofOfWork from "../components/ProofOfWork";
 import ClientsSection from "../components/ClientsSection";
 import ProcessSection from "../components/ProcessSection";
 import PipelineSection from "../components/PipelineSection";
@@ -19,6 +24,11 @@ const Index = () => {
       <Nav />
       <HeroSection />
       <NumbersSection />
+      <LogoTicker />
+      <SocialProofCarousel />
+      <FeaturedAlongside />
+      <SecondNumbersWall />
+      <ProofOfWork />
       <ClientsSection />
       <ProcessSection />
       <PipelineSection />
