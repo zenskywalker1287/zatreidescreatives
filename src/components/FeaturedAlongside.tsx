@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { useInView } from "../hooks/useInView";
 
-const brands = ["NIKE", "CHIPOTLE", "GYMSHARK"];
-
 const FeaturedAlongside = () => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, 0.1);
@@ -17,22 +15,21 @@ const FeaturedAlongside = () => {
       <div className="max-w-[900px] mx-auto text-center px-6">
         <span className="meta-label text-primary mb-8 block">[AS SEEN ALONGSIDE]</span>
 
-        <div className="flex items-center justify-center gap-6 md:gap-12 mb-8">
-          {brands.map((brand, i) => (
-            <div key={brand} className="flex items-center gap-6 md:gap-12">
-              {i > 0 && <div className="w-[1px] h-12 bg-foreground/15" />}
-              <h3 className="font-display text-[clamp(2rem,5vw,4rem)] text-pure-white leading-none">
-                {brand}
-              </h3>
-            </div>
-          ))}
-        </div>
+        <h3 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-pure-white leading-[0.95] mb-6">
+          FEATURED ON<br />REALLY GOOD EMAILS.
+        </h3>
 
-        <span className="meta-label text-foreground/50 mb-3 block">[YOUR CREATIVE SAT NEXT TO THEIRS.]</span>
-        <p className="font-serif-thin italic text-foreground/60 text-base mb-3">
-          Not a flex. Just context.
+        <span className="meta-label text-foreground/50 mb-6 block leading-relaxed">
+          [ALONGSIDE NIKE · CHIPOTLE · GYMSHARK<br />
+          AND 10,000+ OF THE BEST EMAILS ON THE INTERNET]
+        </span>
+
+        <p className="font-serif-thin italic text-foreground/60 text-base md:text-lg mb-6 leading-relaxed max-w-lg mx-auto">
+          It's the industry's most respected email curation platform.
+          Your work only gets on there if it's actually good.
         </p>
-        <span className="meta-label text-muted-foreground/40">[FEATURED IN THE SAME CAMPAIGN BRIEF — 2024]</span>
+
+        <span className="meta-label text-muted-foreground/40">[REALLYGOODEMAILS.COM · CURATED · NOT PAID]</span>
       </div>
     </section>
   );
