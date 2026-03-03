@@ -141,37 +141,36 @@ const HeroSection = () => {
 
 
       {/* TOP HALF — Headline */}
-      <div className="relative z-10 flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-24 pb-4 min-h-[60vh] sm:min-h-[50vh]">
-      <div className="max-w-[1400px] w-full flex flex-col items-start text-left">
+      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 pt-24 pb-4">
+      <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
 
           {/* Label */}
           <span className="meta-label text-primary mb-6 opacity-0 animate-fade-up">[ZEN RICHARDS]</span>
 
-          <h1 className="leading-[0.9] tracking-tight mb-8 animate-fade-up relative">
+          <h1 className="leading-[0.9] tracking-tight mb-6 animate-fade-up relative">
             {/* Deep background glow */}
             <div className="absolute -inset-20 blur-[180px] opacity-30 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)' }} />
 
-            {/* Secondary ambient glow */}
             <div className="absolute -inset-10 blur-[100px] opacity-15 pointer-events-none"
             style={{ background: 'radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.6), transparent 50%), radial-gradient(circle at 70% 50%, hsl(var(--foreground) / 0.1), transparent 50%)' }} />
 
             {/* Far ghost echo */}
-            <span className="absolute inset-0 flex flex-col items-start justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.04)' }}>
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.04)' }}>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[18px] opacity-[0.08]">CREATIVE STRATEGIST</span>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[18px] opacity-[0.08]">FOR 6, 7 & 8-FIGURE</span>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[18px] opacity-[0.08]">DTC BRANDS.</span>
             </span>
 
             {/* Near ghost echo */}
-            <span className="absolute inset-0 flex flex-col items-start justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.015)' }}>
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: 'scale(1.015)' }}>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[8px] opacity-[0.15]">CREATIVE STRATEGIST</span>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[8px] opacity-[0.15]">FOR 6, 7 & 8-FIGURE</span>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[8px] opacity-[0.15]">DTC BRANDS.</span>
             </span>
 
             {/* Stroke/outline echo */}
-            <span className="absolute inset-0 flex flex-col items-start justify-center pointer-events-none select-none" aria-hidden="true">
+            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true">
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-transparent block" style={{ WebkitTextStroke: '1px hsl(var(--foreground) / 0.15)' }}>CREATIVE STRATEGIST</span>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-transparent block" style={{ WebkitTextStroke: '1px hsl(var(--foreground) / 0.15)' }}>FOR 6, 7 & 8-FIGURE</span>
               <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-transparent block" style={{ WebkitTextStroke: '1px hsl(var(--foreground) / 0.15)' }}>DTC BRANDS.</span>
@@ -190,19 +189,15 @@ const HeroSection = () => {
           </h1>
 
           {/* Subheadline */}
-          <div className="font-serif-thin italic text-foreground text-base md:text-lg max-w-xl mb-10 opacity-0 animate-fade-up leading-relaxed" style={{ animationDelay: "0.3s" }}>
-            <p className="mb-4">You know the agencies that spend three weeks on a moodboard and never move the needle?</p>
-            <p className="mb-4">Not here.</p>
-            <p className="mb-4">
-              $2M+ in revenue generated.<br />
-              1,200+ creatives shipped.<br />
-              Worked inside 8-figure agencies.
+          <div className="font-serif-thin italic text-foreground text-sm md:text-base max-w-xl mb-6 opacity-0 animate-fade-up leading-relaxed" style={{ animationDelay: "0.3s" }}>
+            <p className="mb-2">
+              $2M+ in revenue generated. 1,200+ creatives shipped. Worked inside 8-figure agencies.
             </p>
             <p>This is how we demystify 'the creative' and actually drive conversions.</p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-up" style={{ animationDelay: "0.6s" }}>
+          <div className="flex flex-col sm:flex-row gap-4 mb-5 opacity-0 animate-fade-up" style={{ animationDelay: "0.5s" }}>
             <a
               href="#portfolio"
               className="px-8 py-3 text-xs uppercase tracking-[0.3em] font-mono bg-pure-white text-background transition-all duration-300 hover:bg-background hover:text-pure-white border border-transparent hover:border-foreground/60 inline-block text-center"
@@ -216,18 +211,14 @@ const HeroSection = () => {
               [ SEE OUR LATEST CREATIVE WORLD → ]
             </a>
           </div>
-        </div>
-      </div>
 
-      {/* Content Pillars Strip */}
-      <div className="relative z-10 border-t border-b border-foreground/10 py-5 px-6 md:px-12 lg:px-20 opacity-0 animate-fade-up" style={{ animationDelay: "0.7s" }}>
-        <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-          <span className="meta-label text-primary whitespace-nowrap">[WHAT WE DO]</span>
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Content Pillars — inline strip */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 opacity-0 animate-fade-up" style={{ animationDelay: "0.6s" }}>
+            <span className="meta-label text-primary mr-1">[WHAT WE DO]</span>
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
-                className="border border-foreground/20 rounded-full px-6 py-2.5 font-mono text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-200 hover:border-primary hover:text-pure-white cursor-default"
+                className="border border-foreground/20 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground transition-all duration-200 hover:border-primary hover:text-pure-white cursor-default"
                 style={{ backgroundColor: 'transparent' }}
                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'hsl(10 100% 56% / 0.1)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
@@ -242,7 +233,7 @@ const HeroSection = () => {
       {/* BOTTOM HALF — Card Strip */}
       <div
         ref={stripRef}
-        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-12 my-[4px] py-[111px]"
+        className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden opacity-0 animate-fade-up pb-6 mt-4 py-16"
         style={{ animationDelay: "0.8s" }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
