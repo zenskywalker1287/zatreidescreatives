@@ -1,23 +1,29 @@
-import { GitBranch, CalendarClock, ArrowRightLeft } from "lucide-react";
+import { GitBranch, CalendarClock, MessageSquare, Target } from "lucide-react";
 
 const cards = [
   {
     icon: GitBranch,
-    stat: "10 FLOWS",
-    mono: "[PRE & POST PURCHASE — FULLY BUILT]",
-    desc: "Every stage of the customer journey. Abandoned carts, winbacks, upsells — all copy, design and strategy handled. Zero input from your team.",
+    title: "10 EMAIL FLOWS",
+    tag: "[PRE & POST PURCHASE — FULLY BUILT]",
+    desc: "Abandoned carts. Winbacks. Welcome sequences. Post-purchase upsells. Every stage of the customer journey — written, designed and deployed. Your team does nothing.",
   },
   {
     icon: CalendarClock,
-    stat: "3 CAMPAIGNS\nPER WEEK",
-    mono: "[FRESH ANGLES. EVERY SINGLE WEEK.]",
-    desc: "New campaigns hitting your list weekly. Built around your USPs, your personas, your brand voice. Always relevant. Never repetitive.",
+    title: "3 CAMPAIGNS\nPER WEEK",
+    tag: "[ALWAYS RELEVANT. NEVER GUESSED.]",
+    desc: "Fresh angles hitting your list every week. Built from your USPs. Written to your personas. Never templated. Never repetitive.",
   },
   {
-    icon: ArrowRightLeft,
-    stat: "EMAILS →\nAD CREATIVES",
-    mono: "[YOUR BEST EMAILS DON'T DIE IN THE INBOX.]",
-    desc: "Top performing emails get repurposed into high-impact ad creatives. Same message. Every channel. Nothing wasted.",
+    icon: MessageSquare,
+    title: "SMS\nSEQUENCES",
+    tag: "[THE CHANNEL YOUR COMPETITORS SLEEP ON.]",
+    desc: "Short. Punchy. Timed right. The channel most brands completely ignore — and leave serious money in.",
+  },
+  {
+    icon: Target,
+    title: "SEGMENTATION\nSTRATEGY",
+    tag: "[NO MORE BATCH AND BLAST.]",
+    desc: "The right message to the right person at the right time. Built into every send.",
   },
 ];
 
@@ -55,35 +61,43 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
       </div>
 
       {/* Foreground content */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 md:px-10 max-w-[700px] mx-auto text-center">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 md:px-10 max-w-[800px] mx-auto text-center">
         <h2
           className={`font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-pure-white mb-4 transition-all duration-700 ${
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          30+ TOUCHPOINTS.
+          THE 99% WHO
           <br />
-          SELLING 24/7.
+          DON'T BUY TODAY
           <br />
-          ZERO INPUT FROM YOU.
+          ARE STILL WORTH
+          <br />
+          A FORTUNE.
         </h2>
 
         <p
-          className={`font-serif italic text-sm md:text-base text-foreground/60 mb-8 transition-all duration-700 delay-200 ${
+          className={`font-serif-thin italic text-sm md:text-base text-foreground/60 mb-8 transition-all duration-700 delay-200 ${
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          100+ USPs turned into an automated system
+          They found your brand.
           <br />
-          that brands, sells, and retargets —
+          They looked. They left.
           <br />
-          while you sleep.
+          Most brands let them walk forever.
+          <br />
+          We built the system that
+          <br />
+          follows them home —
+          <br />
+          and keeps them coming back.
         </p>
 
         <div className={`w-full h-[1px] bg-foreground/15 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
 
-        {/* Three cards */}
-        <div className="grid grid-cols-3 gap-4 w-full mb-8">
+        {/* Four cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-8">
           {cards.map((card, i) => {
             const Icon = card.icon;
             return (
@@ -98,9 +112,9 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
                   <Icon size={20} className="text-primary" />
                 </div>
                 <h3 className="font-display text-lg md:text-xl text-pure-white whitespace-pre-line mb-2">
-                  {card.stat}
+                  {card.title}
                 </h3>
-                <span className="meta-label text-primary block mb-3">{card.mono}</span>
+                <span className="meta-label text-primary block mb-3">{card.tag}</span>
                 <p className="font-mono text-[10px] md:text-[11px] text-foreground/50 leading-relaxed">
                   {card.desc}
                 </p>
@@ -114,20 +128,17 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
           href="/portfolio"
           className="inline-block font-display text-sm md:text-base bg-pure-white text-background px-8 py-3 transition-all duration-300 hover:bg-background hover:text-pure-white hover:border-primary border border-transparent hover:border mb-3"
         >
-          [ SEE EMAIL PORTFOLIO NOW → ]
+          [ SEE THE EMAIL PORTFOLIO → ]
         </a>
-        <p className="meta-label text-muted-foreground/50 whitespace-pre-line">
-          {"[30+ CREATIVES BUILT PER BRAND —\nEMAIL · SMS · ADS · ALL INCLUDED]"}
-        </p>
       </div>
 
       {/* Bottom strip */}
       <div className="relative z-10 border-t border-primary/30 px-6 md:px-10 py-3 flex justify-between items-center flex-shrink-0">
-        <span className="meta-label text-muted-foreground/50">
-          [PHASE 02 COMPLETE — BACKEND RUNNING 24/7]
+        <span className="meta-label text-muted-foreground/50 whitespace-pre-line">
+          {"[PHASE 02 COMPLETE —\nRETENTION SYSTEM LIVE.\nRUNNING 24/7. ZERO INPUT FROM YOU.]"}
         </span>
         <span className="meta-label text-primary animate-pulse">
-          PHASE 03: FRONT END →
+          PHASE 03: CREATIVE DIRECTION →
         </span>
       </div>
     </div>

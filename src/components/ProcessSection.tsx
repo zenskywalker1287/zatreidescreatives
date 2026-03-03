@@ -1,12 +1,12 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import Phase01PreFlight from "./process/Phase01PreFlight";
-import Phase02Backend from "./process/Phase02Backend";
-import Phase03FrontEnd from "./process/Phase03FrontEnd";
+import Phase01Strategy from "./process/Phase01PreFlight";
+import Phase02Retention from "./process/Phase02Backend";
+import Phase03Creative from "./process/Phase03FrontEnd";
 
 const phaseLabels = [
-  "[PHASE 01 — PRE-FLIGHT]",
-  "[PHASE 02 — THE BACKEND]",
-  "[PHASE 03 — FRONT END]",
+  "[PHASE 01 — STRATEGY]",
+  "[PHASE 02 — RETENTION]",
+  "[PHASE 03 — CREATIVE DIRECTION]",
 ];
 
 const AUTO_SCROLL_INTERVAL = 8000;
@@ -29,7 +29,6 @@ const ProcessSection = () => {
     });
   }, []);
 
-  // Observe scroll position to determine active phase
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -43,7 +42,6 @@ const ProcessSection = () => {
     return () => track.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Pause auto-scroll on user interaction
   const handleUserInteraction = useCallback(() => {
     setIsPaused(true);
     if (resumeTimer.current) clearTimeout(resumeTimer.current);
@@ -62,7 +60,6 @@ const ProcessSection = () => {
     return () => events.forEach((e) => track.removeEventListener(e, handleUserInteraction));
   }, [handleUserInteraction]);
 
-  // Auto-scroll + progress bar
   useEffect(() => {
     if (isPaused) {
       if (animFrame.current) cancelAnimationFrame(animFrame.current);
@@ -74,7 +71,6 @@ const ProcessSection = () => {
       const pct = Math.min(elapsed / AUTO_SCROLL_INTERVAL, 1);
       setProgress(pct);
       if (pct >= 1) {
-        // Advance
         setActivePhase((prev) => {
           const next = prev < 2 ? prev + 1 : 0;
           scrollToPhase(next);
@@ -93,8 +89,29 @@ const ProcessSection = () => {
 
   return (
     <section id="process" className="relative overflow-hidden max-w-[100vw]">
+      {/* Section intro */}
+      <div className="w-full bg-background py-16 md:py-24 text-center px-6">
+        <span className="meta-label text-primary mb-6 block">[THE PROCESS]</span>
+        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mb-6">
+          HOW WE TURN
+          <br />
+          A BRAND INTO
+          <br />
+          A MACHINE.
+        </h2>
+        <p className="font-serif-thin italic text-sm md:text-base text-foreground/60 max-w-lg mx-auto">
+          Three phases. Every time.
+          <br />
+          No shortcuts. No guesswork.
+          <br />
+          This is how optimized creative
+          <br />
+          actually gets built.
+        </p>
+      </div>
+
       {/* Phase label — fixed within section */}
-      <div className="absolute top-4 left-6 md:top-6 md:left-10 z-20 pointer-events-none">
+      <div className="absolute top-4 left-6 md:top-6 md:left-10 z-20 pointer-events-none" style={{ top: "calc(var(--intro-offset, 0px) + 1rem)" }}>
         <span className="meta-label text-primary transition-all duration-500" key={activePhase}>
           {phaseLabels[activePhase]}
         </span>
@@ -130,9 +147,9 @@ const ProcessSection = () => {
           msOverflowStyle: "none",
         }}
       >
-        <Phase01PreFlight isActive={activePhase === 0} />
-        <Phase02Backend isActive={activePhase === 1} />
-        <Phase03FrontEnd isActive={activePhase === 2} />
+        <Phase01Strategy isActive={activePhase === 0} />
+        <Phase02Retention isActive={activePhase === 1} />
+        <Phase03Creative isActive={activePhase === 2} />
       </div>
 
       {/* Dot indicators */}
@@ -156,6 +173,20 @@ const ProcessSection = () => {
           className="h-full bg-primary transition-none"
           style={{ width: `${progress * 100}%` }}
         />
+      </div>
+
+      {/* Bottom strip */}
+      <div className="w-full border-t border-foreground/15 border-b border-b-foreground/15 bg-background px-6 md:px-10 py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <h3 className="font-display text-[clamp(1.5rem,3vw,2.5rem)] text-pure-white leading-[1.1] text-center md:text-left">
+          STRATEGY BUILDS IT.
+          <br />
+          RETENTION KEEPS IT.
+          <br />
+          CREATIVE SCALES IT.
+        </h3>
+        <span className="meta-label text-foreground/40">
+          [3 PHASES · 1 SYSTEM · ZERO GAPS]
+        </span>
       </div>
     </section>
   );
