@@ -9,14 +9,14 @@ interface Brief {
 
 const CreatorBriefCard = ({ brief }: { brief: Brief }) => {
   return (
-    <div className="border border-foreground/10 bg-secondary/20 p-4 md:p-5">
-      <span className="meta-label text-primary block mb-3">[CREATOR BRIEF]</span>
+    <div className="border border-foreground/10 bg-secondary/20 p-3 md:p-4">
+      <span className="meta-label text-primary block mb-2">[CREATOR BRIEF]</span>
 
-      <span className="font-mono text-[9px] tracking-[0.2em] text-primary uppercase block mb-2">
+      <span className="font-mono text-[9px] tracking-[0.2em] text-primary uppercase block mb-1">
         [{brief.hookFormat}]
       </span>
 
-      <p className="font-serif-thin text-sm md:text-base text-foreground/90 italic mb-4 leading-relaxed">
+      <p className="font-serif-thin text-sm md:text-base text-foreground/90 italic mb-3 leading-relaxed">
         "{brief.hookLine}"
       </p>
 
