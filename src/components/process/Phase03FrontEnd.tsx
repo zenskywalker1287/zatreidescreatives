@@ -1,31 +1,36 @@
 import { Link } from "react-router-dom";
-import { Image, Smartphone, Camera, LayoutGrid } from "lucide-react";
+import { LayoutGrid, FileText, Users, BookOpen, Cog } from "lucide-react";
 
 const creativeCards = [
   {
-    icon: Image,
-    title: "STATIC ADS",
-    description: "Scroll-stopping concepts built around\nyour USPs and personas. Engineered\nto arrest attention and force the click.",
-    tags: "[META · TIKTOK · PINTEREST]",
-  },
-  {
-    icon: Smartphone,
-    title: "SHORT FORM\n& HOOKS",
-    description: "Hooks so specific they feel like\ninside jokes. Ready-to-deploy concepts\nfor TikTok, Reels, and Shorts.",
-    tags: "[TIKTOK · REELS · SHORTS · CAMPAIGNS]",
-  },
-  {
-    icon: Camera,
-    title: "UGC\nSCRIPTING",
-    description: "Word-for-word scripts and shot-by-shot\nbriefs. Your creators know exactly\nwhat to say and why it converts.",
-    tags: "[SCRIPTS · SHOOT BRIEFS · DIRECTION]",
-  },
-  {
     icon: LayoutGrid,
-    title: "100+ CONTENT\nANGLES",
-    description: "Never run out of ideas.\nMyth Busters · FAQ · Day in the Life ·\nBefore vs. After · Hot Take · + 94 more.",
-    tags: "[CONTENT · NARRATIVE · FORMATS]",
-    cta: true,
+    title: "CONTENT PILLAR\nSTRATEGY",
+    description: "Four optimized pillars\nbuilt specifically for your brand.\nTested monthly. Refined constantly.\nYour team always knows\nexactly what to make and why.",
+    tags: "[ORGANIC · PAID · ALWAYS OPTIMIZED]",
+  },
+  {
+    icon: FileText,
+    title: "CREATIVE\nBRIEFING",
+    description: "Every shoot. Every campaign.\nEvery UGC creator on your roster —\nbriefed with strategy behind it.\nNo more guessing on set.\nNo more off-brand content.",
+    tags: "[BRIEFS · DIRECTION · EXECUTION]",
+  },
+  {
+    icon: Users,
+    title: "TEAM\nINTEGRATION",
+    description: "I work inside your team.\nSlack. Notion. Whatever you run on.\nYour editors, your photographers,\nyour media buyers —\nall aligned to the same\ncreative strategy.",
+    tags: "[EMBEDDED · NOT EXTERNAL]",
+  },
+  {
+    icon: BookOpen,
+    title: "HOOKS & ANGLE\nLIBRARY",
+    description: "A living document\nyour team pulls from daily.\n100+ angles organized by format,\nplatform and objective.\nYour content never runs dry.",
+    tags: "[ALWAYS ON. ALWAYS FRESH.]",
+  },
+  {
+    icon: Cog,
+    title: "IN-HOUSE\nSYSTEMS & SOPS",
+    description: "Every process documented.\nEvery workflow built.\nSo when you scale your team —\nthe creative quality\nscales with it.",
+    tags: "[BUILT TO OUTLAST THE ENGAGEMENT]",
   },
 ];
 
@@ -44,9 +49,11 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          STOP THE SCROLL.
+          THE IN-HOUSE
           <br />
-          START THE SALE.
+          CREATIVE DIRECTOR
+          <br />
+          YOU NEVER HAD.
         </h2>
 
         <p
@@ -54,18 +61,28 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Your ads are the first impression.
+          Not a freelancer you brief once
           <br />
-          We make sure they're not just pretty —
+          and never hear from.
           <br />
-          they're engineered to convert.
+          Embedded. Opinionated. Accountable.
+          <br />
+          Running your content strategy,
+          <br />
+          briefing your team,
+          <br />
+          owning your pillars —
+          <br />
+          like a full-time creative director
+          <br />
+          without the full-time price tag.
         </p>
 
         {/* Divider */}
         <div className={`w-24 h-[1px] bg-foreground/20 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
 
-        {/* 4 Cards */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl">
+        {/* 5 Cards */}
+        <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl">
           {creativeCards.map((card, i) => {
             const Icon = card.icon;
             return (
@@ -94,25 +111,24 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
                 <span className="font-mono text-[8px] tracking-wider text-primary/60 group-hover:text-primary transition-colors">
                   {card.tags}
                 </span>
-
-                {card.cta && (
-                  <Link
-                    to="/front-end"
-                    className="mt-4 font-mono text-[9px] tracking-wider border border-foreground/20 px-3 py-1.5 text-foreground/50 hover:bg-primary hover:text-pure-white hover:border-primary transition-all"
-                  >
-                    [ SEE THE WHOLE LIST → ]
-                  </Link>
-                )}
               </div>
             );
           })}
         </div>
+
+        {/* CTA */}
+        <Link
+          to="/portfolio"
+          className="mt-6 font-display text-sm md:text-base bg-pure-white text-background px-8 py-3 transition-all duration-300 hover:bg-background hover:text-pure-white hover:border-primary border border-transparent hover:border"
+        >
+          [ SEE THE WORK → ]
+        </Link>
       </div>
 
       {/* Bottom strip */}
       <div className="border-t border-foreground/15 px-6 md:px-10 py-3 flex justify-between items-center flex-shrink-0">
-        <span className="meta-label text-muted-foreground/50">
-          [PHASE 03 COMPLETE — FRONT END ARMED AND READY]
+        <span className="meta-label text-muted-foreground/50 whitespace-pre-line">
+          {"[PHASE 03 COMPLETE —\nYOU NOW HAVE A CREATIVE DIRECTOR.\nWITHOUT THE FULL-TIME SALARY.]"}
         </span>
         <a href="#campaign" className="meta-label text-primary hover:text-pure-white transition-colors">
           [ THE WORK → ]

@@ -1,37 +1,37 @@
 import { useState } from "react";
-import { Search, Users, CalendarDays, Palette, BookOpen, X } from "lucide-react";
+import { Search, Users, CalendarDays, Palette, BookOpen } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const deliverables = [
   {
     icon: Search,
     title: "100+ USPS",
-    oneLiner: "[MAPPED TO 8 LIFE FORCES]",
-    example: "100+ unique selling propositions mapped across 8 fundamental life forces that drive every human decision — survival, pleasure, freedom, desire, comfort, superiority, protection, and approval.",
+    oneLiner: "[MAPPED TO REAL BUYER PSYCHOLOGY]",
+    example: "Extracted from your real customer language. Every angle your brand has. Nothing assumed.",
   },
   {
     icon: Users,
     title: "3+ PERSONAS",
-    oneLiner: "[REAL FEARS. REAL LANGUAGE.]",
-    example: "Deep psychological persona profiles built from real customer language — their fears, desires, objections, and the exact words they use to describe their problems.",
+    oneLiner: "[WHO THEY ARE. WHY THEY BUY.]",
+    example: "Built from real fears. Real language. Real objections. Not demographics — psychology.",
   },
   {
     icon: CalendarDays,
     title: "30-60 DAY CALENDAR",
-    oneLiner: "[EVERY TOUCHPOINT. SEQUENCED.]",
-    example: "A complete 30-60 day campaign calendar with every email, SMS, and ad touchpoint mapped, sequenced, and strategically timed for maximum conversion.",
+    oneLiner: "[ZERO GUESSWORK. EVERY SEND.]",
+    example: "Every touchpoint mapped before we write a single subject line. Sequenced with intent.",
   },
   {
     icon: Palette,
     title: "BRAND MOODBOARD",
-    oneLiner: "[EMOTIONAL BLUEPRINT.]",
-    example: "A curated visual and emotional blueprint — color palettes, typography direction, texture references, and photography style that captures the brand's soul before the first asset is ever made.",
+    oneLiner: "[VIBES ARE NOT RANDOM.]",
+    example: "The emotional world your brand lives in. Locked before a single creative is made.",
   },
   {
     icon: BookOpen,
     title: "BRAND BIBLE",
-    oneLiner: "[THE DOS. THE DON'TS.]",
-    example: "The definitive brand voice document — tone rules, language guardrails, messaging hierarchies, and the line you never cross. Every writer, designer, and creator aligned from day one.",
+    oneLiner: "[THE DOS. THE DON'TS. THE LINE.]",
+    example: "Your voice. Your rules. The line you never cross. Written once. Referenced forever.",
   },
 ];
 
@@ -53,11 +53,9 @@ const Phase01PreFlight = ({ isActive }: Phase01Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          WE BUILD THE BRAIN
+          WE BUILD THE
           <br />
-          BEFORE WE WRITE
-          <br />
-          A SINGLE WORD.
+          BRAIN FIRST.
         </h2>
 
         <p
@@ -67,7 +65,15 @@ const Phase01PreFlight = ({ isActive }: Phase01Props) => {
         >
           Most creatives open a doc and start typing.
           <br />
-          We open your reviews.
+          We open your reviews, your Reddit threads,
+          <br />
+          your competitor ads.
+          <br />
+          By the time we write a single word —
+          <br />
+          we already know what makes
+          <br />
+          your customer buy at 2am.
         </p>
 
         {/* Divider */}
@@ -108,8 +114,8 @@ const Phase01PreFlight = ({ isActive }: Phase01Props) => {
 
       {/* Bottom strip */}
       <div className="border-t border-foreground/15 px-6 md:px-10 py-3 flex justify-between items-center flex-shrink-0">
-        <span className="meta-label text-muted-foreground/50">
-          [PHASE 01 COMPLETE — ZERO GUESSWORK]
+        <span className="meta-label text-muted-foreground/50 whitespace-pre-line">
+          {"[PHASE 01 COMPLETE — ZERO GUESSWORK.\nSTRATEGY LOCKED. READY TO BUILD.]"}
         </span>
         <span className="meta-label text-primary animate-pulse">
           PHASE 02 →
