@@ -179,13 +179,13 @@ const PipelineSection = () => {
 
   return (
     <section id="pipeline" className="section-border" ref={ref}>
-      <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
+      <div className="px-6 md:px-12 lg:px-20 py-12 md:py-20">
         {/* Header */}
         <span className="meta-label text-primary">[WATCH US WORK]</span>
-        <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4 mb-6">
+        <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-3 mb-4">
           THIS IS HOW WE THINK.
         </h2>
-        <p className="font-serif-thin text-lg md:text-xl text-foreground/80 italic max-w-2xl mb-16">
+        <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mb-10">
           "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
         </p>
 
@@ -194,7 +194,7 @@ const PipelineSection = () => {
           <span className="meta-label text-primary block mb-2">
             [LIVE DEMO — MADCOW COLLARS]
           </span>
-          <p className="font-mono text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-4">
+          <p className="font-mono text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-3">
             Raw product input below. Hit RUN EXTRACTION and watch what happens.
           </p>
 
@@ -242,7 +242,7 @@ const PipelineSection = () => {
         </div>
 
         {/* USP Cards */}
-        <div className={`space-y-4 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[12000px] opacity-100 mt-16"}`}>
+        <div className={`space-y-3 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[12000px] opacity-100 mt-10"}`}>
           {usps.map((usp, i) => {
             const visible = i < visibleCards;
             const formatVisible = i < showFormats;
@@ -255,7 +255,7 @@ const PipelineSection = () => {
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
                 {/* Card Header */}
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-3">
                   <span className="meta-label text-muted-foreground">
                     [USP {String(i + 1).padStart(2, "0")}]
                   </span>
@@ -269,7 +269,7 @@ const PipelineSection = () => {
 
                 {/* Format Row */}
                 <div
-                  className={`mt-5 pt-4 border-t border-foreground/10 transition-all duration-500 overflow-hidden ${
+                  className={`mt-3 pt-3 border-t border-foreground/10 transition-all duration-500 overflow-hidden ${
                     formatVisible ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
@@ -282,7 +282,7 @@ const PipelineSection = () => {
 
                 {/* Creator Brief */}
                 <div
-                  className={`mt-4 transition-all duration-500 overflow-hidden ${
+                  className={`mt-3 transition-all duration-500 overflow-hidden ${
                     formatVisible ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
@@ -302,11 +302,11 @@ const PipelineSection = () => {
           <ScaleSection />
 
           {/* Closing */}
-          <div className="mt-16 text-center">
-            <h3 className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[0.95] text-pure-white mb-6">
+          <div className="mt-10 text-center">
+            <h3 className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[0.95] text-pure-white mb-4">
               ONE USP. FOUR FORMATS. WE EXTRACT 100+ PER BRAND.
             </h3>
-            <p className="font-serif-thin text-lg md:text-xl text-foreground/80 italic max-w-2xl mx-auto mb-8">
+            <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mx-auto mb-6">
               "That's 400+ pieces of content. All rooted in your brand's real customer psychology. None of it templated. None of it guessed."
             </p>
             <p className="font-mono text-[10px] md:text-xs tracking-[0.15em] text-muted-foreground uppercase">
