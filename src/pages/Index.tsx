@@ -10,7 +10,7 @@ import ClientsSection from "../components/ClientsSection";
 import ProcessSection from "../components/ProcessSection";
 import PipelineSection from "../components/PipelineSection";
 import CampaignSection from "../components/CampaignSection";
-import TouchpointsSection from "../components/TouchpointsSection";
+
 import StatsSection from "../components/StatsSection";
 import PortfolioStrip from "../components/PortfolioStrip";
 import ContactSection from "../components/ContactSection";
@@ -33,7 +33,7 @@ const Index = () => {
       <ProcessSection />
       <PipelineSection />
       <CampaignSection />
-      <TouchpointsSection />
+      
       <StatsSection />
       <PortfolioStrip />
       <ContactSection />
