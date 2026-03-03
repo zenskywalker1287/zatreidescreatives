@@ -1,36 +1,30 @@
 import { Link } from "react-router-dom";
-import { LayoutGrid, FileText, Users, BookOpen, Cog } from "lucide-react";
+import { LayoutGrid, FileText, Users, BookOpen } from "lucide-react";
 
 const creativeCards = [
   {
     icon: LayoutGrid,
     title: "CONTENT PILLAR\nSTRATEGY",
-    description: "Four optimized pillars\nbuilt specifically for your brand.\nTested monthly. Refined constantly.\nYour team always knows\nexactly what to make and why.",
+    description: "Four optimized pillars built specifically for your brand. Tested monthly. Refined constantly. Your team always knows exactly what to make and why.",
     tags: "[ORGANIC · PAID · ALWAYS OPTIMIZED]",
   },
   {
     icon: FileText,
     title: "CREATIVE\nBRIEFING",
-    description: "Every shoot. Every campaign.\nEvery UGC creator on your roster —\nbriefed with strategy behind it.\nNo more guessing on set.\nNo more off-brand content.",
+    description: "Every shoot. Every campaign. Every UGC creator on your roster — briefed with strategy behind it. No more guessing on set. No more off-brand content.",
     tags: "[BRIEFS · DIRECTION · EXECUTION]",
   },
   {
     icon: Users,
     title: "TEAM\nINTEGRATION",
-    description: "I work inside your team.\nSlack. Notion. Whatever you run on.\nYour editors, your photographers,\nyour media buyers —\nall aligned to the same\ncreative strategy.",
+    description: "I work inside your team. Slack. Notion. Whatever you run on. Your editors, your photographers, your media buyers — all aligned to the same creative strategy.",
     tags: "[EMBEDDED · NOT EXTERNAL]",
   },
   {
     icon: BookOpen,
     title: "HOOKS & ANGLE\nLIBRARY",
-    description: "A living document\nyour team pulls from daily.\n100+ angles organized by format,\nplatform and objective.\nYour content never runs dry.",
+    description: "A living document your team pulls from daily. 100+ angles organized by format, platform and objective. Your content never runs dry.",
     tags: "[ALWAYS ON. ALWAYS FRESH.]",
-  },
-  {
-    icon: Cog,
-    title: "IN-HOUSE\nSYSTEMS & SOPS",
-    description: "Every process documented.\nEvery workflow built.\nSo when you scale your team —\nthe creative quality\nscales with it.",
-    tags: "[BUILT TO OUTLAST THE ENGAGEMENT]",
   },
 ];
 
@@ -49,11 +43,7 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          THE IN-HOUSE
-          <br />
-          CREATIVE DIRECTOR
-          <br />
-          YOU NEVER HAD.
+          THE IN-HOUSE CREATIVE DIRECTOR YOU NEVER HAD.
         </h2>
 
         <p
@@ -61,28 +51,14 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Not a freelancer you brief once
-          <br />
-          and never hear from.
-          <br />
-          Embedded. Opinionated. Accountable.
-          <br />
-          Running your content strategy,
-          <br />
-          briefing your team,
-          <br />
-          owning your pillars —
-          <br />
-          like a full-time creative director
-          <br />
-          without the full-time price tag.
+          Not a freelancer you brief once and never hear from. Embedded. Opinionated. Accountable. Running your content strategy, briefing your team, owning your pillars — like a full-time creative director without the full-time price tag.
         </p>
 
         {/* Divider */}
         <div className={`w-24 h-[1px] bg-foreground/20 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
 
         {/* 5 Cards */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl">
+        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl">
           {creativeCards.map((card, i) => {
             const Icon = card.icon;
             return (
