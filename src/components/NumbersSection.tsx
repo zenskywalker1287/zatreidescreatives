@@ -23,11 +23,6 @@ const panels = [
   { number: "1,200+", label: "CREATIVES SHIPPED" },
   { number: "40%", label: "OF TOTAL REVENUE FROM EMAIL ALONE — MADCOW COLLARS" },
   { number: "14 DAYS", label: "BRIEF TO LIVE. EVERY TIME." },
-  {
-    number: "NIKE. CHIPOTLE. GYMSHARK.",
-    label: "YOUR CREATIVE SAT NEXT TO THEIRS.",
-    subline: "Not a flex. Just context.",
-  },
 ];
 
 /* ── MARQUEE ── */
@@ -192,11 +187,6 @@ const GiantNumbers = () => {
               [{panel.label}]
             </span>
 
-            {panel.subline && (
-              <span className="font-serif-thin italic text-foreground/50 text-lg md:text-xl mt-3 relative z-10">
-                {panel.subline}
-              </span>
-            )}
           </div>
         ))}
       </div>
