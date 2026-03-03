@@ -53,9 +53,7 @@ const Phase01PreFlight = ({ isActive }: Phase01Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          WE BUILD THE
-          <br />
-          BRAIN FIRST.
+          WE BUILD THE BRAIN FIRST.
         </h2>
 
         <p
@@ -63,17 +61,7 @@ const Phase01PreFlight = ({ isActive }: Phase01Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Most creatives open a doc and start typing.
-          <br />
-          We open your reviews, your Reddit threads,
-          <br />
-          your competitor ads.
-          <br />
-          By the time we write a single word —
-          <br />
-          we already know what makes
-          <br />
-          your customer buy at 2am.
+          Most creatives open a doc and start typing. We open your reviews, your Reddit threads, your competitor ads. By the time we write a single word — we already know what makes your customer buy at 2am.
         </p>
 
         {/* Divider */}

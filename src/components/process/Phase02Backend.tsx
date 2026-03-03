@@ -67,13 +67,7 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          THE 99% WHO
-          <br />
-          DON'T BUY TODAY
-          <br />
-          ARE STILL WORTH
-          <br />
-          A FORTUNE.
+          THE 99% WHO DON'T BUY TODAY ARE STILL WORTH A FORTUNE.
         </h2>
 
         <p
@@ -81,17 +75,7 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          They found your brand.
-          <br />
-          They looked. They left.
-          <br />
-          Most brands let them walk forever.
-          <br />
-          We built the system that
-          <br />
-          follows them home —
-          <br />
-          and keeps them coming back.
+          They found your brand. They looked. They left. Most brands let them walk forever. We built the system that follows them home — and keeps them coming back.
         </p>
 
         <div className={`w-full h-[1px] bg-foreground/15 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
