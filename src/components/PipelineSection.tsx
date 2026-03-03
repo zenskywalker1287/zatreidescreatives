@@ -1,55 +1,87 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useInView } from "../hooks/useInView";
+import CreatorBriefCard from "./pipeline/CreatorBriefCard";
+import ScaleSection from "./pipeline/ScaleSection";
 
 const usps = [
   {
     text: "ENGINEERED FOR DOGS THAT BREAK EVERYTHING ELSE.",
     formats: {
-      "EMAIL SUBJECT": "The collar that outlasted 3 Amazon buys.",
-      "AD HOOK": "POV: Your dog just snapped his third collar this year.",
-      "UGC SCRIPT": "I stopped buying cheap collars when my dog broke his fourth one—",
-      "SMS": "This collar has a lifetime guarantee. Here's why that matters →",
-      "ORGANIC CAPTION": "Built for the dogs that break everything else.\nZero nylon. Zero weak points. Zero compromises.",
+      "EMAIL · SUBJECT LINE": "The collar that outlasted 3 Amazon buys.",
+      "PAID AD · HOOK": "POV: Your dog just snapped his third collar this year.",
+      "UGC · OPENING LINE": "I stopped buying cheap collars when my dog broke his fourth one—",
+    },
+    brief: {
+      hookFormat: "US VS THEM",
+      hookLine: "Every other collar on the market is built to be replaced. This one is built to outlast them all.",
+      talent: "Dog owner. Working breed preferred.",
+      shot: "Close up of snapped cheap collar next to intact Madcow collar.",
+      direction: "Frustrated but relieved energy.",
+      cta: "Link in bio.",
     },
   },
   {
     text: "THE LAST COLLAR YOU'LL EVER BUY.",
     formats: {
-      "EMAIL SUBJECT": "Stop replacing collars every 6 months.",
-      "AD HOOK": "What if your dog's collar came with a lifetime guarantee?",
-      "UGC SCRIPT": "I've spent $200+ on collars that fell apart—until this one.",
-      "SMS": "One collar. For life. No gimmicks. See why →",
-      "ORGANIC CAPTION": "The last collar you'll ever buy.\nBacked by a lifetime guarantee.",
+      "EMAIL · SUBJECT LINE": "Stop replacing collars every 6 months.",
+      "PAID AD · HOOK": "What if your dog's collar came with a lifetime guarantee?",
+      "UGC · OPENING LINE": "I've spent $200+ on collars that fell apart—until this one.",
+    },
+    brief: {
+      hookFormat: "NIGHTMARE SCENARIO",
+      hookLine: "Imagine your dog snaps his collar mid-walk. Busy road. No backup. That's not a hypothetical — it happens every single day.",
+      talent: "Any dog owner.",
+      shot: "Unboxing. Focus on hardware detail.",
+      direction: "Calm. Confident. Premium feel.",
+      cta: "Swipe up or link in bio.",
     },
   },
   {
     text: "BUILT FOR THE 1% WHO DON'T COMPROMISE ON THEIR DOG'S GEAR.",
     formats: {
-      "EMAIL SUBJECT": "Your dog deserves better than PetSmart hardware.",
-      "AD HOOK": "Most dog owners settle. You're not most dog owners.",
-      "UGC SCRIPT": "I train protection dogs—cheap gear is a liability.",
-      "SMS": "Premium hardware. No plastic. No compromises. Shop now →",
-      "ORGANIC CAPTION": "For the 1% who treat their dog's gear\nlike their own.",
+      "EMAIL · SUBJECT LINE": "Your dog deserves better than PetSmart hardware.",
+      "PAID AD · HOOK": "Most dog owners settle. You're not most dog owners.",
+      "UGC · OPENING LINE": "I train protection dogs—cheap gear is a liability.",
+    },
+    brief: {
+      hookFormat: "MYTH BUSTER",
+      hookLine: "Myth: A $15 collar does the same job as a premium one. Reality: Ask anyone whose dog has ever broken free.",
+      talent: "Serious dog owner. Working breed or protection dog.",
+      shot: "Dog in action. Collar close up.",
+      direction: "Status. Pride. No nonsense.",
+      cta: "Link in bio.",
     },
   },
   {
     text: "ZERO NYLON. ZERO CHEAP HARDWARE. ZERO EXCUSES.",
     formats: {
-      "EMAIL SUBJECT": "We don't use nylon. Here's what we use instead.",
-      "AD HOOK": "Your dog's collar has a plastic buckle. Let that sink in.",
-      "UGC SCRIPT": "I cut open a cheap collar vs. this one—watch what's inside.",
-      "SMS": "All metal. All leather. All built to last. See the difference →",
-      "ORGANIC CAPTION": "Zero nylon. Zero plastic buckles.\nJust over-engineered quality.",
+      "EMAIL · SUBJECT LINE": "We don't use nylon. Here's what we use instead.",
+      "PAID AD · HOOK": "Your dog's collar has a plastic buckle. Let that sink in.",
+      "UGC · OPENING LINE": "I cut open a cheap collar vs. this one—watch what's inside.",
+    },
+    brief: {
+      hookFormat: "US VS THEM",
+      hookLine: "PetSmart sells collars. We engineer them. Plastic buckles vs solid metal hardware. You tell us which one you trust.",
+      talent: "Any dog owner.",
+      shot: "Side by side comparison. Cheap collar vs Madcow hardware.",
+      direction: "Slightly appalled. Then satisfied.",
+      cta: "Link in bio.",
     },
   },
   {
     text: "OVER-ENGINEERED BY DESIGN — BECAUSE YOUR DOG DOESN'T DO GENTLE.",
     formats: {
-      "EMAIL SUBJECT": "Over-engineered on purpose.",
-      "AD HOOK": "This collar was built for dogs that destroy everything.",
-      "UGC SCRIPT": "My GSD pulled a 200lb sled in this collar. Not a scratch.",
-      "SMS": "Built for power dogs. Tested by working K9s. Shop now →",
-      "ORGANIC CAPTION": "Over-engineered by design.\nBecause your dog doesn't do gentle.",
+      "EMAIL · SUBJECT LINE": "Over-engineered on purpose.",
+      "PAID AD · HOOK": "This collar was built for dogs that destroy everything.",
+      "UGC · OPENING LINE": "My GSD pulled a 200lb sled in this collar. Not a scratch.",
+    },
+    brief: {
+      hookFormat: "NIGHTMARE SCENARIO",
+      hookLine: "Your 80lb dog hits the end of the leash at full sprint. Cheap collar snaps. He's gone. This is the collar built for that moment.",
+      talent: "High energy breed owner.",
+      shot: "Dog pulling hard. Collar holding under pressure.",
+      direction: "Raw. Unfiltered. No studio lighting needed.",
+      cta: "Link in bio.",
     },
   },
 ];
@@ -115,7 +147,6 @@ const PipelineSection = () => {
     setShowFormats(0);
     setShowClosing(false);
 
-    // Count up 1-5
     let c = 0;
     const countIv = setInterval(() => {
       c++;
@@ -123,14 +154,12 @@ const PipelineSection = () => {
       if (c >= 5) {
         clearInterval(countIv);
         setPhase("done");
-        // Reveal cards staggered
         let card = 0;
         const cardIv = setInterval(() => {
           card++;
           setVisibleCards(card);
           if (card >= 5) {
             clearInterval(cardIv);
-            // Reveal format rows staggered
             let fmt = 0;
             setTimeout(() => {
               const fmtIv = setInterval(() => {
@@ -152,18 +181,25 @@ const PipelineSection = () => {
     <section id="pipeline" className="section-border" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
         {/* Header */}
-        <span className="meta-label text-primary">[05] PIPELINE</span>
-        <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4 mb-2">
+        <span className="meta-label text-primary">[WATCH US WORK]</span>
+        <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4 mb-6">
           THIS IS HOW WE THINK.
         </h2>
-        <p className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground uppercase mb-16">
-          [WATCH A RAW PRODUCT BECOME A RETENTION SYSTEM]
+        <p className="font-serif-thin text-lg md:text-xl text-foreground/80 italic max-w-2xl mb-16">
+          "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
         </p>
 
         {/* Terminal Input */}
         <div className="max-w-3xl">
+          <span className="meta-label text-primary block mb-2">
+            [LIVE DEMO — MADCOW COLLARS]
+          </span>
+          <p className="font-mono text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-4">
+            Raw product input below. Hit RUN EXTRACTION and watch what happens.
+          </p>
+
           <span className="meta-label text-muted-foreground block mb-2">
-            [RAW PRODUCT INPUT — MADCOW COLLARS]
+            [RAW PRODUCT INPUT]
           </span>
           <div className="border border-foreground/20 bg-secondary/30 p-4 md:p-6 font-mono text-sm md:text-base text-foreground/90 relative">
             <span>Heavy-duty dog collar built for working and protection dogs.</span>
@@ -178,7 +214,7 @@ const PipelineSection = () => {
               className="btn-brutal disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {phase === "idle"
-                ? "RUN EXTRACTION"
+                ? "RUN EXTRACTION →"
                 : phase === "extracting"
                   ? "EXTRACTING..."
                   : "EXTRACTION COMPLETE"}
@@ -206,7 +242,7 @@ const PipelineSection = () => {
         </div>
 
         {/* USP Cards */}
-        <div className={`space-y-4 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[5000px] opacity-100 mt-16"}`}>
+        <div className={`space-y-4 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[12000px] opacity-100 mt-16"}`}>
           {usps.map((usp, i) => {
             const visible = i < visibleCards;
             const formatVisible = i < showFormats;
@@ -243,23 +279,39 @@ const PipelineSection = () => {
                     ))}
                   </div>
                 </div>
+
+                {/* Creator Brief */}
+                <div
+                  className={`mt-4 transition-all duration-500 overflow-hidden ${
+                    formatVisible ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <CreatorBriefCard brief={usp.brief} />
+                </div>
               </div>
             );
           })}
         </div>
 
-        {/* Closing */}
+        {/* Scale Section */}
         <div
-          className={`mt-16 transition-all duration-1000 ${
+          className={`transition-all duration-1000 ${
             showClosing ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          <p className="font-serif-thin text-lg md:text-xl text-foreground/80 italic mb-8">
-            "One USP. Five assets. We extract 100+ USPs per brand."
-          </p>
-          <div className="border border-foreground/10 p-5 md:p-6 font-mono text-[10px] md:text-xs tracking-[0.15em] text-muted-foreground uppercase leading-relaxed">
-            [100 USPS × 5 FORMATS = 500+ PIECES OF CONTENT.<br />
-            ALL ROOTED IN YOUR BRAND. NONE OF IT TEMPLATED.]
+          <ScaleSection />
+
+          {/* Closing */}
+          <div className="mt-16 text-center">
+            <h3 className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[0.95] text-pure-white mb-6">
+              ONE USP. FOUR FORMATS. WE EXTRACT 100+ PER BRAND.
+            </h3>
+            <p className="font-serif-thin text-lg md:text-xl text-foreground/80 italic max-w-2xl mx-auto mb-8">
+              "That's 400+ pieces of content. All rooted in your brand's real customer psychology. None of it templated. None of it guessed."
+            </p>
+            <p className="font-mono text-[10px] md:text-xs tracking-[0.15em] text-muted-foreground uppercase">
+              [THIS IS PHASE 01. BEFORE WE WRITE A SINGLE EMAIL.]
+            </p>
           </div>
         </div>
       </div>
