@@ -90,7 +90,7 @@ const ProcessSection = () => {
   return (
     <section id="process" className="relative overflow-hidden max-w-[100vw]">
       {/* Section intro */}
-      <div className="w-full bg-background py-16 md:py-24 text-center px-6">
+      <div className="w-full bg-background py-8 md:py-12 text-center px-6">
         <span className="meta-label text-primary mb-6 block">[THE PROCESS]</span>
         <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mb-6">
           HOW WE TURN A BRAND INTO A MACHINE.
