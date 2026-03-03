@@ -28,6 +28,7 @@ const FeaturedAlongside = () => {
           ))}
         </div>
 
+        <span className="meta-label text-foreground/50 mb-3 block">[YOUR CREATIVE SAT NEXT TO THEIRS.]</span>
         <p className="font-serif-thin italic text-foreground/60 text-base mb-3">
           Not a flex. Just context.
         </p>

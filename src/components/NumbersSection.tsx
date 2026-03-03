@@ -3,12 +3,14 @@ import { useInView } from "../hooks/useInView";
 
 /* ── MARQUEE DATA ── */
 const tickerItems = [
-  "MADCOW: 40% OF TOTAL REVENUE DRIVEN BY EMAIL",
-  "FLATPACK: $100K GENERATED IN A SINGLE MONTH",
+  "MADCOW COLLARS: EMAIL BECAME 40% OF TOTAL REVENUE",
+  "FLATPACK: $100K FROM EMAIL IN A SINGLE MONTH",
+  "1,200+ CREATIVES SHIPPED ACROSS DTC BRANDS",
+  "$2M+ IN REVENUE GENERATED",
+  "926% EMAIL REVENUE INCREASE — ONE BRAND, ONE MONTH",
+  "WORKED INSIDE 8-FIGURE KLAVIYO AGENCIES",
   "FEATURED ALONGSIDE NIKE & CHIPOTLE",
-  "MKTG: $1M FOR CLIENTS IN ONE QUARTER",
-  "$2M+ IN EMAIL REVENUE ACROSS DTC BRANDS",
-  "2 WEEKS FROM ZERO TO FULLY DEPLOYED",
+  "14 DAYS FROM BRIEF TO LIVE",
 ];
 
 const tickerContent = tickerItems
@@ -17,13 +19,13 @@ const tickerContent = tickerItems
 
 /* ── PANELS ── */
 const panels = [
-  { number: "$2M+", label: "TOTAL EMAIL REVENUE GENERATED ACROSS DTC BRANDS" },
-  { number: "$100K", label: "GENERATED FOR A SINGLE BRAND IN ONE MONTH — FLATPACK" },
+  { number: "$2M+", label: "REVENUE GENERATED ACROSS DTC BRANDS" },
+  { number: "1,200+", label: "CREATIVES SHIPPED" },
   { number: "40%", label: "OF TOTAL REVENUE FROM EMAIL ALONE — MADCOW COLLARS" },
-  { number: "2 WKS", label: "FROM ZERO TO FULLY DEPLOYED. ONE-TIME FEE. YOURS FOREVER." },
+  { number: "14 DAYS", label: "BRIEF TO LIVE. EVERY TIME." },
   {
-    number: "NIKE.",
-    label: "EMAILS FEATURED ALONGSIDE NIKE AND CHIPOTLE",
+    number: "NIKE. CHIPOTLE. GYMSHARK.",
+    label: "YOUR CREATIVE SAT NEXT TO THEIRS.",
     subline: "Not a flex. Just context.",
   },
 ];
@@ -238,8 +240,10 @@ const NumbersSection = () => {
             closingInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <p className="font-serif-thin italic text-foreground/70 text-lg md:text-2xl text-center max-w-3xl">
-            These aren't projections. These are results from real brands in real months.
+          <p className="font-serif-thin italic text-foreground/70 text-lg md:text-2xl text-center max-w-3xl leading-relaxed">
+            Every number on this page comes from a real Klaviyo dashboard.<br />
+            Real brands. Real months.<br />
+            Nothing projected. Nothing padded.
           </p>
         </div>
       </div>
