@@ -1,5 +1,19 @@
 import { useRef } from "react";
 import { useInView } from "../hooks/useInView";
+import CarouselStrip from "./CarouselStrip";
+
+const emailCards = [
+  { id: 1, image: "/images/email-01.png" },
+  { id: 2, image: "/images/email-02.png" },
+  { id: 3, image: "/images/email-03.png" },
+  { id: 4, image: "/images/email-04.png" },
+  { id: 5, image: "/images/email-05.png" },
+  { id: 6, image: "/images/email-06.png" },
+  { id: 7, image: "/images/email-01.png" },
+  { id: 8, image: "/images/email-02.png" },
+  { id: 9, image: "/images/email-03.png" },
+  { id: 10, image: "/images/email-04.png" },
+];
 
 const FeaturedAlongside = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,6 +44,11 @@ const FeaturedAlongside = () => {
         </p>
 
         <span className="meta-label text-muted-foreground/40">[REALLYGOODEMAILS.COM · CURATED · NOT PAID]</span>
+      </div>
+
+      {/* Email carousel */}
+      <div className="mt-10">
+        <CarouselStrip cards={emailCards} direction="left" />
       </div>
     </section>
   );
