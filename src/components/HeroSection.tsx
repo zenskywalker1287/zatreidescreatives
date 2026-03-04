@@ -31,6 +31,9 @@ const topCards = [
   { id: 28, image: "/images/slice18.png" },
   { id: 29, image: "/images/slice19.png" },
   { id: 30, image: "/images/slice20.png" },
+  { id: 31, image: "/images/slice41.png" },
+  { id: 32, image: "/images/slice42.png" },
+  { id: 33, image: "/images/slice43.png" },
 ];
 
 const bottomCards = [
@@ -64,6 +67,8 @@ const bottomCards = [
   { id: 128, image: "/images/slice38.png" },
   { id: 129, image: "/images/slice39.png" },
   { id: 130, image: "/images/slice40.png" },
+  { id: 131, image: "/images/slice44.png" },
+  { id: 132, image: "/images/slice45.png" },
 ];
 
 interface CarouselStripProps {
