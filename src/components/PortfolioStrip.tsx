@@ -2,19 +2,32 @@ import { useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 const emailHeroes = [
-  { id: 1, image: "/images/email-01.png" },
-  { id: 2, image: "/images/email-02.png" },
-  { id: 3, image: "/images/email-03.png" },
-  { id: 4, image: "/images/email-04.png" },
-  { id: 5, image: "/images/email-05.png" },
-  { id: 6, image: "/images/email-06.png" },
-  { id: 7, image: "/images/email-01.png" },
+  { id: 1, image: "/images/slice21.png" },
+  { id: 2, image: "/images/slice22.png" },
+  { id: 3, image: "/images/slice23.png" },
+  { id: 4, image: "/images/slice24.png" },
+  { id: 5, image: "/images/slice25.png" },
+  { id: 6, image: "/images/slice26.png" },
+  { id: 7, image: "/images/slice27.png" },
+  { id: 8, image: "/images/slice28.png" },
+  { id: 9, image: "/images/slice29.png" },
+  { id: 10, image: "/images/slice30.png" },
+  { id: 11, image: "/images/slice31.png" },
+  { id: 12, image: "/images/slice32.png" },
+  { id: 13, image: "/images/slice33.png" },
+  { id: 14, image: "/images/slice34.png" },
+  { id: 15, image: "/images/slice35.png" },
+  { id: 16, image: "/images/slice36.png" },
+  { id: 17, image: "/images/slice37.png" },
+  { id: 18, image: "/images/slice38.png" },
+  { id: 19, image: "/images/slice39.png" },
+  { id: 20, image: "/images/slice40.png" },
 ];
 
 const PortfolioStrip = () => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, 0.1);
-  const [activeIndex, setActiveIndex] = useState(3);
+  const [activeIndex, setActiveIndex] = useState(10);
 
   const getCardStyle = (i: number) => {
     const offset = i - activeIndex;
