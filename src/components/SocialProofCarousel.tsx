@@ -159,9 +159,13 @@ const SocialProofCarousel = () => {
                       {t.isSlack && (
                         <span className="absolute top-0 right-0 text-foreground/30 text-sm font-mono">#slack</span>
                       )}
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground font-display text-lg shrink-0">
-                        {t.initial}
-                      </div>
+                      {t.avatar ? (
+                        <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground font-display text-lg shrink-0">
+                          {t.initial}
+                        </div>
+                      )}
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-pure-white text-sm font-bold">{t.name}</span>
