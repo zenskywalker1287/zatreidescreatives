@@ -29,15 +29,25 @@ const Nav = () => {
       <div className="flex items-center justify-between px-6 md:px-12 py-4">
         <span className="meta-label text-primary">CMD.CTRL</span>
         <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              [{link.num}] {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.route ? (
+              <Link
+                key={link.id}
+                to={link.route}
+                className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
+                [{link.num}] {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
+                [{link.num}] {link.label}
+              </a>
+            )
+          )}
         </div>
         <div className="md:hidden">
           <MobileMenu links={links} />
