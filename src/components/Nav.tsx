@@ -60,7 +60,7 @@ const Nav = () => {
 const MobileMenu = ({
   links,
 }: {
-  links: { id: string; label: string; num: string }[];
+  links: { id: string; label: string; num: string; route?: string }[];
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -73,16 +73,27 @@ const MobileMenu = ({
       </button>
       {open && (
         <div className="fixed inset-0 top-[52px] bg-background/98 z-40 flex flex-col items-center justify-center gap-8">
-          {links.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={() => setOpen(false)}
-              className="nav-label text-lg text-foreground hover:text-primary transition-colors"
-            >
-              [{link.num}] {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.route ? (
+              <Link
+                key={link.id}
+                to={link.route}
+                onClick={() => setOpen(false)}
+                className="nav-label text-lg text-foreground hover:text-primary transition-colors"
+              >
+                [{link.num}] {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setOpen(false)}
+                className="nav-label text-lg text-foreground hover:text-primary transition-colors"
+              >
+                [{link.num}] {link.label}
+              </a>
+            )
+          )}
         </div>
       )}
     </>
