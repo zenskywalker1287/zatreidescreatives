@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -13,7 +14,7 @@ const Nav = () => {
     { id: "hero", label: "LOGIC", num: "01" },
     { id: "comparison", label: "PROCESS", num: "02" },
     { id: "personas", label: "PERSONAS", num: "03" },
-    { id: "portfolio", label: "PORTFOLIO", num: "04" },
+    { id: "portfolio", label: "PORTFOLIO", num: "04", route: "/portfolio" },
     { id: "contact", label: "CONTACT", num: "05" },
   ];
 
@@ -28,15 +29,25 @@ const Nav = () => {
       <div className="flex items-center justify-between px-6 md:px-12 py-4">
         <span className="meta-label text-primary">CMD.CTRL</span>
         <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
-            >
-              [{link.num}] {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.route ? (
+              <Link
+                key={link.id}
+                to={link.route}
+                className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
+                [{link.num}] {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
+                [{link.num}] {link.label}
+              </a>
+            )
+          )}
         </div>
         <div className="md:hidden">
           <MobileMenu links={links} />
@@ -49,7 +60,7 @@ const Nav = () => {
 const MobileMenu = ({
   links,
 }: {
-  links: { id: string; label: string; num: string }[];
+  links: { id: string; label: string; num: string; route?: string }[];
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -62,16 +73,27 @@ const MobileMenu = ({
       </button>
       {open && (
         <div className="fixed inset-0 top-[52px] bg-background/98 z-40 flex flex-col items-center justify-center gap-8">
-          {links.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={() => setOpen(false)}
-              className="nav-label text-lg text-foreground hover:text-primary transition-colors"
-            >
-              [{link.num}] {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.route ? (
+              <Link
+                key={link.id}
+                to={link.route}
+                onClick={() => setOpen(false)}
+                className="nav-label text-lg text-foreground hover:text-primary transition-colors"
+              >
+                [{link.num}] {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setOpen(false)}
+                className="nav-label text-lg text-foreground hover:text-primary transition-colors"
+              >
+                [{link.num}] {link.label}
+              </a>
+            )
+          )}
         </div>
       )}
     </>

@@ -1,112 +1,209 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
-const campaigns = [
-  {
-    brand: "MADCOW COLLARS",
-    persona: "THE TACTICAL GUARDIAN",
-    goal: "Convert protection-dog owners via fear-of-loss + authority positioning",
-    results: "312% ROAS · 47% Email Open Rate · $89K Revenue in 30 Days",
-    days: [
-      "D1: Inoculation — 'Why cheap collars fail working dogs'",
-      "D3: Objection — 'Is $80 too much for your dog's safety?'",
-      "D7: Social Proof — 'K9 handlers trust Madcow'",
-      "D14: Identity — 'You're not a pet owner. You're a handler.'",
-      "D21: Urgency — 'Limited batch. Handmade. When they're gone...'",
-      "D30: Hard Close — 'Your dog deserves mil-spec.'",
-    ],
-  },
-  {
-    brand: "MADCOW COLLARS",
-    persona: "THE GEAR SNOB",
-    goal: "Position as premium lifestyle brand — anti-Amazon, anti-generic",
-    results: "278% ROAS · 52% Email Open Rate · $67K Revenue in 30 Days",
-    days: [
-      "D1: Status Signal — 'This isn't PetSmart. This is Madcow.'",
-      "D5: Exclusivity — 'Limited drop. No restock date.'",
-      "D10: Craft Story — 'Hand-stitched. Over-engineered. On purpose.'",
-      "D15: Community — 'The collar people ask about at the park'",
-      "D22: Contrast — 'Amazon collar vs. Madcow — the difference is visible'",
-      "D28: Loyalty Loop — 'Welcome to the inner circle.'",
-    ],
-  },
-  {
-    brand: "MADCOW COLLARS",
-    persona: "THE WEEKEND WARRIOR",
-    goal: "Convert adventure-lifestyle dog owners via durability + freedom narrative",
-    results: "245% ROAS · 44% Email Open Rate · $54K Revenue in 30 Days",
-    days: [
-      "D1: Adventure Hook — 'Your dog lives outside. Their gear should too.'",
-      "D4: Durability Proof — 'Mud. Rivers. Mountains. One collar.'",
-      "D8: UGC Feature — 'Real dogs. Real trails. Real Madcow.'",
-      "D12: Behind Scenes — 'How we test: 500lbs of pull force'",
-      "D20: Bundle — 'Collar + leash + harness. One system.'",
-      "D26: Emotional Close — 'Every adventure. Every memory. One collar.'",
-    ],
-  },
+type PortfolioItem = {
+  id: number;
+  image: string;
+  brand: string;
+  tag: string;
+  category: "EMAIL" | "ADS" | "SHORT FORM";
+};
+
+const items: PortfolioItem[] = Array.from({ length: 42 }, (_, i) => ({
+  id: i + 1,
+  image: `/images/slice${i + 1}.png`,
+  brand: ["MADCOW", "4AMSKIN", "XYKO", "FLATPACK"][i % 4],
+  tag: ["WELCOME FLOW", "CAMPAIGN", "ABANDONED CART", "WINBACK", "LAUNCH"][i % 5],
+  category: "EMAIL",
+}));
+
+const tabs = [
+  { id: "ALL", label: "ALL" },
+  { id: "EMAIL", label: "EMAIL" },
+  { id: "ADS", label: "ADS" },
+  { id: "SHORT FORM", label: "SHORT FORM" },
+  { id: "CREATIVE_WORLD", label: "✦ LATEST CREATIVE WORLD" },
 ];
 
 const Portfolio = () => {
+  const [activeTab, setActiveTab] = useState("ALL");
+  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+  const [creativeWorldOpen, setCreativeWorldOpen] = useState(false);
+
+  const filtered =
+    activeTab === "ALL"
+      ? items
+      : activeTab === "EMAIL"
+        ? items.filter((i) => i.category === "EMAIL")
+        : [];
+
+  const showEmpty = activeTab === "ADS" || activeTab === "SHORT FORM";
+
+  const handleTabClick = (id: string) => {
+    if (id === "CREATIVE_WORLD") {
+      setCreativeWorldOpen(true);
+      return;
+    }
+    setActiveTab(id);
+  };
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedItem(null);
+        setCreativeWorldOpen(false);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   return (
     <div className="min-h-screen bg-background relative">
       <div className="film-grain" />
 
       {/* Header */}
-      <div className="border-b border-foreground/10 px-6 md:px-12 lg:px-20 py-6 flex items-center justify-between">
-        <Link to="/" className="meta-label text-primary hover:text-foreground transition-colors">
-          ← BACK TO COMMAND
-        </Link>
-        <span className="meta-label text-muted-foreground">PORTFOLIO / CASE STUDIES</span>
+      <div className="pt-20 pb-8 text-center px-6">
+        <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary">
+          [ZEN RICHARDS · PORTFOLIO]
+        </span>
+        <h1 className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.95] text-pure-white mt-4">
+          THE WORK.
+        </h1>
+        <p className="font-serif-thin text-lg md:text-xl text-foreground italic mt-4 max-w-lg mx-auto">
+          50+ emails and creatives shipped<br />
+          across 6, 7 and 8-figure DTC brands.
+        </p>
       </div>
 
-      <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
-        <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mb-4">
-          THE FULL<br />30-DAY LOGIC.
-        </h1>
-        <p className="font-serif-thin text-xl text-muted-foreground italic mb-20">
-          Every campaign. Every persona. Every touchpoint — mapped.
-        </p>
+      {/* Filter Tabs */}
+      <div className="flex flex-wrap justify-center gap-2 px-6 pb-10">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => handleTabClick(tab.id)}
+            className={`font-mono text-[11px] uppercase tracking-[0.15em] rounded-full px-6 py-2.5 border transition-all duration-200 cursor-pointer ${
+              activeTab === tab.id
+                ? "bg-primary border-primary text-pure-white"
+                : "border-foreground/30 text-foreground hover:border-foreground/60"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
 
-        <div className="space-y-20">
-          {campaigns.map((campaign, ci) => (
-            <div key={ci} className="border border-foreground/10">
-              {/* Campaign header */}
-              <div className="p-8 md:p-12 border-b border-foreground/10">
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <span className="meta-label border border-foreground/15 px-3 py-1">{campaign.brand}</span>
-                  <span className="meta-label border border-primary/30 px-3 py-1 text-primary">{campaign.persona}</span>
-                </div>
-                <h3 className="font-display text-3xl md:text-4xl text-pure-white mb-4">
-                  CAMPAIGN {String(ci + 1).padStart(2, '0')}
-                </h3>
-                <p className="font-mono text-sm text-muted-foreground mb-4">{campaign.goal}</p>
-                <div className="border-t border-foreground/10 pt-4 mt-4">
-                  <span className="meta-label text-primary block mb-1">RESULTS</span>
-                  <span className="font-mono text-sm text-foreground">{campaign.results}</span>
-                </div>
-              </div>
-
-              {/* Touchpoint timeline */}
-              <div className="p-8 md:p-12">
-                <span className="meta-label text-primary block mb-6">KEY TOUCHPOINTS</span>
-                <div className="space-y-4">
-                  {campaign.days.map((day, di) => (
-                    <div key={di} className="flex items-start gap-4 py-3 border-b border-foreground/5">
-                      <div className="w-2 h-2 mt-1.5 bg-primary/40 flex-shrink-0" />
-                      <span className="font-mono text-xs md:text-sm text-foreground/80">{day}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* Grid or Empty State */}
+      <div className="px-4 md:px-8 lg:px-12 pb-20">
+        {showEmpty ? (
+          <div className="text-center py-32">
+            <span className="font-mono text-sm text-foreground">
+              MORE CREATIVE COMING SOON.
+            </span>
+            <div className="mt-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary border border-primary/40 px-3 py-1">
+                [CHECK BACK]
+              </span>
             </div>
-          ))}
+          </div>
+        ) : (
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-3">
+            {filtered.map((item) => (
+              <div
+                key={item.id}
+                onClick={() => setSelectedItem(item)}
+                className="mb-3 break-inside-avoid cursor-pointer group overflow-hidden rounded-lg border border-transparent hover:border-foreground/40 transition-all duration-200 hover:scale-[1.02]"
+              >
+                <img
+                  src={item.image}
+                  alt={`${item.brand} ${item.tag}`}
+                  className="w-full h-auto block"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Lightbox */}
+      {selectedItem && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ backgroundColor: "rgba(0,0,0,0.96)" }}
+          onClick={() => setSelectedItem(null)}
+        >
+          <button
+            onClick={() => setSelectedItem(null)}
+            className="absolute top-6 right-6 font-mono text-foreground text-lg hover:text-primary transition-colors z-10"
+          >
+            [✕]
+          </button>
+          <div
+            className="bg-white rounded-xl overflow-y-auto w-full max-w-[600px] max-h-[85vh] relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 z-10 bg-white border-b border-black/10 px-4 py-3 flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-black/60">
+                {selectedItem.brand}
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#FF2400]">
+                [{selectedItem.tag}]
+              </span>
+            </div>
+            <img
+              src={selectedItem.image}
+              alt={`${selectedItem.brand} ${selectedItem.tag}`}
+              className="w-full h-auto block"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Creative World Modal */}
+      <Dialog open={creativeWorldOpen} onOpenChange={setCreativeWorldOpen}>
+        <DialogContent className="bg-background border-foreground/10 max-w-xl text-center">
+          <DialogHeader>
+            <DialogTitle className="font-display text-4xl md:text-5xl text-pure-white">
+              CREATIVE WORLD 01 — COMING SOON.
+            </DialogTitle>
+            <DialogDescription className="font-serif-thin text-lg text-foreground italic mt-4">
+              Our first brand universe is in production.<br />
+              Check back soon.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      {/* Bottom CTA */}
+      <div className="border-t border-foreground/20">
+        <div className="text-center py-20 px-6">
+          <h2 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.95] text-pure-white">
+            SEEN ENOUGH?
+          </h2>
+          <p className="font-serif-thin text-lg text-foreground italic mt-4 max-w-md mx-auto">
+            Let's talk about what we can<br />
+            build for your brand.
+          </p>
+          <Link
+            to="/#contact"
+            className="inline-block mt-8 font-mono text-[11px] uppercase tracking-[0.25em] bg-pure-white text-background px-8 py-4 rounded-none transition-all duration-200 hover:bg-background hover:text-foreground border border-foreground/20"
+          >
+            START THE CONVERSATION →
+          </Link>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="border-t border-foreground/5 px-6 md:px-12 lg:px-20 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <Link to="/" className="meta-label text-primary">CMD.CTRL</Link>
-        <span className="meta-label text-muted-foreground/40">© 2026 — CREATIVE BACKEND SYSTEMS</span>
-      </footer>
     </div>
   );
 };
