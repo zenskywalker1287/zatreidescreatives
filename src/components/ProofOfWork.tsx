@@ -56,18 +56,24 @@ const ProofOfWork = () => {
             <img
               src={card.image}
               alt={card.label}
-              className="w-full h-full object-cover"
+              className="w-full h-auto block"
               loading="lazy"
             />
 
             {/* Gradient overlay + label */}
             <div
-              className="absolute bottom-0 left-0 right-0 p-4 pt-12"
+              className="absolute bottom-0 left-0 right-0 p-4 pt-16"
               style={{
-                background: "linear-gradient(to top, rgba(0,0,0,0.85), transparent)",
+                background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4) 60%, transparent)",
               }}
             >
-              <span className="font-mono text-[9px] tracking-[0.15em] text-foreground/50 uppercase leading-tight">
+              <span
+                className="font-mono text-[9px] tracking-[0.15em] uppercase leading-tight font-bold"
+                style={{
+                  color: "#FF2400",
+                  textShadow: "0 0 8px rgba(255,36,0,0.6), 0 0 20px rgba(255,36,0,0.3)",
+                }}
+              >
                 [{card.label}]
               </span>
             </div>
