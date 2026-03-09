@@ -131,13 +131,25 @@ const SocialProofCarousel = () => {
 
                 {t.isVideo ? (
                   /* Video card */
-                  <div className="flex flex-col items-center justify-center flex-1 gap-4 relative z-20">
-                    <span className="meta-label text-primary">[VIDEO TESTIMONIAL]</span>
-                    <div className="w-16 h-16 rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-primary transition-colors">
-                      <span className="text-2xl text-foreground ml-1">▶</span>
+                  <div className="flex flex-col items-center justify-center flex-1 gap-4 relative z-20 overflow-hidden rounded-2xl">
+                    <video
+                      src={t.videoSrc}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      muted
+                      loop
+                      playsInline
+                      autoPlay={isActive}
+                      ref={(el) => {
+                        if (el) {
+                          if (isActive) el.play().catch(() => {});
+                          else el.pause();
+                        }
+                      }}
+                    />
+                    <div className="relative z-10 flex flex-col items-center gap-4 bg-black/50 p-6 rounded-xl">
+                      <h3 className="font-display text-2xl text-pure-white">{t.name}</h3>
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
                     </div>
-                    <h3 className="font-display text-2xl text-pure-white">{t.name}</h3>
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
                   </div>
                 ) : (
                   /* Quote card */
