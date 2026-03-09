@@ -2,14 +2,17 @@ import { useRef } from "react";
 import { useInView } from "../hooks/useInView";
 
 const cards = [
-  { id: 1, span: "col-span-2", label: "NZ$489K TOTAL · NZ$126K FROM EMAIL · 83% INCREASE" },
-  { id: 2, span: "", label: "A$400K TOTAL · A$112K EMAIL · 554% INCREASE" },
-  { id: 3, span: "", label: "$76K TOTAL · $25K FROM EMAIL · 124% INCREASE" },
-  { id: 4, span: "", label: "$42K TOTAL · $13K EMAIL · 926% INCREASE" },
-  { id: 5, span: "col-span-2", label: "50-72% OPEN RATES · CONSISTENT ACROSS CAMPAIGNS" },
-  { id: 6, span: "", label: "54-62% OPEN RATES · MULTIPLE BRANDS" },
-  { id: 7, span: "", label: "PER EMAIL REVENUE · BRANDS DOING 6-FIGURES" },
-  { id: 8, span: "col-span-2", label: "DIRECT FEEDBACK · CEO · MKTG EMAILS" },
+  { id: 1, span: "col-span-2", image: "/images/klaviyo-01.png", label: "NZ$489K TOTAL · NZ$126K FROM EMAIL · 83% UP" },
+  { id: 2, span: "", image: "/images/klaviyo-02.png", label: "A$400K TOTAL · A$112K EMAIL · 554% INCREASE" },
+  { id: 3, span: "", image: "/images/klaviyo-03.png", label: "$76K TOTAL · $25K FROM EMAIL · 124% UP" },
+  { id: 4, span: "", image: "/images/klaviyo-04.png", label: "$42K TOTAL · $13K EMAIL · 926% INCREASE" },
+  { id: 5, span: "col-span-2", image: "/images/klaviyo-05.png", label: "50–72% OPEN RATES · CONSISTENT ACROSS CAMPAIGNS" },
+  { id: 6, span: "", image: "/images/klaviyo-06.png", label: "54–62% OPEN RATES · MULTIPLE BRANDS" },
+  { id: 7, span: "", image: "/images/klaviyo-07.png", label: "70%+ OPEN RATES · FASHION BRAND · MULTIPLE CAMPAIGNS" },
+  { id: 8, span: "col-span-2", image: "/images/klaviyo-08.png", label: "DIRECT SLACK FEEDBACK · CEO · MKTG EMAILS · UNSOLICITED" },
+  { id: 9, span: "", image: "/images/klaviyo-09.png", label: "NZ$ PER EMAIL REVENUE · BLACK FRIDAY CAMPAIGNS" },
+  { id: 10, span: "", image: "/images/klaviyo-10.png", label: "48–55% OPEN RATES · A$ CAMPAIGNS · CONSISTENT" },
+  { id: 11, span: "", image: "/images/klaviyo-11.png", label: "54–62% OPEN RATES · A$8,354 SINGLE EMAIL · FLOWS" },
 ];
 
 const ProofOfWork = () => {
@@ -39,15 +42,31 @@ const ProofOfWork = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className={`${card.span} group relative border border-foreground/15 rounded-lg overflow-hidden bg-[#0a0a0a] hover:border-foreground/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer`}
+            className={`${card.span} group relative rounded-lg overflow-hidden cursor-pointer transition-all duration-200 hover:-translate-y-1`}
+            style={{
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.border = "1px solid rgba(255,255,255,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.border = "1px solid rgba(255,255,255,0.1)";
+            }}
           >
-            {/* Placeholder for screenshot */}
-            <div className="aspect-video w-full bg-muted/10 flex items-center justify-center">
-              <span className="meta-label text-foreground/20">[SCREENSHOT {String(card.id).padStart(2, "0")}]</span>
-            </div>
+            <img
+              src={card.image}
+              alt={card.label}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
 
             {/* Gradient overlay + label */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent p-4 pt-8 group-hover:from-[#0a0a0a]/90 transition-all duration-300">
+            <div
+              className="absolute bottom-0 left-0 right-0 p-4 pt-12"
+              style={{
+                background: "linear-gradient(to top, rgba(0,0,0,0.85), transparent)",
+              }}
+            >
               <span className="font-mono text-[9px] tracking-[0.15em] text-foreground/50 uppercase leading-tight">
                 [{card.label}]
               </span>
