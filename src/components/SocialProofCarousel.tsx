@@ -8,6 +8,7 @@ const testimonials = [
     name: "Angus",
     role: "CEO · MKTG EMAILS",
     isSlack: true,
+    avatar: "/images/Angus_PFP.JPG",
     quote:
       "Working with Zen was a great experience — his work was always consistently high quality and on time. He made my life very easy and filled a really vital hole in our team. Zen would be a great asset to any team needing an experienced copywriter.",
     footer: "Sent via Slack DM",
@@ -17,6 +18,7 @@ const testimonials = [
     initial: "W",
     name: "Will",
     role: "FOUNDER · XYKO · FASHION & LIFESTYLE",
+    avatar: "/images/Will_PFP.jpg",
     quote: "Zen came in and overhauled our entire email strategy — even helped dial in the brand aesthetic across the board. We were hitting 60% email revenue pretty much right away.",
     footerRight: "XYKO",
   },
@@ -40,6 +42,7 @@ const testimonials = [
     name: "ADSUMO DIGITAL",
     role: "CEO · AGENCY PARTNER",
     isVideo: true,
+    videoSrc: "/images/ADSUMO_DIGITAL_VIDEO_TESTIMONIAL.MOV",
     quote: "",
   },
 ];
@@ -128,13 +131,25 @@ const SocialProofCarousel = () => {
 
                 {t.isVideo ? (
                   /* Video card */
-                  <div className="flex flex-col items-center justify-center flex-1 gap-4 relative z-20">
-                    <span className="meta-label text-primary">[VIDEO TESTIMONIAL]</span>
-                    <div className="w-16 h-16 rounded-full border-2 border-foreground/30 flex items-center justify-center hover:border-primary transition-colors">
-                      <span className="text-2xl text-foreground ml-1">▶</span>
+                  <div className="flex flex-col items-center justify-center flex-1 gap-4 relative z-20 overflow-hidden rounded-2xl">
+                    <video
+                      src={t.videoSrc}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      muted
+                      loop
+                      playsInline
+                      autoPlay={isActive}
+                      ref={(el) => {
+                        if (el) {
+                          if (isActive) el.play().catch(() => {});
+                          else el.pause();
+                        }
+                      }}
+                    />
+                    <div className="relative z-10 flex flex-col items-center gap-4 bg-black/50 p-6 rounded-xl">
+                      <h3 className="font-display text-2xl text-pure-white">{t.name}</h3>
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
                     </div>
-                    <h3 className="font-display text-2xl text-pure-white">{t.name}</h3>
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
                   </div>
                 ) : (
                   /* Quote card */
@@ -144,9 +159,13 @@ const SocialProofCarousel = () => {
                       {t.isSlack && (
                         <span className="absolute top-0 right-0 text-foreground/30 text-sm font-mono">#slack</span>
                       )}
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground font-display text-lg shrink-0">
-                        {t.initial}
-                      </div>
+                      {t.avatar ? (
+                        <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-foreground font-display text-lg shrink-0">
+                          {t.initial}
+                        </div>
+                      )}
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-pure-white text-sm font-bold">{t.name}</span>
