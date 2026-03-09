@@ -3,7 +3,7 @@ import { useInView, useCountUp } from "../hooks/useInView";
 
 const stats = [
   { value: 1000000, prefix: "$", suffix: "+", label: "REVENUE GENERATED" },
-  { value: 1200, prefix: "", suffix: "+", label: "CREATIVES PRODUCED" },
+  { value: 1200, prefix: "", suffix: "+", label: "CREATIVES DELIVERED" },
   { value: 5, prefix: "", suffix: "", label: "FEATURE SCRIPTS WRITTEN" },
   { value: 30, prefix: "", suffix: "+", label: "BRANDS SCALED" },
 ];
