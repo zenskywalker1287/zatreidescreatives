@@ -8,6 +8,7 @@ const testimonials = [
     name: "Angus",
     role: "CEO · MKTG EMAILS",
     isSlack: true,
+    avatar: "/images/Angus_PFP.JPG",
     quote:
       "Working with Zen was a great experience — his work was always consistently high quality and on time. He made my life very easy and filled a really vital hole in our team. Zen would be a great asset to any team needing an experienced copywriter.",
     footer: "Sent via Slack DM",
@@ -17,6 +18,7 @@ const testimonials = [
     initial: "W",
     name: "Will",
     role: "FOUNDER · XYKO · FASHION & LIFESTYLE",
+    avatar: "/images/Will_PFP.jpg",
     quote: "Zen came in and overhauled our entire email strategy — even helped dial in the brand aesthetic across the board. We were hitting 60% email revenue pretty much right away.",
     footerRight: "XYKO",
   },
@@ -40,6 +42,7 @@ const testimonials = [
     name: "ADSUMO DIGITAL",
     role: "CEO · AGENCY PARTNER",
     isVideo: true,
+    videoSrc: "/images/ADSUMO_DIGITAL_VIDEO_TESTIMONIAL.MOV",
     quote: "",
   },
 ];
