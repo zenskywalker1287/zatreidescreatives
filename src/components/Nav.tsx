@@ -11,9 +11,9 @@ const Nav = () => {
   }, []);
 
   const links = [
-    { id: "hero", label: "LOGIC", num: "01" },
-    { id: "comparison", label: "PROCESS", num: "02" },
-    { id: "personas", label: "PERSONAS", num: "03" },
+    { id: "hero", label: "HOME", num: "01" },
+    { id: "comparison", label: "NUMBERS", num: "02" },
+    { id: "clients", label: "BRANDS", num: "03" },
     { id: "portfolio", label: "PORTFOLIO", num: "04", route: "/portfolio" },
     { id: "contact", label: "CONTACT", num: "05" },
   ];

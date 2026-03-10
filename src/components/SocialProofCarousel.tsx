@@ -70,7 +70,8 @@ const SocialProofCarousel = () => {
     if (offset < -Math.floor(total / 2)) offset += total;
     const absOffset = Math.abs(offset);
 
-    const translateX = offset * 300;
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+    const translateX = offset * (isMobile ? 200 : 300);
     const scale = absOffset === 0 ? 1 : Math.max(0.7, 1 - absOffset * 0.12);
     const zIndex = 10 - absOffset;
     const rotateY = offset * -6;
