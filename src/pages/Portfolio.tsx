@@ -193,8 +193,7 @@ const Portfolio = () => {
             SEEN ENOUGH?
           </h2>
           <p className="font-serif-thin text-lg text-foreground italic mt-4 max-w-md mx-auto">
-            Let's talk about what we can<br />
-            build for your brand.
+            Let's talk about what we can build for your brand.
           </p>
           <Link
             to="/#contact"

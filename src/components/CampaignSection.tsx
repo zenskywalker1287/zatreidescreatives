@@ -227,7 +227,7 @@ const CampaignSection = () => {
 
                 {/* Connector Arrow between columns (desktop only) */}
                 {i < 2 && (
-                  <div className="flex flex-col items-center justify-center w-16 shrink-0">
+                  <div className="hidden lg:flex flex-col items-center justify-center w-16 shrink-0">
                     <span className="meta-label text-muted-foreground/60 text-center text-[8px] leading-tight mb-2 whitespace-nowrap">
                       {connectors[i].label}
                     </span>
