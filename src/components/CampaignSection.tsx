@@ -128,7 +128,7 @@ const CampaignSection = () => {
         </div>
 
         {/* Three Columns with Connectors */}
-        <div className="relative flex flex-row items-stretch justify-center gap-0 max-w-6xl mx-auto">
+        <div className="relative flex flex-col lg:flex-row items-stretch justify-center gap-6 lg:gap-0 max-w-6xl mx-auto">
           {columns.map((col, i) => {
             const Icon = col.icon;
             const isHovered = hoveredCol === i;
