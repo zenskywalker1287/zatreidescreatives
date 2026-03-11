@@ -81,6 +81,11 @@ const FlatpackCaseStudy = () => {
         })}
       </div>
 
+      {/* Hero Carousel */}
+      <div className="pb-16">
+        <HeroCarousel images={heroImages} />
+      </div>
+
       {/* Divider */}
       <div className="px-6 md:px-12 lg:px-20">
         <div className="w-full h-px bg-foreground/15" />
