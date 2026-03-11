@@ -150,18 +150,16 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
                   backgroundColor: "#0a0a0a",
                   borderRadius: isMobile ? "20px" : "16px",
                   border: `1px solid hsl(var(--foreground) / 0.2)`,
-                  aspectRatio: isMobile ? "9 / 16" : undefined,
+                  aspectRatio: "9 / 16",
                 }}
               >
                 <img
                   src={img}
                   alt={`Email creative ${i + 1}`}
-                  className="w-full block"
+                  className="w-full h-full block"
                   style={{
-                    height: isMobile ? "100%" : "auto",
-                    objectFit: isMobile ? "cover" : undefined,
+                    objectFit: "cover",
                     objectPosition: "top center",
-                    maxHeight: isMobile ? undefined : "500px",
                   }}
                   loading="lazy"
                   draggable={false}
