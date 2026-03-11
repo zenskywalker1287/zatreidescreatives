@@ -22,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/front-end" element={<FrontEnd />} />
+          <Route path="/case-studies/flatpack" element={<FlatpackCaseStudy />} />
           <Route path="/case-studies/:slug" element={<CaseStudy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
