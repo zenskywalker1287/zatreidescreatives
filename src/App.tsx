@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import FrontEnd from "./pages/FrontEnd";
 import CaseStudy from "./pages/CaseStudy";
+import FlatpackCaseStudy from "./pages/FlatpackCaseStudy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
