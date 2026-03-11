@@ -14,8 +14,8 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
   const [containerWidth, setContainerWidth] = useState(0);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 240;
-  const CARD_GAP = isMobile ? 10 : 24;
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 340;
+  const CARD_GAP = isMobile ? 10 : 28;
   const TOTAL_WIDTH = images.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
