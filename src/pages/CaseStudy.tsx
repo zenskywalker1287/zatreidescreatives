@@ -98,6 +98,45 @@ const CaseStudy = () => {
         </div>
       </div>
 
+      {/* MKTG Client Work Section */}
+      {study.slug === "mktg" && (
+        <>
+          <div className="px-6 md:px-12 lg:px-20">
+            <div className="w-full h-px bg-foreground/15" />
+          </div>
+          <div className="px-6 md:px-12 lg:px-20 py-20 text-center">
+            <h2 className="font-display text-[clamp(2rem,5vw,4rem)] text-pure-white mb-6">
+              CLIENT WORK.
+            </h2>
+            <p className="font-serif-thin text-xl md:text-2xl text-muted-foreground italic mb-4 max-w-2xl mx-auto whitespace-pre-line">
+              {"Written for the brands inside\none of the world's leading\nKlaviyo agencies."}
+            </p>
+            <p
+              className="font-mono text-xs tracking-wider mb-12"
+              style={{
+                color: "#FF2400",
+                textShadow: "0 0 8px rgba(255,36,0,0.5)",
+              }}
+            >
+              [IN COLLABORATION WITH MKTG EMAILS]
+            </p>
+          </div>
+          <div className="pb-16">
+            <HeroCarousel
+              images={[
+                "/images/innerdose-01.png",
+                "/images/innerdose-02.png",
+                "/images/innerdose-03.png",
+                "/images/innerdose-04.png",
+                "/images/innerdose-05.png",
+                "/images/heroloupes-01.png",
+                "/images/heroloupes-02.png",
+              ]}
+            />
+          </div>
+        </>
+      )}
+
       {/* Prev / Next navigation */}
       <div className="border-t border-foreground/10 px-6 md:px-12 lg:px-20 py-12 flex justify-between items-center">
         <Link
