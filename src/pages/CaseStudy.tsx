@@ -153,9 +153,9 @@ const CaseStudy = () => {
             </p>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-[1200px] mx-auto">
               {[
-                "/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png",
-                "/images/whiskeyballs-01.png", "/images/whiskeyballs-02.png", "/images/whiskeyballs-03.png",
-                "/images/upairy-01.png", "/images/upairy-02.png", "/images/upairy-03.png", "/images/upairy-04.png",
+                "/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png", "/images/greengoo-05.png",
+                "/images/whiskeyballs-01.png", "/images/whiskeyballs-02.png", "/images/whiskeyballs-03.png", "/images/whiskeyballs-04.png",
+                "/images/upairy-01.png", "/images/upairy-02.png",
               ].map((img, i) => (
                 <div key={i} className="mb-4 break-inside-avoid">
                   <img
