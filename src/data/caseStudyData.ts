@@ -203,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "High 6-figure campaigns — built on copy that converts.",
     context: "Adsumo Digital is a performance agency. We partnered with them to produce campaign and flow copy across multiple DTC brands.",
     image: null,
-    heroImages: ["/images/email-04.png", "/images/email-05.png", "/images/email-06.png", "/images/email-01.png", "/images/email-02.png", "/images/email-03.png"],
+    heroImages: ["/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png", "/images/whiskeyballs-01.png", "/images/whiskeyballs-02.png", "/images/whiskeyballs-03.png", "/images/upairy-01.png", "/images/upairy-02.png", "/images/upairy-03.png", "/images/upairy-04.png"],
     deliverables: [
       { icon: Sun, label: "SUMMER CAMPAIGNS" },
       { icon: RefreshCw, label: "FLOW COPY" },
