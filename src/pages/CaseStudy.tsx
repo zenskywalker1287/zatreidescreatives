@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { getCaseStudyBySlug, getAdjacentStudies } from "@/data/caseStudyData";
 import type { Deliverable } from "@/data/caseStudyData";
 import HeroCarousel from "@/components/HeroCarousel";
+import BrandPillStrip from "@/components/BrandPillStrip";
 
 const DeliverableIcon = ({ item }: { item: Deliverable }) => {
   const Icon = item.icon;
