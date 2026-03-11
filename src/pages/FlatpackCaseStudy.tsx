@@ -2,6 +2,16 @@ import { Link } from "react-router-dom";
 import {
   Mail, RefreshCw, Target, PenTool, Settings,
 } from "lucide-react";
+import HeroCarousel from "@/components/HeroCarousel";
+
+const heroImages = [
+  "/images/flatpack-01.png",
+  "/images/flatpack-02.png",
+  "/images/flatpack-03.png",
+  "/images/flatpack-04.png",
+  "/images/flatpack-05.png",
+  "/images/flatpack-06.png",
+];
 
 const scopeItems = [
   { icon: Mail, label: "EMAIL COPY" },
@@ -69,6 +79,11 @@ const FlatpackCaseStudy = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Hero Carousel */}
+      <div className="pb-16">
+        <HeroCarousel images={heroImages} />
       </div>
 
       {/* Divider */}
