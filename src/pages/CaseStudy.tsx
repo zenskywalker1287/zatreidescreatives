@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { getCaseStudyBySlug, getAdjacentStudies } from "@/data/caseStudyData";
 import type { Deliverable } from "@/data/caseStudyData";
 import HeroCarousel from "@/components/HeroCarousel";
+import BrandPillStrip from "@/components/BrandPillStrip";
 
 const DeliverableIcon = ({ item }: { item: Deliverable }) => {
   const Icon = item.icon;
@@ -98,9 +99,13 @@ const CaseStudy = () => {
         </div>
       </div>
 
-      {/* MKTG Client Work Section */}
+      {/* MKTG Logo Strip + Client Work Section */}
       {study.slug === "mktg" && (
         <>
+          <div className="px-6 md:px-12 lg:px-20">
+            <div className="w-full h-px bg-foreground/15" />
+          </div>
+          <BrandPillStrip />
           <div className="px-6 md:px-12 lg:px-20">
             <div className="w-full h-px bg-foreground/15" />
           </div>
@@ -120,6 +125,52 @@ const CaseStudy = () => {
             >
               [IN COLLABORATION WITH MKTG EMAILS]
             </p>
+          </div>
+        </>
+      )}
+
+      {/* Adsumo Client Work Section */}
+      {study.slug === "adsumo" && (
+        <>
+          <div className="px-6 md:px-12 lg:px-20">
+            <div className="w-full h-px bg-foreground/15" />
+          </div>
+          <div className="px-6 md:px-12 lg:px-20 py-20 text-center">
+            <h2 className="font-display text-[clamp(2rem,5vw,4rem)] text-pure-white mb-6">
+              CLIENT WORK.
+            </h2>
+            <p className="font-serif-thin text-xl md:text-2xl text-muted-foreground italic mb-4 max-w-2xl mx-auto whitespace-pre-line">
+              {"Emails written for the brands\ninside Adsumo Digital."}
+            </p>
+            <p
+              className="font-mono text-xs tracking-wider mb-12"
+              style={{
+                color: "#FF2400",
+                textShadow: "0 0 8px rgba(255,36,0,0.5)",
+              }}
+            >
+              [IN COLLABORATION WITH ADSUMO DIGITAL]
+            </p>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-[1200px] mx-auto">
+              {[
+                "/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png",
+                "/images/whiskeyballs-01.png", "/images/whiskeyballs-02.png", "/images/whiskeyballs-03.png",
+                "/images/upairy-01.png", "/images/upairy-02.png", "/images/upairy-03.png", "/images/upairy-04.png",
+              ].map((img, i) => (
+                <div key={i} className="mb-4 break-inside-avoid">
+                  <img
+                    src={img}
+                    alt={`Adsumo client work ${i + 1}`}
+                    className="w-full h-auto block"
+                    style={{
+                      borderRadius: "8px",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}

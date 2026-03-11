@@ -170,7 +170,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "$1M generated across 12+ brands in a single quarter.",
     context: "MKTG is an 8-figure Klaviyo agency. They brought us in to write high-converting email copy across their entire portfolio — fast.",
     image: null,
-    heroImages: ["/images/innerdose-01.png", "/images/innerdose-02.png", "/images/innerdose-03.png", "/images/innerdose-04.png", "/images/innerdose-05.png", "/images/heroloupes-01.png", "/images/heroloupes-02.png"],
+    heroImages: ["/images/innerdose-01.png", "/images/innerdose-02.png", "/images/innerdose-03.png", "/images/innerdose-04.png", "/images/innerdose-05.png", "/images/heroloupes-01.png", "/images/heroloupes-02.png", "/images/primetrain-01.png", "/images/primetrain-02.png", "/images/primetrain-03.png", "/images/bestbody-03.png", "/images/bestbody-04.png", "/images/bestbody-05.png", "/images/bestbody-06.png", "/images/loveluggage-01.png"],
     deliverables: [
       { icon: DollarSign, label: "$1M GENERATED" },
       { icon: Building2, label: "8-FIG AGENCY" },
@@ -203,7 +203,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "High 6-figure campaigns — built on copy that converts.",
     context: "Adsumo Digital is a performance agency. We partnered with them to produce campaign and flow copy across multiple DTC brands.",
     image: null,
-    heroImages: ["/images/email-04.png", "/images/email-05.png", "/images/email-06.png", "/images/email-01.png", "/images/email-02.png", "/images/email-03.png"],
+    heroImages: ["/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png", "/images/whiskeyballs-01.png", "/images/whiskeyballs-02.png", "/images/whiskeyballs-03.png", "/images/upairy-01.png", "/images/upairy-02.png", "/images/upairy-03.png", "/images/upairy-04.png"],
     deliverables: [
       { icon: Sun, label: "SUMMER CAMPAIGNS" },
       { icon: RefreshCw, label: "FLOW COPY" },
