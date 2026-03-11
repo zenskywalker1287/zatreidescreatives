@@ -112,7 +112,7 @@ const CaseStudy = () => {
               {"Written for the brands inside\none of the world's leading\nKlaviyo agencies."}
             </p>
             <p
-              className="font-mono text-xs tracking-wider mb-12"
+              className="font-mono text-xs tracking-wider"
               style={{
                 color: "#FF2400",
                 textShadow: "0 0 8px rgba(255,36,0,0.5)",
@@ -120,19 +120,6 @@ const CaseStudy = () => {
             >
               [IN COLLABORATION WITH MKTG EMAILS]
             </p>
-          </div>
-          <div className="pb-16">
-            <HeroCarousel
-              images={[
-                "/images/innerdose-01.png",
-                "/images/innerdose-02.png",
-                "/images/innerdose-03.png",
-                "/images/innerdose-04.png",
-                "/images/innerdose-05.png",
-                "/images/heroloupes-01.png",
-                "/images/heroloupes-02.png",
-              ]}
-            />
           </div>
         </>
       )}

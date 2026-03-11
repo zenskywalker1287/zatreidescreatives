@@ -170,7 +170,7 @@ export const caseStudies: CaseStudy[] = [
     subheadline: "$1M generated across 12+ brands in a single quarter.",
     context: "MKTG is an 8-figure Klaviyo agency. They brought us in to write high-converting email copy across their entire portfolio — fast.",
     image: null,
-    heroImages: ["/images/email-01.png", "/images/email-02.png", "/images/email-03.png", "/images/email-04.png", "/images/email-05.png", "/images/email-06.png"],
+    heroImages: ["/images/innerdose-01.png", "/images/innerdose-02.png", "/images/innerdose-03.png", "/images/innerdose-04.png", "/images/innerdose-05.png", "/images/heroloupes-01.png", "/images/heroloupes-02.png"],
     deliverables: [
       { icon: DollarSign, label: "$1M GENERATED" },
       { icon: Building2, label: "8-FIG AGENCY" },
