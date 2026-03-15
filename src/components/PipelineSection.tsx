@@ -98,7 +98,7 @@ const TypewriterText = ({ text, started }: { text: string; started: boolean }) =
     }, 18);
     return () => clearInterval(iv);
   }, [text, started]);
-  return <>{displayed}<span className="animate-pulse">|</span></>;
+  return <>{displayed}<span className="animate-pulse text-primary">▊</span></>;
 };
 
 const FormatBadge = ({ label, example }: { label: string; example: string }) => {
@@ -113,13 +113,13 @@ const FormatBadge = ({ label, example }: { label: string; example: string }) => 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <span className={`text-[9px] tracking-[0.2em] font-mono uppercase whitespace-nowrap flex-shrink-0 transition-colors duration-300 ${
+      <span className={`text-[9px] tracking-[0.2em] font-body uppercase whitespace-nowrap flex-shrink-0 transition-colors duration-300 ${
         hovered ? "text-primary" : "text-muted-foreground"
       }`}>
         {label}
       </span>
       <span
-        className={`font-mono text-[10px] text-foreground/70 whitespace-nowrap transition-all duration-400 ${
+        className={`font-body text-[10px] text-foreground/70 whitespace-nowrap transition-all duration-400 ${
           hovered ? "opacity-100 max-w-[350px]" : "opacity-0 max-w-0"
         }`}
       >
@@ -180,8 +180,7 @@ const PipelineSection = () => {
   return (
     <section id="pipeline" className="section-border" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 py-12 md:py-20">
-        {/* Header */}
-        <span className="meta-label text-primary">[WATCH US WORK]</span>
+        <span className="meta-label text-primary">WATCH US WORK</span>
         <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-3 mb-4">
           THIS IS HOW WE THINK.
         </h2>
@@ -189,24 +188,22 @@ const PipelineSection = () => {
           "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
         </p>
 
-        {/* Terminal Input */}
         <div className="max-w-3xl">
           <span className="meta-label text-primary block mb-2">
-            [LIVE DEMO — MADCOW COLLARS]
+            LIVE DEMO — MADCOW COLLARS
           </span>
-          <p className="font-mono text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-3">
+          <p className="font-body text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-3">
             Raw product input below. Hit RUN EXTRACTION and watch what happens.
           </p>
 
           <span className="meta-label text-muted-foreground block mb-2">
-            [RAW PRODUCT INPUT]
+            RAW PRODUCT INPUT
           </span>
-          <div className="border border-foreground/20 bg-secondary/30 p-4 md:p-6 font-mono text-sm md:text-base text-foreground/90 relative">
+          <div className="border border-foreground/20 bg-secondary/30 p-4 md:p-6 font-body text-sm md:text-base text-foreground/90 relative">
             <span>Heavy-duty dog collar built for working and protection dogs.</span>
             <span className="animate-pulse text-primary ml-1">▊</span>
           </div>
 
-          {/* Button + Counter Row */}
           <div className="flex items-center justify-between mt-4">
             <button
               onClick={run}
@@ -232,16 +229,15 @@ const PipelineSection = () => {
             </button>
 
             {(phase === "extracting" || phase === "done") && (
-              <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase transition-all duration-300">
+              <span className="font-body text-[10px] tracking-[0.2em] text-primary uppercase transition-all duration-300">
                 {phase === "extracting"
-                  ? `[EXTRACTING USP ${extractCount} OF 100+...]`
-                  : "[SHOWING 5 OF 100+ USPS EXTRACTED]"}
+                  ? `EXTRACTING USP ${extractCount} OF 100+...`
+                  : "SHOWING 5 OF 100+ USPS EXTRACTED"}
               </span>
             )}
           </div>
         </div>
 
-        {/* USP Cards */}
         <div className={`space-y-3 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[12000px] opacity-100 mt-10"}`}>
           {usps.map((usp, i) => {
             const visible = i < visibleCards;
@@ -254,20 +250,17 @@ const PipelineSection = () => {
                 }`}
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
-                {/* Card Header */}
                 <div className="flex justify-between items-center mb-3">
                   <span className="meta-label text-muted-foreground">
-                    [USP {String(i + 1).padStart(2, "0")}]
+                    USP {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="meta-label text-primary">[{i + 1} OF 100+]</span>
+                  <span className="meta-label text-primary">{i + 1} OF 100+</span>
                 </div>
 
-                {/* USP Text */}
                 <h3 className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white leading-[1.1]">
                   {visible ? <TypewriterText text={usp.text} started={visible} /> : ""}
                 </h3>
 
-                {/* Format Row */}
                 <div
                   className={`mt-3 pt-3 border-t border-foreground/10 transition-all duration-500 overflow-hidden ${
                     formatVisible ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
@@ -280,7 +273,6 @@ const PipelineSection = () => {
                   </div>
                 </div>
 
-                {/* Creator Brief */}
                 <div
                   className={`mt-3 transition-all duration-500 overflow-hidden ${
                     formatVisible ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
@@ -293,7 +285,6 @@ const PipelineSection = () => {
           })}
         </div>
 
-        {/* Scale Section */}
         <div
           className={`transition-all duration-1000 ${
             showClosing ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -301,7 +292,6 @@ const PipelineSection = () => {
         >
           <ScaleSection />
 
-          {/* Closing */}
           <div className="mt-10 text-center">
             <h3 className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[0.95] text-pure-white mb-4">
               ONE USP. FOUR FORMATS. WE EXTRACT 100+ PER BRAND.
@@ -309,8 +299,8 @@ const PipelineSection = () => {
             <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mx-auto mb-6">
               "That's 400+ pieces of content. All rooted in your brand's real customer psychology. None of it templated. None of it guessed."
             </p>
-            <p className="font-mono text-[10px] md:text-xs tracking-[0.15em] text-muted-foreground uppercase">
-              [THIS IS PHASE 01. BEFORE WE WRITE A SINGLE EMAIL.]
+            <p className="font-body text-[10px] md:text-xs tracking-[0.15em] text-muted-foreground uppercase">
+              THIS IS PHASE 01. BEFORE WE WRITE A SINGLE EMAIL.
             </p>
           </div>
         </div>

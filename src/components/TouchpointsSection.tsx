@@ -33,7 +33,7 @@ const TouchpointsSection = () => {
   return (
     <section className="section-border" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
-        <span className="meta-label text-primary">[06] SCIENCE</span>
+        <span className="meta-label text-primary">SCIENCE</span>
         <h2 className="font-display text-[clamp(2rem,5vw,5rem)] leading-[0.95] text-pure-white mt-4 mb-4">
           WHY 30 TOUCHPOINTS<br />IS THE MINIMUM IN 2026.
         </h2>
@@ -41,9 +41,7 @@ const TouchpointsSection = () => {
           A psychology textbook designed by a film director.
         </p>
 
-        {/* Timeline */}
         <div className="relative">
-          {/* Progress bar */}
           <div className="hidden md:block absolute top-6 left-0 right-0 h-px bg-foreground/10">
             <div
               className="h-full bg-primary transition-all duration-700"
@@ -64,22 +62,21 @@ const TouchpointsSection = () => {
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <span className={`font-mono text-2xl font-bold ${activePhase === i ? "text-primary" : "text-foreground/30"}`}>
+                  <span className={`font-body text-2xl font-bold ${activePhase === i ? "text-primary" : "text-foreground/30"}`}>
                     {phase.range}
                   </span>
                 </div>
                 <h3 className="font-display text-2xl text-pure-white mb-2">{phase.label}</h3>
                 <span className="meta-label text-primary/60 block mb-3">{phase.principle}</span>
-                <p className="font-mono text-xs text-muted-foreground">{phase.desc}</p>
+                <p className="font-body text-xs text-muted-foreground">{phase.desc}</p>
               </button>
             ))}
           </div>
 
-          {/* Detail panel */}
           <div className="brutal-card border-primary/20 bg-primary/[0.02]">
             <span className="meta-label text-primary block mb-3">TOUCHPOINTS {phases[activePhase].range}</span>
             <h3 className="font-display text-3xl text-pure-white mb-2">{phases[activePhase].label}</h3>
-            <p className="font-mono text-sm text-foreground/80 max-w-2xl">{phases[activePhase].detail}</p>
+            <p className="font-body text-sm text-foreground/80 max-w-2xl">{phases[activePhase].detail}</p>
           </div>
         </div>
       </div>
