@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import CarouselStrip from "./CarouselStrip";
 
 const heroCards = [
@@ -29,92 +29,296 @@ const heroCards = [
   { id: 125, image: "/images/slice45.png" },
 ];
 
-const HeroSection = () => {
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+// Marquee images split into 3 rows
+const row1 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 1}.png`);
+const row2 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 15}.png`);
+const row3 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 29}.png`);
+
+const SCRAMBLE_CHARS = "XØΔΛ█▓░!<>-_\\/[]{}—=+";
+
+const useTextScramble = (text: string, delay = 0) => {
+  const [display, setDisplay] = useState("");
+  const started = useRef(false);
 
   useEffect(() => {
-    let rafId: number;
-    const handleMouse = (e: MouseEvent) => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
-      });
+    if (started.current) return;
+    started.current = true;
+
+    const timeout = setTimeout(() => {
+      let iteration = 0;
+      const interval = setInterval(() => {
+        setDisplay(
+          text
+            .split("")
+            .map((letter, index) => {
+              if (index < iteration) return text[index];
+              if (letter === " ") return " ";
+              return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+            })
+            .join("")
+        );
+        if (iteration >= text.length) clearInterval(interval);
+        iteration += 1 / 3;
+      }, 30);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
+
+  return display || text.replace(/./g, (c) => (c === " " ? " " : "░"));
+};
+
+const MarqueeRow = ({
+  images,
+  direction,
+  speed,
+}: {
+  images: string[];
+  direction: "left" | "right";
+  speed: number;
+}) => {
+  const duration = (images.length * 286) / speed;
+  return (
+    <div className="flex overflow-hidden whitespace-nowrap mb-1.5">
+      <div
+        className="flex shrink-0"
+        style={{
+          animation: `marquee-${direction === "right" ? "right" : "left"} ${duration}s linear infinite`,
+        }}
+      >
+        {[...images, ...images].map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt=""
+            loading="lazy"
+            className="shrink-0 object-cover"
+            style={{
+              height: 280,
+              width: "auto",
+              borderRadius: 8,
+              margin: "0 6px",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const HeroSection = () => {
+  const [showContent, setShowContent] = useState(false);
+  const [showSub, setShowSub] = useState(false);
+  const [showCTAs, setShowCTAs] = useState(false);
+  const [showLine, setShowLine] = useState(false);
+
+  const line1 = useTextScramble("CREATIVE STRATEGIST", 200);
+  const line2 = useTextScramble("FOR 6, 7 & 8-FIGURE", 400);
+  const line3 = useTextScramble("DTC BRANDS.", 600);
+
+  useEffect(() => {
+    setShowContent(true);
+    const t1 = setTimeout(() => setShowLine(true), 1200);
+    const t2 = setTimeout(() => setShowSub(true), 1600);
+    const t3 = setTimeout(() => setShowCTAs(true), 2000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
     };
-    window.addEventListener("mousemove", handleMouse);
-    return () => { window.removeEventListener("mousemove", handleMouse); cancelAnimationFrame(rafId); };
+  }, []);
+
+  // Feather trail
+  const feathers = useRef<HTMLDivElement[]>([]);
+  const featherPositions = useRef(
+    Array.from({ length: 4 }, () => ({ x: 0, y: 0 }))
+  );
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  const setFeatherRef = useCallback((el: HTMLDivElement | null, i: number) => {
+    if (el) feathers.current[i] = el;
+  }, []);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("mousemove", onMove);
+
+    let rafId: number;
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    const animate = () => {
+      featherPositions.current.forEach((pos, i) => {
+        const target = i === 0 ? mouseRef.current : featherPositions.current[i - 1];
+        pos.x = lerp(pos.x, target.x, 0.08 - i * 0.015);
+        pos.y = lerp(pos.y, target.y + i * 5, 0.08 - i * 0.015);
+
+        if (feathers.current[i]) {
+          feathers.current[i].style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`;
+          feathers.current[i].style.opacity = `${0.6 - i * 0.12}`;
+        }
+      });
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
-    <section id="hero" className="relative flex flex-col overflow-hidden">
-      {/* Vignette */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-all duration-700"
-        style={{
-          background: `radial-gradient(ellipse at ${mousePos.x * 100}% ${mousePos.y * 100}%, transparent 0%, hsl(var(--background)) 70%)`,
-          opacity: 0.5,
-        }}
-      />
+    <section id="hero" className="relative flex flex-col overflow-hidden min-h-screen">
+      {/* Layer 1 — Living wall marquee */}
+      <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-1.5 opacity-40">
+        <MarqueeRow images={row1} direction="right" speed={25} />
+        <MarqueeRow images={row2} direction="left" speed={18} />
+        <MarqueeRow images={row3} direction="right" speed={22} />
+      </div>
 
-      {/* Grid lines */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
+      {/* Overlay on marquee */}
+      <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.72)" }} />
 
-      {/* HEADLINE */}
-      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 py-8">
+      {/* Feather trail */}
+      {[0, 1, 2, 3].map((i) => (
+        <div
+          key={i}
+          ref={(el) => setFeatherRef(el, i)}
+          className="hidden md:block"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            pointerEvents: "none",
+            zIndex: 99997,
+            opacity: 0,
+          }}
+        >
+          <svg width="8" height="12" viewBox="0 0 8 12" fill="none">
+            <path d="M4 0C4 0 8 4 8 8C8 10.2 6.2 12 4 12C1.8 12 0 10.2 0 8C0 4 4 0 4 0Z" fill="hsl(10 75% 44%)" />
+          </svg>
+        </div>
+      ))}
+
+      {/* Layer 2 — Foreground content */}
+      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 flex-1 py-32">
         <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
-          <span className="meta-label text-primary mb-6 opacity-0 animate-fade-up">[ZEN RICHARDS]</span>
+          {/* Small label */}
+          <span
+            className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary mb-8"
+            style={{
+              opacity: showContent ? 0.5 : 0,
+              transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          >
+            EST. 2024 — DTC EMAIL & RETENTION SYSTEMS
+          </span>
 
-          <h1 className="leading-[0.9] tracking-tight mb-6 animate-fade-up relative">
-            <div className="absolute -inset-20 blur-[180px] opacity-30 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)" }} />
-            <div className="absolute -inset-10 blur-[100px] opacity-15 pointer-events-none" style={{ background: "radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.6), transparent 50%), radial-gradient(circle at 70% 50%, hsl(var(--foreground) / 0.1), transparent 50%)" }} />
+          {/* Headline with scramble */}
+          <h1 className="leading-[0.9] tracking-tight mb-2 relative">
+            {/* Glow */}
+            <div
+              className="absolute -inset-20 blur-[180px] opacity-20 pointer-events-none"
+              style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)" }}
+            />
 
-            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: "scale(1.04)" }}>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[18px] opacity-[0.08]">CREATIVE STRATEGIST</span>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[18px] opacity-[0.08]">FOR 6, 7 & 8-FIGURE</span>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[18px] opacity-[0.08]">DTC BRANDS.</span>
+            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+              {line1}
             </span>
-
-            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true" style={{ transform: "scale(1.015)" }}>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[8px] opacity-[0.15]">CREATIVE STRATEGIST</span>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[8px] opacity-[0.15]">FOR 6, 7 & 8-FIGURE</span>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block blur-[8px] opacity-[0.15]">DTC BRANDS.</span>
+            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+              {line2}
             </span>
-
-            <span className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none" aria-hidden="true">
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-transparent block" style={{ WebkitTextStroke: "1px hsl(var(--foreground) / 0.15)" }}>CREATIVE STRATEGIST</span>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-transparent block" style={{ WebkitTextStroke: "1px hsl(var(--foreground) / 0.15)" }}>FOR 6, 7 & 8-FIGURE</span>
-              <span className="font-display text-[clamp(2.5rem,8vw,7.5rem)] text-transparent block" style={{ WebkitTextStroke: "1px hsl(var(--foreground) / 0.15)" }}>DTC BRANDS.</span>
+            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+              {line3}
             </span>
-
-            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1)" }}>CREATIVE STRATEGIST</span>
-            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1)" }}>FOR 6, 7 & 8-FIGURE</span>
-            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-pure-white block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1)" }}>DTC BRANDS.</span>
           </h1>
 
-          <div className="font-serif-thin italic text-foreground text-sm md:text-base max-w-xl mb-6 opacity-0 animate-fade-up leading-relaxed" style={{ animationDelay: "0.3s" }}>
+          {/* Drawn red line */}
+          <div
+            className="w-24 h-[2px] bg-primary mb-8"
+            style={{
+              transform: showLine ? "scaleX(1)" : "scaleX(0)",
+              transformOrigin: "left",
+              transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          />
+
+          {/* Subheadline */}
+          <div
+            className="font-body text-foreground/70 text-sm md:text-base max-w-xl mb-8 leading-relaxed"
+            style={{
+              opacity: showSub ? 1 : 0,
+              transform: showSub ? "translateY(0)" : "translateY(20px)",
+              transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          >
             <p className="mb-2">$2M+ in revenue generated. 1,200+ creatives shipped. Worked inside 8-figure agencies.</p>
             <p>This is how we demystify 'the creative' and actually drive conversions.</p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-5 opacity-0 animate-fade-up" style={{ animationDelay: "0.5s" }}>
-            <a href="#portfolio" className="px-8 py-3 text-xs uppercase tracking-[0.3em] font-mono bg-pure-white text-background transition-all duration-300 hover:bg-background hover:text-pure-white border border-transparent hover:border-foreground/60 inline-block text-center">[ SEE THE PORTFOLIO → ]</a>
-            <a href="/creative-world" className="px-8 py-3 text-xs uppercase tracking-[0.3em] font-mono text-pure-white border border-foreground/60 transition-all duration-300 hover:bg-primary hover:border-primary hover:text-pure-white inline-block text-center">[ SEE OUR LATEST CREATIVE WORLD → ]</a>
+          {/* CTAs */}
+          <div
+            className="flex flex-col sm:flex-row gap-4 mb-6"
+            style={{
+              opacity: showCTAs ? 1 : 0,
+              transform: showCTAs ? "translateY(0)" : "translateY(16px)",
+              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          >
+            <a
+              href="#contact"
+              className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] bg-primary text-primary-foreground inline-block text-center"
+              style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 30px hsl(10 75% 44% / 0.4)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              BOOK A CALL
+            </a>
+            <a
+              href="#portfolio"
+              className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] text-primary border border-primary inline-block text-center"
+              style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "hsl(10 75% 44% / 0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
+            >
+              SEE THE WORK
+            </a>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 opacity-0 animate-fade-up" style={{ animationDelay: "0.6s" }}>
+          {/* Pills */}
+          <div
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+            style={{
+              opacity: showCTAs ? 1 : 0,
+              transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
+            }}
+          >
             <span className="meta-label text-primary mr-1">[WHAT WE DO]</span>
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
-                className="border border-foreground/20 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground transition-all duration-200 hover:border-primary hover:text-pure-white cursor-default"
-                style={{ backgroundColor: "transparent" }}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "hsl(10 100% 56% / 0.1)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+                className="border border-foreground/20 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
+                style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "hsl(var(--primary))";
+                  e.currentTarget.style.backgroundColor = "hsl(10 75% 44% / 0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.2)";
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
               >
                 {pill}
               </span>
@@ -123,13 +327,26 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* CAROUSEL — scrolls RIGHT */}
-      <div className="opacity-0 animate-fade-up" style={{ animationDelay: "0.8s" }}>
+      {/* Scroll indicator */}
+      <div className="relative z-10 flex flex-col items-center pb-10 gap-2">
+        <div className="flex items-center gap-3">
+          <div className="relative w-[1px] h-12 bg-primary/20 overflow-hidden">
+            <div
+              className="absolute w-full h-3 bg-primary rounded-full"
+              style={{ animation: "scroll-dot 2s cubic-bezier(0.16, 1, 0.3, 1) infinite" }}
+            />
+          </div>
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground">SCROLL</span>
+        </div>
+      </div>
+
+      {/* CAROUSEL */}
+      <div className="relative z-10">
         <CarouselStrip cards={heroCards} direction="right" />
       </div>
 
       {/* Bottom metadata */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-4 md:gap-8 opacity-0 animate-fade-up" style={{ animationDelay: "1s" }}>
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-4 md:gap-8">
         <span className="meta-label">[EST. CREATIVE BACKEND SYSTEMS]</span>
         <span className="meta-label">[SPECIALITY: EMAIL · ADS · STRATEGY]</span>
       </div>

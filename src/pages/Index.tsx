@@ -1,4 +1,5 @@
 import Nav from "../components/Nav";
+import CursorDot from "../components/CursorDot";
 import HeroSection from "../components/HeroSection";
 import NumbersSection from "../components/NumbersSection";
 import LogoTicker from "../components/LogoTicker";
