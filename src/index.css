@@ -145,12 +145,12 @@
 
   /* Metadata label style */
   .meta-label {
-    @apply text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-mono;
+    @apply text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body;
   }
 
   /* Number label style */
   .nav-label {
-    @apply text-[11px] uppercase tracking-[0.25em] font-mono;
+    @apply text-[16px] uppercase tracking-[0.15em] font-display;
   }
 
   /* Brutalist card */
