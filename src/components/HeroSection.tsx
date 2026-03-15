@@ -202,8 +202,13 @@ const HeroSection = () => {
         </div>
       ))}
 
+      {/* CAROUSEL — shows first on mobile */}
+      <div className="relative z-10 md:hidden order-first pt-24 pb-4">
+        <CarouselStrip cards={heroCards} direction="right" />
+      </div>
+
       {/* Layer 2 — Foreground content */}
-      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 flex-1 py-32">
+      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 flex-1 py-16 md:py-32">
         <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           {/* Small label */}
           <span
@@ -340,8 +345,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* CAROUSEL */}
-      <div className="relative z-10">
+      {/* CAROUSEL — desktop only (mobile version is above) */}
+      <div className="relative z-10 hidden md:block">
         <CarouselStrip cards={heroCards} direction="right" />
       </div>
 

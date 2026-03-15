@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useInView, useCountUp } from "../hooks/useInView";
+import ScrollReveal from "./ScrollReveal";
 
 const stats = [
   { value: 1000000, prefix: "$", suffix: "+", label: "REVENUE GENERATED" },
@@ -17,16 +18,16 @@ const StatsSection = () => {
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0">
           {stats.map((stat, i) => (
-            <div
+            <ScrollReveal
               key={i}
-              className={`p-8 md:p-12 ${i < stats.length - 1 ? "border-b lg:border-b-0 lg:border-r border-primary/20" : ""} ${
-                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              } transition-all duration-700`}
-              style={{ transitionDelay: `${i * 200}ms` }}
+              variant="fade-up"
+              delay={i * 150}
+              threshold={0.2}
+              className={`p-8 md:p-12 ${i < stats.length - 1 ? "border-b lg:border-b-0 lg:border-r border-primary/20" : ""}`}
             >
               <StatNumber stat={stat} inView={inView} />
               <span className="meta-label block mt-4">{stat.label}</span>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

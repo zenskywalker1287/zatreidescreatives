@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import Phase01Strategy from "./process/Phase01PreFlight";
 import Phase02Retention from "./process/Phase02Backend";
 import Phase03Creative from "./process/Phase03FrontEnd";
+import ScrollReveal from "./ScrollReveal";
 
 const phaseLabels = [
   "PHASE 01 — STRATEGY",
@@ -89,15 +90,17 @@ const ProcessSection = () => {
 
   return (
     <section id="process" className="relative overflow-hidden max-w-[100vw]">
-      <div className="w-full bg-background py-8 md:py-12 text-center px-6">
-        <span className="meta-label text-primary mb-6 block">THE PROCESS</span>
-        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mb-6">
-          HOW WE TURN A BRAND INTO A MACHINE.
-        </h2>
-        <p className="font-serif-thin italic text-sm md:text-base text-foreground/60 max-w-lg mx-auto">
-          Three phases. Every time. No shortcuts. No guesswork. This is how optimized creative actually gets built.
-        </p>
-      </div>
+      <ScrollReveal variant="blur" threshold={0.1}>
+        <div className="w-full bg-background py-8 md:py-12 text-center px-6">
+          <span className="meta-label text-primary mb-6 block">THE PROCESS</span>
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mb-6">
+            HOW WE TURN A BRAND INTO A MACHINE.
+          </h2>
+          <p className="font-serif-thin italic text-sm md:text-base text-foreground/60 max-w-lg mx-auto">
+            Three phases. Every time. No shortcuts. No guesswork. This is how optimized creative actually gets built.
+          </p>
+        </div>
+      </ScrollReveal>
 
       <div className="absolute top-4 left-6 md:top-6 md:left-10 z-20 pointer-events-none" style={{ top: "calc(var(--intro-offset, 0px) + 1rem)" }}>
         <span className="meta-label text-primary transition-all duration-500" key={activePhase}>
@@ -144,6 +147,7 @@ const ProcessSection = () => {
             key={i}
             onClick={() => { scrollToPhase(i); handleUserInteraction(); }}
             className="font-body text-xs transition-all duration-300"
+            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
           >
             <span className={i === activePhase ? "text-primary" : "text-foreground/30"}>
               {i === activePhase ? "●" : "○"}
@@ -159,18 +163,20 @@ const ProcessSection = () => {
         />
       </div>
 
-      <div className="w-full border-t border-foreground/15 border-b border-b-foreground/15 bg-background px-6 md:px-10 py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <h3 className="font-display text-[clamp(1.5rem,3vw,2.5rem)] text-pure-white leading-[1.1] text-center md:text-left">
-          STRATEGY BUILDS IT.
-          <br />
-          RETENTION KEEPS IT.
-          <br />
-          CREATIVE SCALES IT.
-        </h3>
-        <span className="meta-label text-foreground/40">
-          3 PHASES · 1 SYSTEM · ZERO GAPS
-        </span>
-      </div>
+      <ScrollReveal variant="fade-up" threshold={0.1}>
+        <div className="w-full border-t border-foreground/15 border-b border-b-foreground/15 bg-background px-6 md:px-10 py-8 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <h3 className="font-display text-[clamp(1.5rem,3vw,2.5rem)] text-pure-white leading-[1.1] text-center md:text-left">
+            STRATEGY BUILDS IT.
+            <br />
+            RETENTION KEEPS IT.
+            <br />
+            CREATIVE SCALES IT.
+          </h3>
+          <span className="meta-label text-foreground/40">
+            3 PHASES · 1 SYSTEM · ZERO GAPS
+          </span>
+        </div>
+      </ScrollReveal>
     </section>
   );
 };

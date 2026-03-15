@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useInView } from "../hooks/useInView";
+import ScrollReveal from "./ScrollReveal";
 
 const emailHeroes = [
   { id: 1, image: "/images/slice21.png" },
@@ -44,52 +45,62 @@ const PortfolioStrip = () => {
       transform: `translateX(${translateX}px) perspective(1200px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
       zIndex,
       opacity,
-      transition: "all 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
+      transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
     };
   };
 
   return (
     <section id="portfolio" className="section-border overflow-hidden" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 pt-20 md:pt-32 pb-8 text-center">
-        <span className="meta-label text-primary">PORTFOLIO</span>
-        <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4 mb-2">
-          THE HEROES.
-        </h2>
-        <p className="meta-label mb-12">TOP-FOLD EMAIL DESIGNS — CLICK TO EXPLORE</p>
+        <ScrollReveal variant="fade-up">
+          <span className="meta-label text-primary">PORTFOLIO</span>
+        </ScrollReveal>
+        <ScrollReveal variant="blur" delay={100}>
+          <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4 mb-2">
+            THE HEROES.
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal variant="fade-up" delay={200}>
+          <p className="meta-label mb-12">TOP-FOLD EMAIL DESIGNS — CLICK TO EXPLORE</p>
+        </ScrollReveal>
       </div>
 
-      <div
-        className={`relative flex items-center justify-center h-[500px] md:h-[700px] mb-8 transition-opacity duration-700 ${
-          inView ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {emailHeroes.map((hero, i) => {
-          const isActive = i === activeIndex;
-          return (
-            <div
-              key={hero.id}
-              className="absolute w-[260px] md:w-[340px] h-[420px] md:h-[600px] cursor-pointer"
-              style={getCardStyle(i)}
-              onClick={() => setActiveIndex(i)}
-            >
+      <ScrollReveal variant="slide-up-rotate" delay={200} threshold={0.05}>
+        <div
+          className={`relative flex items-center justify-center h-[500px] md:h-[700px] mb-8 transition-opacity duration-700 ${
+            inView ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+        >
+          {emailHeroes.map((hero, i) => {
+            const isActive = i === activeIndex;
+            return (
               <div
-                className={`w-full h-full rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
-                  isActive
-                    ? "border-foreground/30 shadow-[0_0_60px_rgba(0,0,0,0.8)]"
-                    : "border-foreground/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
-                }`}
+                key={hero.id}
+                className="absolute w-[260px] md:w-[340px] h-[420px] md:h-[600px] cursor-pointer"
+                style={getCardStyle(i)}
+                onClick={() => setActiveIndex(i)}
               >
-                <img
-                  src={hero.image}
-                  alt={`Email Design ${hero.id}`}
-                  className="w-full h-full object-cover object-top bg-[#0a0a0a]"
-                  loading="lazy"
-                />
+                <div
+                  className={`w-full h-full rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
+                    isActive
+                      ? "border-foreground/30 shadow-[0_0_60px_rgba(0,0,0,0.8)]"
+                      : "border-foreground/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                  }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                >
+                  <img
+                    src={hero.image}
+                    alt={`Email Design ${hero.id}`}
+                    className="w-full h-full object-cover object-top bg-[#0a0a0a]"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </ScrollReveal>
 
       <div className="flex items-center justify-center gap-2 pb-6">
         {emailHeroes.map((_, i) => (
@@ -101,6 +112,7 @@ const PortfolioStrip = () => {
                 ? "bg-primary w-6"
                 : "bg-foreground/20 hover:bg-foreground/40"
             }`}
+            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
           />
         ))}
       </div>
