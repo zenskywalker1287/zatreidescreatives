@@ -5,7 +5,7 @@ const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -20,21 +20,26 @@ const Nav = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-sm border-b border-foreground/10"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        background: scrolled ? "rgba(10,10,10,0.85)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(196,57,29,0.12)" : "1px solid transparent",
+        transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+      }}
     >
       <div className="flex items-center justify-between px-6 md:px-12 py-4">
-        <span className="meta-label text-primary">CMD.CTRL</span>
+        <span className="logo-shimmer font-display text-xl tracking-wider">CMD.CTRL</span>
+
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) =>
             link.route ? (
               <Link
                 key={link.id}
                 to={link.route}
-                className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="nav-label nav-link-hover text-muted-foreground hover:text-primary"
+                style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 [{link.num}] {link.label}
               </Link>
@@ -42,13 +47,21 @@ const Nav = () => {
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className="nav-label text-muted-foreground hover:text-primary transition-colors duration-300"
+                className="nav-label nav-link-hover text-muted-foreground hover:text-primary"
+                style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 [{link.num}] {link.label}
               </a>
             )
           )}
+
+          {/* Available indicator */}
+          <div className="flex items-center gap-2">
+            <span className="pulse-dot" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">AVAILABLE</span>
+          </div>
         </div>
+
         <div className="md:hidden">
           <MobileMenu links={links} />
         </div>
@@ -79,7 +92,8 @@ const MobileMenu = ({
                 key={link.id}
                 to={link.route}
                 onClick={() => setOpen(false)}
-                className="nav-label text-lg text-foreground hover:text-primary transition-colors"
+                className="nav-label nav-link-hover text-lg text-foreground hover:text-primary"
+                style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 [{link.num}] {link.label}
               </Link>
@@ -88,12 +102,17 @@ const MobileMenu = ({
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={() => setOpen(false)}
-                className="nav-label text-lg text-foreground hover:text-primary transition-colors"
+                className="nav-label nav-link-hover text-lg text-foreground hover:text-primary"
+                style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 [{link.num}] {link.label}
               </a>
             )
           )}
+          <div className="flex items-center gap-2">
+            <span className="pulse-dot" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">AVAILABLE</span>
+          </div>
         </div>
       )}
     </>

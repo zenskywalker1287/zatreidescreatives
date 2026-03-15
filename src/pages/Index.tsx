@@ -1,4 +1,5 @@
 import Nav from "../components/Nav";
+import CursorDot from "../components/CursorDot";
 import HeroSection from "../components/HeroSection";
 import NumbersSection from "../components/NumbersSection";
 import LogoTicker from "../components/LogoTicker";
@@ -20,6 +21,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative">
       {/* Film grain overlay */}
       <div className="film-grain" />
+      <CursorDot />
 
       <Nav />
       <HeroSection />
