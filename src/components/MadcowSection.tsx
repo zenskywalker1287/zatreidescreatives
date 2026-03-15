@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useInView } from "../hooks/useInView";
 
-/* ───── brand / persona data ───── */
-
 interface Persona {
   name: string;
   trigger: string;
@@ -137,8 +135,6 @@ const brands: Brand[] = [
   },
 ];
 
-/* ───── typewriter sub-component ───── */
-
 const TypewriterLine = ({ text, started }: { text: string; started: boolean }) => {
   const [displayed, setDisplayed] = useState("");
   useEffect(() => {
@@ -151,10 +147,8 @@ const TypewriterLine = ({ text, started }: { text: string; started: boolean }) =
     }, 20);
     return () => clearInterval(iv);
   }, [text, started]);
-  return <>{displayed}<span className="animate-pulse">|</span></>;
+  return <>{displayed}<span className="animate-pulse text-primary">▊</span></>;
 };
-
-/* ───── main section ───── */
 
 const MadcowSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -167,13 +161,11 @@ const MadcowSection = () => {
   const brand = brands[brandIdx];
   const p = activePersona !== null ? brand.personas[activePersona] : null;
 
-  // reset persona when brand changes
   useEffect(() => {
     setActivePersona(null);
     setShowPanel(false);
   }, [brandIdx]);
 
-  // delay panel reveal
   useEffect(() => {
     if (activePersona !== null) {
       const t = setTimeout(() => setShowPanel(true), 350);
@@ -194,9 +186,8 @@ const MadcowSection = () => {
       }}
     >
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
-        {/* ── LAYER 1 — THE THESIS ── */}
         <div className="text-center mb-16">
-          <span className="meta-label text-primary block mb-6">[04] BLUEPRINT</span>
+          <span className="meta-label text-primary block mb-6">BLUEPRINT</span>
           <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white">
             MOST BRANDS TALK TO EVERYONE.
           </h2>
@@ -204,9 +195,9 @@ const MadcowSection = () => {
             Which means they talk to no one.
           </p>
           <p className="meta-label mt-6 mb-8">
-            [WE WRITE TO ONE PERSON AT A TIME — HERE'S WHAT THAT LOOKS LIKE]
+            WE WRITE TO ONE PERSON AT A TIME — HERE'S WHAT THAT LOOKS LIKE
           </p>
-          <p className="text-foreground text-sm md:text-base leading-relaxed max-w-[600px] mx-auto font-mono">
+          <p className="text-foreground text-sm md:text-base leading-relaxed max-w-[600px] mx-auto font-body">
             Before we write a single word, we build a psychological profile of
             every type of person buying your product. Their fears. Their language.
             Their objections. Their desires. Then every email, ad, and piece of
@@ -216,10 +207,9 @@ const MadcowSection = () => {
           <div className="w-full h-px bg-foreground/15 mt-12" />
         </div>
 
-        {/* ── LAYER 2 — BRAND SELECTOR ── */}
         <div className="text-center mb-16">
           <p className="meta-label mb-6">
-            [SELECT AN EXAMPLE BRAND — SEE HOW THE PERSONAS CHANGE]
+            SELECT AN EXAMPLE BRAND — SEE HOW THE PERSONAS CHANGE
           </p>
           <div className="flex justify-center gap-3 flex-wrap">
             {brands.map((b, i) => (
@@ -238,13 +228,11 @@ const MadcowSection = () => {
           </div>
         </div>
 
-        {/* ── LAYER 3 — PERSONA CARDS + DETAIL ── */}
         <div
           className={`transition-all duration-500 ${
             activePersona !== null ? "grid md:grid-cols-[300px_1fr] gap-8" : ""
           }`}
         >
-          {/* cards column */}
           <div
             className={`flex ${
               activePersona !== null ? "flex-col" : "flex-col md:flex-row"
@@ -276,7 +264,6 @@ const MadcowSection = () => {
                         : undefined,
                   }}
                 >
-                  {/* icon area */}
                   <div
                     className={`${
                       activePersona === null
@@ -298,7 +285,6 @@ const MadcowSection = () => {
                       {persona.icon}
                     </span>
                   </div>
-                  {/* info */}
                   <div
                     className={`${isOther ? "p-3" : "p-5"} transition-all duration-300`}
                   >
@@ -310,7 +296,7 @@ const MadcowSection = () => {
                       {persona.name}
                     </h3>
                     <span className="meta-label text-primary mt-2 block text-[9px]">
-                      [TRIGGER: {persona.trigger}]
+                      TRIGGER: {persona.trigger}
                     </span>
                   </div>
                 </div>
@@ -318,7 +304,6 @@ const MadcowSection = () => {
             })}
           </div>
 
-          {/* detail panel */}
           {p && (
             <div
               className={`transition-all duration-500 ${
@@ -327,7 +312,6 @@ const MadcowSection = () => {
                   : "opacity-0 translate-x-8"
               }`}
             >
-              {/* A — Quote */}
               <div className="mb-8">
                 <span className="meta-label text-primary block mb-4">
                   VERBATIM CUSTOMER QUOTE
@@ -337,31 +321,29 @@ const MadcowSection = () => {
                 </blockquote>
               </div>
 
-              {/* B — Linguistic Code */}
               <div className="mb-8">
                 <span className="meta-label text-primary block mb-4">
-                  [LINGUISTIC CODE — HOW THE COPY CHANGES FOR THIS PERSON]
+                  LINGUISTIC CODE — HOW THE COPY CHANGES FOR THIS PERSON
                 </span>
                 <p className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white leading-tight">
                   <TypewriterLine text={p.code} started={showPanel} />
                 </p>
               </div>
 
-              {/* C — Psychological Levers */}
               <div className="border border-foreground/10 p-5">
                 <span className="meta-label block mb-4">PSYCHOLOGICAL LEVERS</span>
-                <div className="space-y-2 font-mono text-xs">
+                <div className="space-y-2 font-body text-xs">
                   <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
                     <span className="text-muted-foreground whitespace-nowrap">PRIMARY DESIRE:</span>
-                    <span className="text-primary">[{p.desire}]</span>
+                    <span className="text-primary">{p.desire}</span>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
                     <span className="text-muted-foreground whitespace-nowrap">PRIMARY FEAR:</span>
-                    <span className="text-foreground/70">[{p.fear}]</span>
+                    <span className="text-foreground/70">{p.fear}</span>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-1 sm:gap-3">
                     <span className="text-muted-foreground whitespace-nowrap">OBJECTION:</span>
-                    <span className="text-foreground/70">[{p.objection}]</span>
+                    <span className="text-foreground/70">{p.objection}</span>
                   </div>
                 </div>
               </div>
@@ -369,15 +351,14 @@ const MadcowSection = () => {
           )}
         </div>
 
-        {/* ── BOTTOM — closing ── */}
         <div className="mt-16 pt-8 border-t border-foreground/10">
           <div className="flex flex-col md:flex-row justify-between gap-8">
             <div className="space-y-2">
               <span className="meta-label text-muted-foreground/60 block">
-                [THIS IS HOW WE APPROACH EVERY BRAND WE WORK WITH]
+                THIS IS HOW WE APPROACH EVERY BRAND WE WORK WITH
               </span>
               <span className="meta-label text-muted-foreground/60 block">
-                [3 PERSONAS MINIMUM · 100+ USPS PER PERSONA · ZERO GENERIC COPY]
+                3 PERSONAS MINIMUM · 100+ USPS PER PERSONA · ZERO GENERIC COPY
               </span>
             </div>
             <p className="font-serif-thin text-foreground italic text-base md:text-lg leading-relaxed max-w-sm text-right">

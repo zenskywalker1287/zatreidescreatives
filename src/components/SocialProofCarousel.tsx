@@ -95,7 +95,7 @@ const SocialProofCarousel = () => {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="text-center mb-16 px-6">
-        <span className="meta-label text-primary">[STRAIGHT FROM THE SOURCE]</span>
+        <span className="meta-label text-primary">STRAIGHT FROM THE SOURCE</span>
         <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mt-4 mb-3">
           DON'T TAKE OUR WORD FOR IT.
         </h2>
@@ -104,7 +104,6 @@ const SocialProofCarousel = () => {
         </p>
       </div>
 
-      {/* Carousel */}
       <div className="relative flex items-center justify-center h-[480px] md:h-[560px] mb-8">
         {testimonials.map((t, i) => {
           const isActive = i === activeIndex;
@@ -121,17 +120,15 @@ const SocialProofCarousel = () => {
                 }`}
                 style={{
                   boxShadow: isActive
-                    ? "0 0 0 1.5px #FF2400, 0 0 20px rgba(255,36,0,0.15), 0 0 40px rgba(120,0,255,0.1)"
+                    ? "0 0 0 1.5px hsl(var(--primary)), 0 0 20px hsl(var(--primary) / 0.15)"
                     : "0 0 0 1px rgba(255,255,255,0.1)",
                 }}
               >
-                {/* Dark overlay for non-active */}
                 {!isActive && (
                   <div className="absolute inset-0 bg-black/40 rounded-2xl z-10 pointer-events-none" />
                 )}
 
                 {t.isVideo ? (
-                  /* Video card */
                   <div className="flex flex-col items-center justify-center flex-1 gap-4 relative z-20 overflow-hidden rounded-2xl">
                     <video
                       src={t.videoSrc}
@@ -149,16 +146,14 @@ const SocialProofCarousel = () => {
                     />
                     <div className="relative z-10 flex flex-col items-center gap-4 bg-black/50 p-6 rounded-xl">
                       <h3 className="font-display text-2xl text-pure-white">{t.name}</h3>
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
+                      <span className="font-body text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
                     </div>
                   </div>
                 ) : (
-                  /* Quote card */
                   <div className="flex flex-col h-full relative z-20">
-                    {/* Header */}
                     <div className="flex items-center gap-3 mb-6">
                       {t.isSlack && (
-                        <span className="absolute top-0 right-0 text-foreground/30 text-sm font-mono">#slack</span>
+                        <span className="absolute top-0 right-0 text-foreground/30 text-sm font-body">#slack</span>
                       )}
                       {t.avatar ? (
                         <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
@@ -170,24 +165,22 @@ const SocialProofCarousel = () => {
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-pure-white text-sm font-bold">{t.name}</span>
-                          {t.isSlack && <span className="w-2 h-2 rounded-full bg-green-500" />}
+                          {t.isSlack && <span className="w-2 h-2 rounded-full bg-primary" />}
                         </div>
-                        <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
+                        <span className="font-body text-[10px] tracking-[0.2em] text-foreground/50 uppercase">{t.role}</span>
                       </div>
                     </div>
 
-                    {/* Quote */}
                     <p className="font-serif-thin italic text-foreground/80 text-sm leading-relaxed flex-1">
                       "{t.quote}"
                     </p>
 
-                    {/* Footer */}
                     <div className="mt-4 flex justify-between items-end">
                       {t.footer && (
-                        <span className="font-mono text-[9px] tracking-[0.15em] text-foreground/30 uppercase">{t.footer}</span>
+                        <span className="font-body text-[9px] tracking-[0.15em] text-foreground/30 uppercase">{t.footer}</span>
                       )}
                       {t.footerRight && (
-                        <span className="font-mono text-[9px] tracking-[0.15em] text-foreground/30 uppercase ml-auto">{t.footerRight}</span>
+                        <span className="font-body text-[9px] tracking-[0.15em] text-foreground/30 uppercase ml-auto">{t.footerRight}</span>
                       )}
                     </div>
                   </div>
@@ -198,7 +191,6 @@ const SocialProofCarousel = () => {
         })}
       </div>
 
-      {/* Dots */}
       <div className="flex items-center justify-center gap-2">
         {testimonials.map((_, i) => (
           <button

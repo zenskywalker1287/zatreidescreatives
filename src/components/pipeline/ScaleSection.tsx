@@ -1,7 +1,7 @@
 const ScaleSection = () => {
   return (
     <div className="mt-10 border border-primary/30 bg-[#0a0a0a] p-6 md:p-8">
-      <span className="meta-label text-primary block mb-3">[IF IT'S A WINNING ANGLE]</span>
+      <span className="meta-label text-primary block mb-3">IF IT'S A WINNING ANGLE</span>
 
       <h3 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-pure-white mb-4">
         SCALE IT WITH 100+ CREATIVE VARIATIONS.
@@ -19,9 +19,9 @@ const ScaleSection = () => {
         ].map((pill) => (
           <span
             key={pill}
-            className="border border-foreground/20 px-4 py-2 font-mono text-[10px] tracking-[0.15em] text-foreground/70 uppercase"
+            className="border border-foreground/20 px-4 py-2 font-body text-[10px] tracking-[0.15em] text-foreground/70 uppercase"
           >
-            [{pill}]
+            {pill}
           </span>
         ))}
       </div>

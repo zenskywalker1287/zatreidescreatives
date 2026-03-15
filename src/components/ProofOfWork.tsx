@@ -27,7 +27,7 @@ const ProofOfWork = () => {
       }`}
     >
       <div className="text-center mb-16">
-        <span className="meta-label text-primary">[PROOF OF WORK — REAL KLAVIYO DATA]</span>
+        <span className="meta-label text-primary">PROOF OF WORK — REAL KLAVIYO DATA</span>
         <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mt-4 mb-3">
           THE NUMBERS DON'T LIE.
         </h2>
@@ -37,7 +37,6 @@ const ProofOfWork = () => {
         <div className="w-full h-[1px] bg-foreground/10 max-w-4xl mx-auto" />
       </div>
 
-      {/* Bento Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mb-16">
         {cards.map((card) => (
           <div
@@ -60,7 +59,6 @@ const ProofOfWork = () => {
               loading="lazy"
             />
 
-            {/* Gradient overlay + label */}
             <div
               className="absolute bottom-0 left-0 right-0 p-4 pt-16"
               style={{
@@ -68,24 +66,23 @@ const ProofOfWork = () => {
               }}
             >
               <span
-                className="font-mono text-[9px] tracking-[0.15em] uppercase leading-tight font-bold"
+                className="font-body text-[9px] tracking-[0.15em] uppercase leading-tight font-bold"
                 style={{
-                  color: "#FF2400",
-                  textShadow: "0 0 8px rgba(255,36,0,0.6), 0 0 20px rgba(255,36,0,0.3)",
+                  color: "hsl(var(--primary))",
+                  textShadow: "0 0 8px hsl(var(--primary) / 0.6), 0 0 20px hsl(var(--primary) / 0.3)",
                 }}
               >
-                [{card.label}]
+                {card.label}
               </span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Bottom */}
       <div className="w-full h-[1px] bg-foreground/10 max-w-4xl mx-auto mb-6" />
       <div className="text-center space-y-1">
-        <p className="meta-label text-foreground/40">[ALL DATA FROM REAL KLAVIYO ACCOUNTS]</p>
-        <p className="meta-label text-foreground/30">[BRAND NAMES OMITTED TO PROTECT CLIENT PRIVACY]</p>
+        <p className="meta-label text-foreground/40">ALL DATA FROM REAL KLAVIYO ACCOUNTS</p>
+        <p className="meta-label text-foreground/30">BRAND NAMES OMITTED TO PROTECT CLIENT PRIVACY</p>
       </div>
     </section>
   );

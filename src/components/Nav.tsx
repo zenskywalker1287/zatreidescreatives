@@ -11,26 +11,26 @@ const Nav = () => {
   }, []);
 
   const links = [
-    { id: "hero", label: "HOME", num: "01" },
-    { id: "comparison", label: "NUMBERS", num: "02" },
-    { id: "clients", label: "BRANDS", num: "03" },
-    { id: "portfolio", label: "PORTFOLIO", num: "04", route: "/portfolio" },
-    { id: "contact", label: "CONTACT", num: "05" },
+    { id: "hero", label: "HOME" },
+    { id: "comparison", label: "NUMBERS" },
+    { id: "clients", label: "BRANDS" },
+    { id: "portfolio", label: "PORTFOLIO", route: "/portfolio" },
+    { id: "contact", label: "CONTACT" },
   ];
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: scrolled ? "rgba(10,10,10,0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+        background: scrolled ? "rgba(10,10,10,0.9)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(196,57,29,0.12)" : "1px solid transparent",
         transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
       <div className="flex items-center justify-between px-6 md:px-12 py-4">
-        <span className="logo-shimmer font-display text-xl tracking-wider">CMD.CTRL</span>
+        <span className="logo-shimmer font-display text-[22px] tracking-wider">CMD.CTRL</span>
 
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) =>
@@ -38,19 +38,19 @@ const Nav = () => {
               <Link
                 key={link.id}
                 to={link.route}
-                className="nav-label nav-link-hover text-muted-foreground hover:text-primary"
+                className="nav-label nav-link-hover text-foreground hover:text-primary"
                 style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
-                [{link.num}] {link.label}
+                {link.label}
               </Link>
             ) : (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className="nav-label nav-link-hover text-muted-foreground hover:text-primary"
+                className="nav-label nav-link-hover text-foreground hover:text-primary"
                 style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
-                [{link.num}] {link.label}
+                {link.label}
               </a>
             )
           )}
@@ -58,7 +58,7 @@ const Nav = () => {
           {/* Available indicator */}
           <div className="flex items-center gap-2">
             <span className="pulse-dot" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">AVAILABLE</span>
+            <span className="font-display text-[12px] uppercase tracking-[0.15em] text-primary">AVAILABLE</span>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ const Nav = () => {
 const MobileMenu = ({
   links,
 }: {
-  links: { id: string; label: string; num: string; route?: string }[];
+  links: { id: string; label: string; route?: string }[];
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -82,7 +82,7 @@ const MobileMenu = ({
         onClick={() => setOpen(!open)}
         className="nav-label text-foreground"
       >
-        [{open ? "CLOSE" : "MENU"}]
+        {open ? "CLOSE" : "MENU"}
       </button>
       {open && (
         <div className="fixed inset-0 top-[52px] bg-background/98 z-40 flex flex-col items-center justify-center gap-8">
@@ -95,7 +95,7 @@ const MobileMenu = ({
                 className="nav-label nav-link-hover text-lg text-foreground hover:text-primary"
                 style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
-                [{link.num}] {link.label}
+                {link.label}
               </Link>
             ) : (
               <a
@@ -105,13 +105,13 @@ const MobileMenu = ({
                 className="nav-label nav-link-hover text-lg text-foreground hover:text-primary"
                 style={{ transition: "color 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
-                [{link.num}] {link.label}
+                {link.label}
               </a>
             )
           )}
           <div className="flex items-center gap-2">
             <span className="pulse-dot" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">AVAILABLE</span>
+            <span className="font-display text-[12px] uppercase tracking-[0.15em] text-primary">AVAILABLE</span>
           </div>
         </div>
       )}

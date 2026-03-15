@@ -217,20 +217,20 @@ const HeroSection = () => {
           </span>
 
           {/* Headline with scramble */}
-          <h1 className="leading-[0.9] tracking-tight mb-2 relative">
+          <h1 className="leading-[0.9] tracking-[-0.02em] mb-2 relative">
             {/* Glow */}
             <div
               className="absolute -inset-20 blur-[180px] opacity-20 pointer-events-none"
               style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)" }}
             />
 
-            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
               {line1}
             </span>
-            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
               {line2}
             </span>
-            <span className="relative z-10 font-display text-[clamp(2.5rem,8vw,7.5rem)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-primary block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
               {line3}
             </span>
           </h1>
@@ -305,7 +305,7 @@ const HeroSection = () => {
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
             }}
           >
-            <span className="meta-label text-primary mr-1">[WHAT WE DO]</span>
+            <span className="meta-label text-primary mr-1">WHAT WE DO</span>
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
@@ -347,8 +347,8 @@ const HeroSection = () => {
 
       {/* Bottom metadata */}
       <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-4 md:gap-8">
-        <span className="meta-label">[EST. CREATIVE BACKEND SYSTEMS]</span>
-        <span className="meta-label">[SPECIALITY: EMAIL · ADS · STRATEGY]</span>
+        <span className="meta-label">EST. CREATIVE BACKEND SYSTEMS</span>
+        <span className="meta-label">SPECIALITY: EMAIL · ADS · STRATEGY</span>
       </div>
     </section>
   );
