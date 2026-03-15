@@ -40,7 +40,7 @@ interface ScrollRevealProps {
   duration?: number;
   threshold?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: "div" | "section" | "article" | "span" | "header" | "footer";
   stagger?: number;
 }
 
