@@ -305,7 +305,7 @@ const HeroSection = () => {
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
             }}
           >
-            <span className="meta-label text-primary mr-1">[WHAT WE DO]</span>
+            <span className="meta-label text-primary mr-1">WHAT WE DO</span>
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
