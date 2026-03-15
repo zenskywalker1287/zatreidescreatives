@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, ReactNode } from "react";
 
-type Variant = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "blur" | "slide-up-rotate";
+type Variant = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "blur" | "slide-up-rotate" | "bounce-up";
 
 const variantStyles: Record<Variant, { hidden: string; visible: string }> = {
   "fade-up": {
@@ -30,6 +30,10 @@ const variantStyles: Record<Variant, { hidden: string; visible: string }> = {
   "slide-up-rotate": {
     hidden: "opacity-0 translate-y-16 rotate-1",
     visible: "opacity-100 translate-y-0 rotate-0",
+  },
+  "bounce-up": {
+    hidden: "opacity-0 translate-y-32 scale-75",
+    visible: "opacity-100 translate-y-0 scale-100",
   },
 };
 
@@ -82,7 +86,9 @@ const ScrollReveal = ({
       style={{
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        transitionTimingFunction: variant === "bounce-up"
+          ? "cubic-bezier(0.34, 1.56, 0.64, 1)"
+          : "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
       {children}

@@ -108,7 +108,7 @@ const ClientsSection = () => {
         </ScrollReveal>
       </div>
 
-      <ScrollReveal variant="scale" delay={300} threshold={0.05}>
+      <ScrollReveal variant="bounce-up" delay={300} duration={900} threshold={0.05}>
         <div
           ref={containerRef}
           className="relative w-full flex items-end justify-center select-none"

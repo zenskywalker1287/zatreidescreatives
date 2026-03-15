@@ -65,7 +65,7 @@ const PortfolioStrip = () => {
         </ScrollReveal>
       </div>
 
-      <ScrollReveal variant="slide-up-rotate" delay={200} threshold={0.05}>
+      <ScrollReveal variant="bounce-up" delay={200} duration={900} threshold={0.05}>
         <div
           className={`relative flex items-center justify-center h-[500px] md:h-[700px] mb-8 transition-opacity duration-700 ${
             inView ? "opacity-100" : "opacity-0"

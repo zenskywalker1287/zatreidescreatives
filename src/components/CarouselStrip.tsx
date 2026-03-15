@@ -23,12 +23,30 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
   const autoScrollRef = useRef<number>(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [hasEntered, setHasEntered] = useState(false);
 
   const isMobile = containerWidth < 640;
   const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 240;
   const CARD_GAP = isMobile ? 10 : 24;
   const TOTAL_WIDTH = cards.length * (CARD_WIDTH + CARD_GAP);
   const AUTO_SPEED = direction === "left" ? -0.5 : 0.5;
+
+  // Bounce entrance on scroll into view
+  useEffect(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEntered(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (stripRef.current) {
@@ -61,14 +79,14 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
   }, [TOTAL_WIDTH, containerWidth]);
 
   useEffect(() => {
-    if (isDragging) return;
+    if (isDragging || !hasEntered) return;
     const tick = () => {
       setScrollX((prev) => wrapScroll(prev + AUTO_SPEED));
       autoScrollRef.current = requestAnimationFrame(tick);
     };
     autoScrollRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(autoScrollRef.current);
-  }, [isDragging, wrapScroll, AUTO_SPEED]);
+  }, [isDragging, wrapScroll, AUTO_SPEED, hasEntered]);
 
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     setIsDragging(true);
@@ -145,17 +163,28 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
           const isHovered = hoveredCard === card.id;
           const cardOpacity = isMobile ? Math.max(0.4, 1 - absDist * 0.2) : 1;
 
+          // Bounce entrance: cards start off-screen below with rotation, then spring into place
+          const entranceDelay = Math.abs(i - Math.floor(cards.length / 2)) * 40;
+          const bounceRotation = hasEntered ? 0 : (i % 2 === 0 ? 15 : -15);
+          const bounceY = hasEntered ? 0 : 300;
+          const bounceScale = hasEntered ? 1 : 0.6;
+          const bounceOpacity = hasEntered ? 1 : 0;
+
           return (
             <div
               key={card.id}
               className="flex-shrink-0 relative"
               style={{
                 width: CARD_WIDTH,
-                opacity: cardOpacity,
-                transform: `rotate(${isHovered && !isMobile ? 0 : rotation}deg) translateY(${isHovered && !isMobile ? -40 : -lift}px) scale(${isHovered && !isMobile ? 1.12 : scale})`,
-                transition: isDragging
+                opacity: hasEntered ? cardOpacity : bounceOpacity,
+                transform: hasEntered
+                  ? `rotate(${isHovered && !isMobile ? 0 : rotation}deg) translateY(${isHovered && !isMobile ? -40 : -lift}px) scale(${isHovered && !isMobile ? 1.12 : scale})`
+                  : `rotate(${bounceRotation}deg) translateY(${bounceY}px) scale(${bounceScale})`,
+                transition: hasEntered && isDragging
                   ? "none"
-                  : "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease",
+                  : hasEntered
+                    ? "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease"
+                    : `transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${entranceDelay}ms, opacity 0.5s ease ${entranceDelay}ms`,
                 zIndex: isHovered ? 50 : isCenter ? 10 : 1,
                 transformOrigin: "bottom center",
               }}
