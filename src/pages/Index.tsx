@@ -21,6 +21,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative">
       {/* Film grain overlay */}
       <div className="film-grain" />
+      <CursorDot />
 
       <Nav />
       <HeroSection />
