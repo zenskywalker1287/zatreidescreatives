@@ -114,7 +114,7 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
   return (
     <div
       ref={stripRef}
-      className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden py-8"
+      className="relative z-10 cursor-grab active:cursor-grabbing select-none overflow-hidden pt-16 pb-8"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
