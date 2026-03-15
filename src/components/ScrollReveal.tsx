@@ -86,7 +86,9 @@ const ScrollReveal = ({
       style={{
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        transitionTimingFunction: variant === "bounce-up"
+          ? "cubic-bezier(0.34, 1.56, 0.64, 1)"
+          : "cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
       {children}
