@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { useInView } from "../hooks/useInView";
 import CreatorBriefCard from "./pipeline/CreatorBriefCard";
 import ScaleSection from "./pipeline/ScaleSection";
+import ScrollReveal from "./ScrollReveal";
 
 const usps = [
   {
@@ -105,11 +106,12 @@ const FormatBadge = ({ label, example }: { label: string; example: string }) => 
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className={`inline-flex items-center border rounded-full cursor-default transition-all duration-400 ease-out overflow-hidden ${
+      className={`inline-flex items-center border rounded-full cursor-default transition-all duration-400 overflow-hidden ${
         hovered
           ? "border-primary/50 bg-primary/5 max-w-[500px] px-4 py-2 gap-3"
           : "border-foreground/20 max-w-[180px] px-3 py-1 gap-0"
       }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -180,65 +182,75 @@ const PipelineSection = () => {
   return (
     <section id="pipeline" className="section-border" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 py-12 md:py-20">
-        <span className="meta-label text-primary">WATCH US WORK</span>
-        <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-3 mb-4">
-          THIS IS HOW WE THINK.
-        </h2>
-        <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mb-10">
-          "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
-        </p>
-
-        <div className="max-w-3xl">
-          <span className="meta-label text-primary block mb-2">
-            LIVE DEMO — MADCOW COLLARS
-          </span>
-          <p className="font-body text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-3">
-            Raw product input below. Hit RUN EXTRACTION and watch what happens.
+        <ScrollReveal variant="fade-right">
+          <span className="meta-label text-primary">WATCH US WORK</span>
+        </ScrollReveal>
+        <ScrollReveal variant="blur" delay={100}>
+          <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-3 mb-4">
+            THIS IS HOW WE THINK.
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal variant="fade-up" delay={200}>
+          <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mb-10">
+            "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
           </p>
+        </ScrollReveal>
 
-          <span className="meta-label text-muted-foreground block mb-2">
-            RAW PRODUCT INPUT
-          </span>
-          <div className="border border-foreground/20 bg-secondary/30 p-4 md:p-6 font-body text-sm md:text-base text-foreground/90 relative">
-            <span>Heavy-duty dog collar built for working and protection dogs.</span>
-            <span className="animate-pulse text-primary ml-1">▊</span>
-          </div>
+        <ScrollReveal variant="fade-up" delay={300}>
+          <div className="max-w-3xl">
+            <span className="meta-label text-primary block mb-2">
+              LIVE DEMO — MADCOW COLLARS
+            </span>
+            <p className="font-body text-[10px] tracking-[0.15em] text-foreground/70 uppercase mb-3">
+              Raw product input below. Hit RUN EXTRACTION and watch what happens.
+            </p>
 
-          <div className="flex items-center justify-between mt-4">
-            <button
-              onClick={run}
-              disabled={phase !== "idle"}
-              className="btn-brutal disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              {phase === "idle"
-                ? "RUN EXTRACTION →"
-                : phase === "extracting"
-                  ? "EXTRACTING..."
-                  : "EXTRACTION COMPLETE"}
-              {phase === "extracting" && (
-                <span className="inline-flex ml-2 gap-[2px]">
-                  {[0, 1, 2].map((d) => (
-                    <span
-                      key={d}
-                      className="w-1 h-1 rounded-full bg-primary inline-block"
-                      style={{ animation: `pulse 1s ${d * 0.2}s infinite` }}
-                    />
-                  ))}
+            <span className="meta-label text-muted-foreground block mb-2">
+              RAW PRODUCT INPUT
+            </span>
+            <div className="border border-foreground/20 bg-secondary/30 p-4 md:p-6 font-body text-sm md:text-base text-foreground/90 relative">
+              <span>Heavy-duty dog collar built for working and protection dogs.</span>
+              <span className="animate-pulse text-primary ml-1">▊</span>
+            </div>
+
+            <div className="flex items-center justify-between mt-4">
+              <button
+                onClick={run}
+                disabled={phase !== "idle"}
+                className="btn-brutal disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {phase === "idle"
+                  ? "RUN EXTRACTION →"
+                  : phase === "extracting"
+                    ? "EXTRACTING..."
+                    : "EXTRACTION COMPLETE"}
+                {phase === "extracting" && (
+                  <span className="inline-flex ml-2 gap-[2px]">
+                    {[0, 1, 2].map((d) => (
+                      <span
+                        key={d}
+                        className="w-1 h-1 rounded-full bg-primary inline-block"
+                        style={{ animation: `pulse 1s ${d * 0.2}s infinite` }}
+                      />
+                    ))}
+                  </span>
+                )}
+              </button>
+
+              {(phase === "extracting" || phase === "done") && (
+                <span className="font-body text-[10px] tracking-[0.2em] text-primary uppercase transition-all duration-300">
+                  {phase === "extracting"
+                    ? `EXTRACTING USP ${extractCount} OF 100+...`
+                    : "SHOWING 5 OF 100+ USPS EXTRACTED"}
                 </span>
               )}
-            </button>
-
-            {(phase === "extracting" || phase === "done") && (
-              <span className="font-body text-[10px] tracking-[0.2em] text-primary uppercase transition-all duration-300">
-                {phase === "extracting"
-                  ? `EXTRACTING USP ${extractCount} OF 100+...`
-                  : "SHOWING 5 OF 100+ USPS EXTRACTED"}
-              </span>
-            )}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className={`space-y-3 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[12000px] opacity-100 mt-10"}`}>
+        <div className={`space-y-3 transition-all duration-500 ${phase === "idle" ? "max-h-0 overflow-hidden opacity-0 mt-0" : "max-h-[12000px] opacity-100 mt-10"}`}
+          style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+        >
           {usps.map((usp, i) => {
             const visible = i < visibleCards;
             const formatVisible = i < showFormats;
@@ -248,7 +260,7 @@ const PipelineSection = () => {
                 className={`border border-foreground/15 bg-background p-5 md:p-6 transition-all duration-500 ${
                   visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8 pointer-events-none"
                 }`}
-                style={{ transitionDelay: `${i * 50}ms` }}
+                style={{ transitionDelay: `${i * 50}ms`, transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 <div className="flex justify-between items-center mb-3">
                   <span className="meta-label text-muted-foreground">
@@ -265,6 +277,7 @@ const PipelineSection = () => {
                   className={`mt-3 pt-3 border-t border-foreground/10 transition-all duration-500 overflow-hidden ${
                     formatVisible ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                   }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   <div className="flex flex-wrap gap-2">
                     {Object.entries(usp.formats).map(([label, example]) => (
@@ -277,6 +290,7 @@ const PipelineSection = () => {
                   className={`mt-3 transition-all duration-500 overflow-hidden ${
                     formatVisible ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
                   }`}
+                  style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
                 >
                   <CreatorBriefCard brief={usp.brief} />
                 </div>
@@ -289,6 +303,7 @@ const PipelineSection = () => {
           className={`transition-all duration-1000 ${
             showClosing ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
+          style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
         >
           <ScaleSection />
 

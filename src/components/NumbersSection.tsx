@@ -1,5 +1,6 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useInView } from "../hooks/useInView";
+import ScrollReveal from "./ScrollReveal";
 
 /* ── MARQUEE DATA ── */
 const tickerItems = [
@@ -21,20 +22,22 @@ const panels = [
 ];
 
 const Marquee = () => (
-  <div className="relative w-full border-y border-primary/40 overflow-hidden py-3" style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.05)' }}>
-    <div className="flex whitespace-nowrap animate-[marquee_40s_linear_infinite]">
-      {[0, 1, 2].map((i) => (
-        <span key={i} className="font-body text-xs md:text-sm text-primary tracking-wide mr-0" style={{ textShadow: '0 0 20px hsl(var(--primary) / 0.5)' }}>
-          {tickerItems.map((item, j) => (
-            <span key={j}>
-              {item}
-              <span className="text-primary/60 mx-4">→</span>
-            </span>
-          ))}
-        </span>
-      ))}
+  <ScrollReveal variant="scale" threshold={0.2}>
+    <div className="relative w-full border-y border-primary/40 overflow-hidden py-3" style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.05)' }}>
+      <div className="flex whitespace-nowrap animate-[marquee_40s_linear_infinite]">
+        {[0, 1, 2].map((i) => (
+          <span key={i} className="font-body text-xs md:text-sm text-primary tracking-wide mr-0" style={{ textShadow: '0 0 20px hsl(var(--primary) / 0.5)' }}>
+            {tickerItems.map((item, j) => (
+              <span key={j}>
+                {item}
+                <span className="text-primary/60 mx-4">→</span>
+              </span>
+            ))}
+          </span>
+        ))}
+      </div>
     </div>
-  </div>
+  </ScrollReveal>
 );
 
 const GiantNumbers = () => {
@@ -199,21 +202,24 @@ const NumbersSection = () => {
   return (
     <section id="comparison" className="section-border bg-background">
       <div className="pt-12 pb-0">
-        <div className="px-6 md:px-12 lg:px-20 mb-8">
+        <ScrollReveal variant="fade-right" className="px-6 md:px-12 lg:px-20 mb-8">
           <span className="meta-label text-primary">THE NUMBERS</span>
-        </div>
+        </ScrollReveal>
 
         <Marquee />
 
-        <div className="py-8 md:py-12">
-          <GiantNumbers />
-        </div>
+        <ScrollReveal variant="slide-up-rotate" delay={200}>
+          <div className="py-8 md:py-12">
+            <GiantNumbers />
+          </div>
+        </ScrollReveal>
 
         <div
           ref={closingRef}
           className={`border-t border-foreground/15 px-6 md:px-12 lg:px-20 py-12 flex justify-center transition-all duration-1000 ${
             closingInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
+          style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
         >
           <p className="font-serif-thin italic text-foreground/70 text-lg md:text-2xl text-center max-w-3xl leading-relaxed">
             Every number on this page comes from a real Klaviyo dashboard.<br />

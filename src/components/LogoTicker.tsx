@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useInView } from "../hooks/useInView";
+import ScrollReveal from "./ScrollReveal";
 
 const row1 = "MADCOW COLLARS · XYKO · FLATPACK · 4AM SKIN · GYMSHARK · BUCKED UP · DAILY CRUNCH · BLU ATLAS · GRÜNS · LUMI · TIMEBEAM · ELITE";
 const row2 = "ADSUMO DIGITAL · MKTG EMAILS · GRUNT STYLE · PLUNGE · HEALTHMATE · DAILY CRUNCH · SNOBODI · HEY BUD · LEELO ACTIVE · FLEX FITNESS";
@@ -14,8 +15,11 @@ const LogoTicker = () => {
       className={`border-t border-b border-foreground/10 py-4 bg-background transition-opacity duration-700 ${
         inView ? "opacity-100" : "opacity-0"
       }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
-      <p className="meta-label text-primary text-center mb-4">BRANDS WE'VE WORKED WITH AND WRITTEN FOR</p>
+      <ScrollReveal variant="fade-down" threshold={0.2}>
+        <p className="meta-label text-primary text-center mb-4">BRANDS WE'VE WORKED WITH AND WRITTEN FOR</p>
+      </ScrollReveal>
 
       <div className="overflow-hidden whitespace-nowrap mb-3">
         <div className="inline-flex animate-ticker-left">
