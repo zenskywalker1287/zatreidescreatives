@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, ReactNode } from "react";
 
-type Variant = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "blur" | "slide-up-rotate";
+type Variant = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "scale" | "blur" | "slide-up-rotate" | "bounce-up";
 
 const variantStyles: Record<Variant, { hidden: string; visible: string }> = {
   "fade-up": {
@@ -30,6 +30,10 @@ const variantStyles: Record<Variant, { hidden: string; visible: string }> = {
   "slide-up-rotate": {
     hidden: "opacity-0 translate-y-16 rotate-1",
     visible: "opacity-100 translate-y-0 rotate-0",
+  },
+  "bounce-up": {
+    hidden: "opacity-0 translate-y-32 scale-75",
+    visible: "opacity-100 translate-y-0 scale-100",
   },
 };
 
