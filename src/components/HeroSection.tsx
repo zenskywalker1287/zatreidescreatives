@@ -345,8 +345,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* CAROUSEL */}
-      <div className="relative z-10">
+      {/* CAROUSEL — desktop only (mobile version is above) */}
+      <div className="relative z-10 hidden md:block">
         <CarouselStrip cards={heroCards} direction="right" />
       </div>
 
