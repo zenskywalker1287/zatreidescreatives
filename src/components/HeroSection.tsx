@@ -208,7 +208,7 @@ const HeroSection = () => {
       </div>
 
       {/* Layer 2 — Foreground content */}
-      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 flex-1 py-16 md:py-32">
+      <div className="relative z-10 flex flex-col justify-center items-center px-6 md:px-12 lg:px-20 flex-1 py-8 md:py-16">
         <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           {/* Small label */}
           <span
