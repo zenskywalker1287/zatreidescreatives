@@ -91,18 +91,16 @@ const ClientsSection = () => {
       tabIndex={0}
       onKeyDown={handleKeyDown}
     >
-      {/* Header */}
       <div className="px-6 md:px-12 lg:px-20 mb-12">
-        <span className="meta-label text-primary">[03] THE BRANDS</span>
+        <span className="meta-label text-primary">THE BRANDS</span>
         <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4">
           THE BRANDS.
         </h2>
         <span className="meta-label text-muted-foreground mt-2 block">
-          [CLICK TO ENTER THE CASE STUDY]
+          CLICK TO ENTER THE CASE STUDY
         </span>
       </div>
 
-      {/* Carousel */}
       <div
         ref={containerRef}
         className="relative w-full flex items-end justify-center select-none"
@@ -119,10 +117,9 @@ const ClientsSection = () => {
 
           const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
 
-          // Fan spread: cards fan out from center with rotation
           const spreadX = offset * (isMobile ? 110 : 170);
-          const rotate = offset * 6; // tilt like a hand of cards
-          const translateY = absOffset * (isMobile ? 20 : 30); // cards further out sit lower
+          const rotate = offset * 6;
+          const translateY = absOffset * (isMobile ? 20 : 30);
           const scale = isActive ? 1 : 0.92 - absOffset * 0.02;
           const cardWidth = isMobile ? 220 : 300;
           const zIndex = 10 - absOffset;
@@ -156,7 +153,6 @@ const ClientsSection = () => {
               onMouseEnter={() => setHoveredCard(i)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Glow behind active */}
               {isActive && (
                 <div
                   className="absolute -inset-6 blur-[60px] opacity-25 pointer-events-none rounded-[32px]"
@@ -164,7 +160,6 @@ const ClientsSection = () => {
                 />
               )}
 
-              {/* Card */}
               <div
                 className="relative w-full h-full overflow-hidden transition-all duration-500"
                 style={{
@@ -176,7 +171,6 @@ const ClientsSection = () => {
                     : "0 10px 30px -10px rgba(0,0,0,0.5)",
                 }}
               >
-                {/* Image */}
                 {brand.image ? (
                   <img
                     src={brand.image}
@@ -197,13 +191,11 @@ const ClientsSection = () => {
                   </div>
                 )}
 
-                {/* Overlay */}
                 <div
                   className="absolute inset-0 bg-background transition-opacity duration-500 pointer-events-none"
                   style={{ opacity: overlayOpacity }}
                 />
 
-                {/* Bottom gradient */}
                 <div
                   className="absolute bottom-0 left-0 right-0 pointer-events-none"
                   style={{
@@ -212,7 +204,6 @@ const ClientsSection = () => {
                   }}
                 />
 
-                {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 z-10">
                   <h3
                     className={`font-display text-pure-white leading-none transition-all duration-500 ${
@@ -224,7 +215,7 @@ const ClientsSection = () => {
                     {brand.name}
                   </h3>
                   <span className="meta-label text-muted-foreground mt-1 block text-[9px]">
-                    [{brand.niche}]
+                    {brand.niche}
                   </span>
 
                   <div
@@ -232,7 +223,7 @@ const ClientsSection = () => {
                       isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
                     }`}
                   >
-                    <span className="font-mono text-[9px] text-primary tracking-wider">
+                    <span className="font-body text-[9px] text-primary tracking-wider">
                       {brand.stat}
                     </span>
                   </div>
@@ -243,7 +234,7 @@ const ClientsSection = () => {
                     }`}
                   >
                     <span className="btn-brutal inline-block text-[9px] py-1.5 px-3">
-                      [ VIEW CASE STUDY → ]
+                      VIEW CASE STUDY →
                     </span>
                   </div>
                 </div>
@@ -253,7 +244,6 @@ const ClientsSection = () => {
         })}
       </div>
 
-      {/* Dot indicators */}
       <div className="flex justify-center gap-3 mt-8">
         {brands.map((_, i) => (
           <button

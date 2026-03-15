@@ -15,24 +15,22 @@ const LogoTicker = () => {
         inView ? "opacity-100" : "opacity-0"
       }`}
     >
-      <p className="meta-label text-primary text-center mb-4">[BRANDS WE'VE WORKED WITH AND WRITTEN FOR]</p>
+      <p className="meta-label text-primary text-center mb-4">BRANDS WE'VE WORKED WITH AND WRITTEN FOR</p>
 
-      {/* Row 1 — scrolls left */}
       <div className="overflow-hidden whitespace-nowrap mb-3">
         <div className="inline-flex animate-ticker-left">
           {[...Array(4)].map((_, i) => (
-            <span key={i} className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase mx-4">
+            <span key={i} className="font-body text-xs tracking-[0.2em] text-foreground/70 uppercase mx-4">
               {row1} ·{" "}
             </span>
           ))}
         </div>
       </div>
 
-      {/* Row 2 — scrolls right */}
       <div className="overflow-hidden whitespace-nowrap">
         <div className="inline-flex animate-ticker-right">
           {[...Array(4)].map((_, i) => (
-            <span key={i} className="font-mono text-xs tracking-[0.2em] text-foreground/70 uppercase mx-4">
+            <span key={i} className="font-body text-xs tracking-[0.2em] text-foreground/70 uppercase mx-4">
               {row2} ·{" "}
             </span>
           ))}

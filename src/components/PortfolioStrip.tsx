@@ -51,14 +51,13 @@ const PortfolioStrip = () => {
   return (
     <section id="portfolio" className="section-border overflow-hidden" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 pt-20 md:pt-32 pb-8 text-center">
-        <span className="meta-label text-primary">[07] PORTFOLIO</span>
+        <span className="meta-label text-primary">PORTFOLIO</span>
         <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white mt-4 mb-2">
           THE HEROES.
         </h2>
-        <p className="meta-label mb-12">[TOP-FOLD EMAIL DESIGNS — CLICK TO EXPLORE]</p>
+        <p className="meta-label mb-12">TOP-FOLD EMAIL DESIGNS — CLICK TO EXPLORE</p>
       </div>
 
-      {/* Fanned card showcase */}
       <div
         className={`relative flex items-center justify-center h-[500px] md:h-[700px] mb-8 transition-opacity duration-700 ${
           inView ? "opacity-100" : "opacity-0"
@@ -92,7 +91,6 @@ const PortfolioStrip = () => {
         })}
       </div>
 
-      {/* Navigation dots */}
       <div className="flex items-center justify-center gap-2 pb-6">
         {emailHeroes.map((_, i) => (
           <button
@@ -107,10 +105,9 @@ const PortfolioStrip = () => {
         ))}
       </div>
 
-      {/* CTA */}
       <div className="flex justify-center pb-20 md:pb-32">
         <a href="/portfolio" className="btn-brutal">
-          [ VIEW FULL 30-DAY LOGIC ]
+          VIEW FULL 30-DAY LOGIC
         </a>
       </div>
     </section>

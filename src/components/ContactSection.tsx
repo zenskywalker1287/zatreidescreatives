@@ -16,7 +16,7 @@ const ContactSection = () => {
     <section id="contact" className="section-border" ref={ref}>
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
         <div className="max-w-2xl">
-          <span className="meta-label text-primary">[08] CONTACT</span>
+          <span className="meta-label text-primary">CONTACT</span>
           <h2
             className={`font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] text-pure-white mt-4 mb-2 transition-all duration-700 ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -37,7 +37,7 @@ const ContactSection = () => {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-foreground/20 py-3 font-mono text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
+                  className="w-full bg-transparent border-b border-foreground/20 py-3 font-body text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
@@ -47,7 +47,7 @@ const ContactSection = () => {
                   required
                   value={form.brand}
                   onChange={(e) => setForm({ ...form, brand: e.target.value })}
-                  className="w-full bg-transparent border-b border-foreground/20 py-3 font-mono text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
+                  className="w-full bg-transparent border-b border-foreground/20 py-3 font-body text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
@@ -57,24 +57,24 @@ const ContactSection = () => {
                   rows={4}
                   value={form.need}
                   onChange={(e) => setForm({ ...form, need: e.target.value })}
-                  className="w-full bg-transparent border-b border-foreground/20 py-3 font-mono text-sm text-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+                  className="w-full bg-transparent border-b border-foreground/20 py-3 font-body text-sm text-foreground focus:outline-none focus:border-primary transition-colors resize-none"
                 />
               </div>
               <button type="submit" className="btn-brutal">
-                [ SUBMIT INQUIRY ]
+                SUBMIT INQUIRY
               </button>
             </form>
           ) : (
             <div className="brutal-card border-primary/30">
-              <span className="text-primary font-mono text-sm">TRANSMISSION RECEIVED.</span>
-              <p className="font-mono text-xs text-muted-foreground mt-2">
+              <span className="text-primary font-body text-sm">TRANSMISSION RECEIVED.</span>
+              <p className="font-body text-xs text-muted-foreground mt-2">
                 We'll review your inquiry and respond within 48 hours.
               </p>
             </div>
           )}
 
           <p className="meta-label mt-12 text-muted-foreground/50">
-            [ NOT ACCEPTING EVERYONE — HIGH-STATUS INTEREST ONLY ]
+            NOT ACCEPTING EVERYONE — HIGH-STATUS INTEREST ONLY
           </p>
         </div>
       </div>

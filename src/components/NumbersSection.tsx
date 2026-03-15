@@ -13,11 +13,6 @@ const tickerItems = [
   "14 DAYS FROM BRIEF TO LIVE",
 ];
 
-const tickerContent = tickerItems
-  .map((t) => `${t} `)
-  .join(" → ");
-
-/* ── PANELS ── */
 const panels = [
   { number: "$2M+", label: "REVENUE GENERATED ACROSS DTC BRANDS" },
   { number: "1,200+", label: "CREATIVES SHIPPED" },
@@ -25,12 +20,11 @@ const panels = [
   { number: "14 DAYS", label: "BRIEF TO LIVE. EVERY TIME." },
 ];
 
-/* ── MARQUEE ── */
 const Marquee = () => (
   <div className="relative w-full border-y border-primary/40 overflow-hidden py-3" style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.05)' }}>
     <div className="flex whitespace-nowrap animate-[marquee_40s_linear_infinite]">
       {[0, 1, 2].map((i) => (
-        <span key={i} className="font-mono text-xs md:text-sm text-primary tracking-wide mr-0" style={{ textShadow: '0 0 20px hsl(var(--primary) / 0.5)' }}>
+        <span key={i} className="font-body text-xs md:text-sm text-primary tracking-wide mr-0" style={{ textShadow: '0 0 20px hsl(var(--primary) / 0.5)' }}>
           {tickerItems.map((item, j) => (
             <span key={j}>
               {item}
@@ -43,7 +37,6 @@ const Marquee = () => (
   </div>
 );
 
-/* ── GIANT NUMBERS SCROLL ── */
 const GiantNumbers = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
@@ -72,7 +65,6 @@ const GiantNumbers = () => {
     }
   }, []);
 
-  // Auto-scroll using refs only — no state updates
   useEffect(() => {
     const speed = -0.4;
     const tick = () => {
@@ -101,7 +93,6 @@ const GiantNumbers = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       (e.target as HTMLElement).setPointerCapture(e.pointerId);
       if (showHint) setShowHint(false);
-      // Remove transition during drag
       if (stripRef.current) stripRef.current.style.transition = 'none';
     },
     [showHint]
@@ -148,7 +139,6 @@ const GiantNumbers = () => {
       scrollXRef.current = clampScroll(scrollXRef.current - e.deltaY * 2);
       applyTransform(scrollXRef.current);
       if (showHint) setShowHint(false);
-      // Resume auto-scroll after a delay
       setTimeout(() => { isUserInteracting.current = false; }, 2000);
     },
     [clampScroll, showHint, applyTransform]
@@ -184,26 +174,24 @@ const GiantNumbers = () => {
             </span>
 
             <span className="meta-label text-foreground/60 mt-4 max-w-md text-center relative z-10 px-4">
-              [{panel.label}]
+              {panel.label}
             </span>
-
           </div>
         ))}
       </div>
 
       {/* Scroll hint */}
       <div
-        className={`absolute bottom-6 right-6 font-mono text-xs text-muted-foreground transition-opacity duration-700 ${
+        className={`absolute bottom-6 right-6 font-body text-xs text-muted-foreground transition-opacity duration-700 ${
           showHint ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        [DRAG →]
+        DRAG →
       </div>
     </div>
   );
 };
 
-/* ── MAIN SECTION ── */
 const NumbersSection = () => {
   const closingRef = useRef<HTMLDivElement>(null);
   const closingInView = useInView(closingRef, 0.5);
@@ -212,18 +200,15 @@ const NumbersSection = () => {
     <section id="comparison" className="section-border bg-background">
       <div className="pt-12 pb-0">
         <div className="px-6 md:px-12 lg:px-20 mb-8">
-          <span className="meta-label text-primary">[02] THE NUMBERS</span>
+          <span className="meta-label text-primary">THE NUMBERS</span>
         </div>
 
-        {/* Layer 1 — Marquee */}
         <Marquee />
 
-        {/* Layer 2 — Giant Numbers */}
         <div className="py-8 md:py-12">
           <GiantNumbers />
         </div>
 
-        {/* Layer 3 — Closing Line */}
         <div
           ref={closingRef}
           className={`border-t border-foreground/15 px-6 md:px-12 lg:px-20 py-12 flex justify-center transition-all duration-1000 ${
