@@ -292,10 +292,12 @@ const HeroSection = () => {
               className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] text-primary border border-primary inline-block text-center"
               style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "hsl(10 75% 44% / 0.1)";
+                e.currentTarget.style.background = "hsl(4 80% 48% / 0.1)";
+                e.currentTarget.style.boxShadow = "0 0 30px hsl(4 80% 48% / 0.15)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               SEE THE WORK
