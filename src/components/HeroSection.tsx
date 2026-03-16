@@ -316,15 +316,17 @@ const HeroSection = () => {
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
-                className="border border-foreground/20 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
+                className="border-2 border-foreground/15 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
                 style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "hsl(var(--primary))";
-                  e.currentTarget.style.backgroundColor = "hsl(10 75% 44% / 0.1)";
+                  e.currentTarget.style.backgroundColor = "hsl(4 80% 48% / 0.1)";
+                  e.currentTarget.style.boxShadow = "0 0 20px hsl(4 80% 48% / 0.15)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.2)";
+                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
                   e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 {pill}

@@ -18,7 +18,7 @@ import ContactSection from "../components/ContactSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(0 0% 2%) 50%, hsl(0 0% 3%) 100%)" }}>
       {/* Film grain overlay */}
       <div className="film-grain" />
       <CursorDot />
