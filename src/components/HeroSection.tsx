@@ -277,7 +277,7 @@ const HeroSection = () => {
               className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] bg-primary text-primary-foreground inline-block text-center"
               style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = "0 0 30px hsl(10 75% 44% / 0.4)";
+                e.currentTarget.style.boxShadow = "0 0 40px hsl(4 80% 48% / 0.5), 0 0 80px hsl(4 80% 48% / 0.2)";
                 e.currentTarget.style.transform = "translateY(-2px)";
               }}
               onMouseLeave={(e) => {
