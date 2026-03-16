@@ -172,14 +172,14 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative flex flex-col overflow-hidden min-h-screen">
       {/* Layer 1 — Living wall marquee */}
-      <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-1.5 opacity-40">
+      <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-1.5 opacity-25">
         <MarqueeRow images={row1} direction="right" speed={25} />
         <MarqueeRow images={row2} direction="left" speed={18} />
         <MarqueeRow images={row3} direction="right" speed={22} />
       </div>
 
-      {/* Overlay on marquee */}
-      <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.72)" }} />
+      {/* Dark concrete overlay */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.65) 50%, rgba(8,8,8,0.9) 100%)" }} />
 
       {/* Feather trail */}
       {[0, 1, 2, 3].map((i) => (
@@ -223,19 +223,19 @@ const HeroSection = () => {
 
           {/* Headline with scramble */}
           <h1 className="leading-[0.9] tracking-[-0.02em] mb-2 relative">
-            {/* Glow */}
+            {/* Spray paint glow */}
             <div
-              className="absolute -inset-20 blur-[180px] opacity-20 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)" }}
+              className="absolute -inset-20 blur-[200px] opacity-30 pointer-events-none"
+              style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 50%)" }}
             />
 
-            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,160px)] text-foreground block" style={{ textShadow: "0 0 80px hsl(var(--primary) / 0.15)" }}>
               {line1}
             </span>
-            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,160px)] text-foreground block" style={{ textShadow: "0 0 80px hsl(var(--primary) / 0.15)" }}>
               {line2}
             </span>
-            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-primary block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,160px)] text-primary block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.5), 0 0 100px hsl(var(--primary) / 0.3)" }}>
               {line3}
             </span>
           </h1>
@@ -277,7 +277,7 @@ const HeroSection = () => {
               className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] bg-primary text-primary-foreground inline-block text-center"
               style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = "0 0 30px hsl(10 75% 44% / 0.4)";
+                e.currentTarget.style.boxShadow = "0 0 40px hsl(4 80% 48% / 0.5), 0 0 80px hsl(4 80% 48% / 0.2)";
                 e.currentTarget.style.transform = "translateY(-2px)";
               }}
               onMouseLeave={(e) => {
@@ -292,10 +292,12 @@ const HeroSection = () => {
               className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] text-primary border border-primary inline-block text-center"
               style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "hsl(10 75% 44% / 0.1)";
+                e.currentTarget.style.background = "hsl(4 80% 48% / 0.1)";
+                e.currentTarget.style.boxShadow = "0 0 30px hsl(4 80% 48% / 0.15)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               SEE THE WORK
@@ -314,15 +316,17 @@ const HeroSection = () => {
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
-                className="border border-foreground/20 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
+                className="border-2 border-foreground/15 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
                 style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "hsl(var(--primary))";
-                  e.currentTarget.style.backgroundColor = "hsl(10 75% 44% / 0.1)";
+                  e.currentTarget.style.backgroundColor = "hsl(4 80% 48% / 0.1)";
+                  e.currentTarget.style.boxShadow = "0 0 20px hsl(4 80% 48% / 0.15)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.2)";
+                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
                   e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 {pill}

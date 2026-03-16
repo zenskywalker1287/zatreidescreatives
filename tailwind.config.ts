@@ -14,9 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Bebas Neue"', 'sans-serif'],
+        display: ['"Anton"', '"Bebas Neue"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
         serif: ['"Playfair Display"', 'serif'],
+        body: ['"Space Grotesk"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

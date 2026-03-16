@@ -22,10 +22,10 @@ const Nav = () => {
     <nav
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        background: scrolled ? "rgba(10,10,10,0.9)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(196,57,29,0.12)" : "1px solid transparent",
+        background: scrolled ? "rgba(8,8,8,0.92)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: scrolled ? "2px solid rgba(200,50,30,0.2)" : "2px solid transparent",
         transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
