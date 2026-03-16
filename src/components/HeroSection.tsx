@@ -223,19 +223,19 @@ const HeroSection = () => {
 
           {/* Headline with scramble */}
           <h1 className="leading-[0.9] tracking-[-0.02em] mb-2 relative">
-            {/* Glow */}
+            {/* Spray paint glow */}
             <div
-              className="absolute -inset-20 blur-[180px] opacity-20 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 60%)" }}
+              className="absolute -inset-20 blur-[200px] opacity-30 pointer-events-none"
+              style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 50%)" }}
             />
 
-            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,160px)] text-foreground block" style={{ textShadow: "0 0 80px hsl(var(--primary) / 0.15)" }}>
               {line1}
             </span>
-            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-foreground block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,160px)] text-foreground block" style={{ textShadow: "0 0 80px hsl(var(--primary) / 0.15)" }}>
               {line2}
             </span>
-            <span className="relative z-10 font-display text-[clamp(72px,12vw,140px)] text-primary block" style={{ textShadow: "0 0 60px hsl(var(--primary) / 0.2)" }}>
+            <span className="relative z-10 font-display text-[clamp(72px,12vw,160px)] text-primary block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.5), 0 0 100px hsl(var(--primary) / 0.3)" }}>
               {line3}
             </span>
           </h1>
