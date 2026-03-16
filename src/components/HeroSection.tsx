@@ -172,14 +172,14 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative flex flex-col overflow-hidden min-h-screen">
       {/* Layer 1 — Living wall marquee */}
-      <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-1.5 opacity-40">
+      <div className="absolute inset-0 overflow-hidden flex flex-col justify-center gap-1.5 opacity-25">
         <MarqueeRow images={row1} direction="right" speed={25} />
         <MarqueeRow images={row2} direction="left" speed={18} />
         <MarqueeRow images={row3} direction="right" speed={22} />
       </div>
 
-      {/* Overlay on marquee */}
-      <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.72)" }} />
+      {/* Dark concrete overlay */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.65) 50%, rgba(8,8,8,0.9) 100%)" }} />
 
       {/* Feather trail */}
       {[0, 1, 2, 3].map((i) => (
