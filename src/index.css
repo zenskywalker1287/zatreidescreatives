@@ -170,14 +170,16 @@
     background: hsl(var(--surface));
   }
 
-  /* CTA button style */
+  /* CTA button style — spray paint edge */
   .btn-brutal {
-    @apply border border-foreground/60 px-8 py-3 text-xs uppercase tracking-[0.3em] font-mono text-foreground;
+    @apply border-2 border-foreground/40 px-8 py-3 text-xs uppercase tracking-[0.3em] font-mono text-foreground;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
   }
   .btn-brutal:hover {
     @apply border-primary text-primary;
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.15);
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.1);
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.6);
   }
 
   /* Red tinted overlay */
