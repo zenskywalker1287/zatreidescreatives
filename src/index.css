@@ -95,7 +95,8 @@
   }
 
   h1, h2, h3, .font-display {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Anton', 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
   }
 
   .font-serif-thin {
