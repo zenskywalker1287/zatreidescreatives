@@ -164,10 +164,11 @@
     @apply text-[16px] uppercase tracking-[0.15em] font-display;
   }
 
-  /* Brutalist card */
+  /* Brutalist card — concrete slab */
   .brutal-card {
-    @apply border border-foreground/15 p-6;
+    @apply border-2 border-foreground/10 p-6;
     background: hsl(var(--surface));
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.3);
   }
 
   /* CTA button style — spray paint edge */
