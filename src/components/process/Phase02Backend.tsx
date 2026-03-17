@@ -47,9 +47,9 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
             );
           })}
         </div>
-        <a href="/portfolio" className="inline-block font-display text-sm md:text-base bg-pure-white text-background px-8 py-3 transition-all duration-300 hover:bg-background hover:text-pure-white hover:border-primary border border-transparent hover:border mb-3">
+        <Link to="/portfolio" className="inline-block font-display text-sm md:text-base bg-pure-white text-background px-8 py-3 transition-all duration-300 hover:bg-background hover:text-pure-white hover:border-primary border border-transparent hover:border mb-3">
           SEE THE EMAIL PORTFOLIO →
-        </a>
+        </Link>
       </div>
       <div className="relative z-10 border-t border-primary/30 px-6 md:px-10 py-3 flex justify-between items-center flex-shrink-0">
         <span className="meta-label text-muted-foreground/50 whitespace-pre-line">{"PHASE 02 COMPLETE —\nRETENTION SYSTEM LIVE.\nRUNNING 24/7. ZERO INPUT FROM YOU."}</span>

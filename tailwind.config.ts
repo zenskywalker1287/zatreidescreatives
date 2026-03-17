@@ -27,6 +27,7 @@ export default {
         foreground: "hsl(var(--foreground))",
         cream: "hsl(var(--cream))",
         "electric-red": "hsl(var(--electric-red))",
+        "blood-orange": "hsl(var(--blood-orange))",
         "pure-white": "hsl(var(--pure-white))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

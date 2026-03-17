@@ -119,9 +119,9 @@ const PortfolioStrip = () => {
       </div>
 
       <div className="flex justify-center pb-20 md:pb-32">
-        <a href="/portfolio" className="btn-brutal">
+        <Link to="/portfolio" className="btn-brutal">
           VIEW FULL 30-DAY LOGIC
-        </a>
+        </Link>
       </div>
     </section>
   );

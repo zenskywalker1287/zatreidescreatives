@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import CarouselStrip from "./CarouselStrip";
+import TypingAnimation from "./TypingAnimation";
 
 const heroCards = [
   { id: 101, image: "/images/slice1.png" },
@@ -29,7 +30,6 @@ const heroCards = [
   { id: 125, image: "/images/slice45.png" },
 ];
 
-// Marquee images split into 3 rows
 const row1 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 1}.png`);
 const row2 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 15}.png`);
 const row3 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 29}.png`);
@@ -105,6 +105,8 @@ const MarqueeRow = ({
     </div>
   );
 };
+
+const CALENDLY_URL = "https://calendly.com/zen-zatreides/30min";
 
 const HeroSection = () => {
   const [showContent, setShowContent] = useState(false);
@@ -212,9 +214,9 @@ const HeroSection = () => {
         <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           {/* Small label */}
           <span
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary mb-8"
+            className="font-mono text-[11px] uppercase tracking-[0.3em] text-blood-orange mb-8"
             style={{
-              opacity: showContent ? 0.5 : 0,
+              opacity: showContent ? 0.7 : 0,
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
@@ -250,17 +252,21 @@ const HeroSection = () => {
             }}
           />
 
-          {/* Subheadline */}
+          {/* Subheadline — blood orange, more readable */}
           <div
-            className="font-body text-foreground/70 text-sm md:text-base max-w-xl mb-8 leading-relaxed"
+            className="font-body text-blood-orange text-sm md:text-base max-w-xl mb-8 leading-relaxed"
             style={{
               opacity: showSub ? 1 : 0,
               transform: showSub ? "translateY(0)" : "translateY(20px)",
               transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
-            <p className="mb-2">$2M+ in revenue generated. 1,200+ creatives shipped. Worked inside 8-figure agencies.</p>
-            <p>This is how we demystify 'the creative' and actually drive conversions.</p>
+            <TypingAnimation
+              text="$2M+ in revenue generated. 1,200+ creatives shipped. Worked inside 8-figure agencies. This is how we demystify 'the creative' and actually drive conversions."
+              duration={20}
+              delay={1800}
+              className="text-blood-orange"
+            />
           </div>
 
           {/* CTAs */}
@@ -273,7 +279,9 @@ const HeroSection = () => {
             }}
           >
             <a
-              href="#contact"
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] bg-primary text-primary-foreground inline-block text-center"
               style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={(e) => {
@@ -312,16 +320,16 @@ const HeroSection = () => {
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
             }}
           >
-            <span className="meta-label text-primary mr-1">WHAT WE DO</span>
+            <span className="meta-label text-blood-orange mr-1">WHAT WE DO</span>
             {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
               <span
                 key={pill}
                 className="border-2 border-foreground/15 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
                 style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--primary))";
-                  e.currentTarget.style.backgroundColor = "hsl(4 80% 48% / 0.1)";
-                  e.currentTarget.style.boxShadow = "0 0 20px hsl(4 80% 48% / 0.15)";
+                  e.currentTarget.style.borderColor = "hsl(var(--blood-orange))";
+                  e.currentTarget.style.backgroundColor = "hsl(18 90% 52% / 0.1)";
+                  e.currentTarget.style.boxShadow = "0 0 20px hsl(18 90% 52% / 0.15)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
@@ -349,7 +357,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* CAROUSEL — desktop only (mobile version is above) */}
+      {/* CAROUSEL — desktop only */}
       <div className="relative z-10 hidden md:block">
         <CarouselStrip cards={heroCards} direction="right" />
       </div>

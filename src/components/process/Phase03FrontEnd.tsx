@@ -42,7 +42,7 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
       </div>
       <div className="border-t border-foreground/15 px-6 md:px-10 py-3 flex justify-between items-center flex-shrink-0">
         <span className="meta-label text-muted-foreground/50 whitespace-pre-line">{"PHASE 03 COMPLETE —\nYOU NOW HAVE A CREATIVE DIRECTOR.\nWITHOUT THE FULL-TIME SALARY."}</span>
-        <a href="#campaign" className="meta-label text-primary hover:text-pure-white transition-colors">THE WORK →</a>
+        <a href="#pipeline" className="meta-label text-primary hover:text-pure-white transition-colors">THE WORK →</a>
       </div>
     </div>
   );
