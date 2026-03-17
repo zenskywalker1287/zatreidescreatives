@@ -1,5 +1,4 @@
 import Nav from "../components/Nav";
-import CursorDot from "../components/CursorDot";
 import HeroSection from "../components/HeroSection";
 import NumbersSection from "../components/NumbersSection";
 import LogoTicker from "../components/LogoTicker";
@@ -21,7 +20,6 @@ const Index = () => {
     <div className="min-h-screen bg-background relative" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(0 0% 2%) 50%, hsl(0 0% 3%) 100%)" }}>
       {/* Film grain overlay */}
       <div className="film-grain" />
-      <CursorDot />
 
       <Nav />
       <HeroSection />
