@@ -197,7 +197,7 @@ const MadcowSection = () => {
           <p className="meta-label mt-6 mb-8">
             WE WRITE TO ONE PERSON AT A TIME — HERE'S WHAT THAT LOOKS LIKE
           </p>
-          <p className="text-foreground text-sm md:text-base leading-relaxed max-w-[600px] mx-auto font-body">
+          <p className="text-foreground text-sm md:text-base leading-relaxed max-w-[600px] mx-auto font-body text-cream">
             Before we write a single word, we build a psychological profile of
             every type of person buying your product. Their fears. Their language.
             Their objections. Their desires. Then every email, ad, and piece of
