@@ -27,7 +27,7 @@ const Phase02Backend = ({ isActive }: Phase02Props) => {
         <h2 className={`font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-pure-white mb-4 transition-all duration-700 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           THE 99% WHO DON'T BUY TODAY ARE STILL WORTH A FORTUNE.
         </h2>
-        <p className={`font-serif-thin italic text-sm md:text-base text-foreground/60 mb-8 transition-all duration-700 delay-200 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <p className={`font-serif-thin italic text-sm md:text-base text-blood-orange mb-8 transition-all duration-700 delay-200 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           They found your brand. They looked. They left. Most brands let them walk forever. We built the system that follows them home — and keeps them coming back.
         </p>
         <div className={`w-full h-[1px] bg-foreground/15 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
