@@ -191,7 +191,7 @@ const MadcowSection = () => {
           <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white">
             MOST BRANDS TALK TO EVERYONE.
           </h2>
-          <p className="font-serif-thin text-[clamp(1.2rem,3vw,2.4rem)] text-foreground italic mt-2">
+          <p className="font-serif-thin text-[clamp(1.2rem,3vw,2.4rem)] text-blood-orange italic mt-2">
             Which means they talk to no one.
           </p>
           <p className="meta-label mt-6 mb-8">
