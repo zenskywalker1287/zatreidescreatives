@@ -47,9 +47,8 @@ const FeaturedAlongside = () => {
         </ScrollReveal>
 
         <ScrollReveal variant="fade-up" delay={300}>
-          <p className="font-serif-thin italic text-foreground/60 text-base md:text-lg mb-6 leading-relaxed max-w-lg mx-auto">
-            It's the industry's most respected email curation platform.
-            Your work only gets on there if it's actually good.
+          <p className="font-serif-thin italic text-blood-orange text-base md:text-lg mb-6 leading-relaxed max-w-lg mx-auto">
+            It's the industry's most respected email curation platform. Your work only gets on there if it's actually good.
           </p>
         </ScrollReveal>
 

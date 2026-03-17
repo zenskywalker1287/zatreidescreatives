@@ -87,12 +87,8 @@ const CampaignSection = () => {
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={200}>
-            <p className="font-serif-thin text-[clamp(1rem,2vw,1.4rem)] text-foreground italic mt-6 leading-relaxed">
-              Every deliverable connects.
-              <br />
-              Every format feeds the next.
-              <br />
-              Nothing exists in isolation.
+            <p className="font-serif-thin text-[clamp(1rem,2vw,1.4rem)] text-blood-orange italic mt-6 leading-relaxed">
+              Every deliverable connects. Every format feeds the next. Nothing exists in isolation.
             </p>
           </ScrollReveal>
 

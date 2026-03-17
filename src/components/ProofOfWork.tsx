@@ -38,7 +38,7 @@ const ProofOfWork = () => {
           </h2>
         </ScrollReveal>
         <ScrollReveal variant="fade-up" delay={200}>
-          <p className="font-serif-thin italic text-foreground/70 text-lg max-w-xl mx-auto mb-8">
+          <p className="font-serif-thin italic text-blood-orange text-lg max-w-xl mx-auto mb-8">
             Real dashboards. Real brands. Real results.
           </p>
         </ScrollReveal>

@@ -106,7 +106,7 @@ const SocialProofCarousel = () => {
           </h2>
         </ScrollReveal>
         <ScrollReveal variant="fade-up" delay={200}>
-          <p className="font-serif-thin italic text-foreground/70 text-lg max-w-xl mx-auto">
+          <p className="font-serif-thin italic text-blood-orange text-lg max-w-xl mx-auto">
             Here's what the people we worked with had to say.
           </p>
         </ScrollReveal>

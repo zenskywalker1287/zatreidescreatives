@@ -191,13 +191,13 @@ const MadcowSection = () => {
           <h2 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] text-pure-white">
             MOST BRANDS TALK TO EVERYONE.
           </h2>
-          <p className="font-serif-thin text-[clamp(1.2rem,3vw,2.4rem)] text-foreground italic mt-2">
+          <p className="font-serif-thin text-[clamp(1.2rem,3vw,2.4rem)] text-blood-orange italic mt-2">
             Which means they talk to no one.
           </p>
           <p className="meta-label mt-6 mb-8">
             WE WRITE TO ONE PERSON AT A TIME — HERE'S WHAT THAT LOOKS LIKE
           </p>
-          <p className="text-foreground text-sm md:text-base leading-relaxed max-w-[600px] mx-auto font-body">
+          <p className="text-foreground text-sm md:text-base leading-relaxed max-w-[600px] mx-auto font-body text-cream">
             Before we write a single word, we build a psychological profile of
             every type of person buying your product. Their fears. Their language.
             Their objections. Their desires. Then every email, ad, and piece of
@@ -361,10 +361,8 @@ const MadcowSection = () => {
                 3 PERSONAS MINIMUM · 100+ USPS PER PERSONA · ZERO GENERIC COPY
               </span>
             </div>
-            <p className="font-serif-thin text-foreground italic text-base md:text-lg leading-relaxed max-w-sm text-right">
-              "When you write to everyone, you move no one.
-              <br />
-              When you write to one person, you move thousands."
+            <p className="font-serif-thin text-blood-orange italic text-base md:text-lg leading-relaxed max-w-sm text-right">
+              "When you write to everyone, you move no one. When you write to one person, you move thousands."
             </p>
           </div>
         </div>

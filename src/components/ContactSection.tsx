@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import { useInView } from "../hooks/useInView";
 import ScrollReveal from "./ScrollReveal";
+import TypingAnimation from "./TypingAnimation";
+
+const CALENDLY_URL = "https://calendly.com/zen-zatreides/30min";
 
 const ContactSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,13 +25,39 @@ const ContactSection = () => {
           </ScrollReveal>
           <ScrollReveal variant="blur" delay={100}>
             <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] text-pure-white mt-4 mb-2">
-              YOU'VE SEEN<br />THE ENGINE.
+              YOU'VE SEEN THE ENGINE.
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" delay={200}>
-            <p className="font-serif-thin text-xl md:text-2xl text-foreground italic mb-12">
+            <p className="font-serif-thin text-xl md:text-2xl text-blood-orange italic mb-8">
               Now let's build yours.
             </p>
+          </ScrollReveal>
+
+          {/* Calendly CTA */}
+          <ScrollReveal variant="fade-up" delay={250}>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-10 py-4 font-display text-base uppercase tracking-[0.15em] bg-primary text-primary-foreground mb-10"
+              style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 40px hsl(4 80% 48% / 0.5), 0 0 80px hsl(4 80% 48% / 0.2)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              BOOK A 30-MIN CALL →
+            </a>
+          </ScrollReveal>
+
+          <ScrollReveal variant="fade-up" delay={280}>
+            <div className="w-full h-px bg-foreground/10 mb-8" />
+            <p className="meta-label text-muted-foreground mb-6">OR SEND AN INQUIRY BELOW</p>
           </ScrollReveal>
 
           {!submitted ? (
@@ -84,7 +113,7 @@ const ContactSection = () => {
           )}
 
           <ScrollReveal variant="fade-up" delay={500}>
-            <p className="meta-label mt-12 text-muted-foreground/50">
+            <p className="meta-label mt-12 text-blood-orange/60">
               NOT ACCEPTING EVERYONE — HIGH-STATUS INTEREST ONLY
             </p>
           </ScrollReveal>

@@ -191,8 +191,8 @@ const PipelineSection = () => {
           </h2>
         </ScrollReveal>
         <ScrollReveal variant="fade-up" delay={200}>
-          <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mb-10">
-            "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
+          <p className="font-serif-thin text-base md:text-lg text-blood-orange italic max-w-2xl mb-10">
+            "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel."
           </p>
         </ScrollReveal>
 
@@ -311,7 +311,7 @@ const PipelineSection = () => {
             <h3 className="font-display text-[clamp(1.5rem,4vw,3.5rem)] leading-[0.95] text-pure-white mb-4">
               ONE USP. FOUR FORMATS. WE EXTRACT 100+ PER BRAND.
             </h3>
-            <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mx-auto mb-6">
+            <p className="font-serif-thin text-base md:text-lg text-blood-orange italic max-w-2xl mx-auto mb-6">
               "That's 400+ pieces of content. All rooted in your brand's real customer psychology. None of it templated. None of it guessed."
             </p>
             <p className="font-body text-[10px] md:text-xs tracking-[0.15em] text-muted-foreground uppercase">

@@ -17,7 +17,7 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
         <h2 className={`font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-pure-white text-center mb-4 transition-all duration-700 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           THE IN-HOUSE CREATIVE DIRECTOR YOU NEVER HAD.
         </h2>
-        <p className={`font-serif-thin italic text-sm md:text-base text-foreground/60 text-center mb-6 transition-all duration-700 delay-200 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <p className={`font-serif-thin italic text-sm md:text-base text-blood-orange text-center mb-6 transition-all duration-700 delay-200 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           Not a freelancer you brief once and never hear from. Embedded. Opinionated. Accountable. Running your content strategy, briefing your team, owning your pillars — like a full-time creative director without the full-time price tag.
         </p>
         <div className={`w-24 h-[1px] bg-foreground/20 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />
@@ -42,7 +42,7 @@ const Phase03FrontEnd = ({ isActive }: Phase03Props) => {
       </div>
       <div className="border-t border-foreground/15 px-6 md:px-10 py-3 flex justify-between items-center flex-shrink-0">
         <span className="meta-label text-muted-foreground/50 whitespace-pre-line">{"PHASE 03 COMPLETE —\nYOU NOW HAVE A CREATIVE DIRECTOR.\nWITHOUT THE FULL-TIME SALARY."}</span>
-        <a href="#campaign" className="meta-label text-primary hover:text-pure-white transition-colors">THE WORK →</a>
+        <a href="#pipeline" className="meta-label text-primary hover:text-pure-white transition-colors">THE WORK →</a>
       </div>
     </div>
   );
