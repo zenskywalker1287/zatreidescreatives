@@ -191,8 +191,8 @@ const PipelineSection = () => {
           </h2>
         </ScrollReveal>
         <ScrollReveal variant="fade-up" delay={200}>
-          <p className="font-serif-thin text-base md:text-lg text-foreground/80 italic max-w-2xl mb-10">
-            "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel. This is what strategy looks like before a single brief gets written."
+          <p className="font-serif-thin text-base md:text-lg text-blood-orange italic max-w-2xl mb-10">
+            "Most agencies protect their process like it's classified. We'll show you ours right now. Type in a raw product description. Watch us pull 100+ angles, map them to real buyer psychology and turn them into creative that works across every channel."
           </p>
         </ScrollReveal>
 
