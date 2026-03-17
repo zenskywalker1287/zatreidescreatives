@@ -153,7 +153,8 @@ const ClientsSection = () => {
                   transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
                 onClick={() => {
-                  if (isActive) {
+                  if (isActive && brand.slug) {
+                    // Use SPA-friendly navigation
                     window.location.href = brand.slug;
                   } else {
                     setActive(i);

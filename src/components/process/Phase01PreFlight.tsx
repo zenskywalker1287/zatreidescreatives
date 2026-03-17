@@ -22,7 +22,7 @@ const Phase01PreFlight = ({ isActive }: Phase01Props) => {
         <h2 className={`font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.95] text-pure-white text-center mb-4 transition-all duration-700 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           WE BUILD THE BRAIN FIRST.
         </h2>
-        <p className={`font-serif-thin italic text-sm md:text-base text-foreground/60 text-center mb-6 transition-all duration-700 delay-200 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+        <p className={`font-serif-thin italic text-sm md:text-base text-blood-orange text-center mb-6 transition-all duration-700 delay-200 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           Most creatives open a doc and start typing. We open your reviews, your Reddit threads, your competitor ads. By the time we write a single word — we already know what makes your customer buy at 2am.
         </p>
         <div className={`w-24 h-[1px] bg-foreground/20 mb-8 transition-all duration-700 delay-300 ${isActive ? "scale-x-100" : "scale-x-0"}`} />

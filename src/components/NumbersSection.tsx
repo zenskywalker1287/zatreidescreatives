@@ -221,7 +221,7 @@ const NumbersSection = () => {
           }`}
           style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
         >
-          <p className="font-serif-thin italic text-foreground/70 text-lg md:text-2xl text-center max-w-3xl leading-relaxed">
+          <p className="font-serif-thin italic text-blood-orange text-lg md:text-2xl text-center max-w-3xl leading-relaxed">
             Every number on this page comes from a real Klaviyo dashboard.<br />
             Real brands. Real months.<br />
             Nothing projected. Nothing padded.

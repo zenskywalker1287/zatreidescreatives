@@ -96,8 +96,8 @@ const ProcessSection = () => {
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] text-pure-white mb-6">
             HOW WE TURN A BRAND INTO A MACHINE.
           </h2>
-          <p className="font-serif-thin italic text-sm md:text-base text-foreground/60 max-w-lg mx-auto">
-            Three phases. Every time. No shortcuts. No guesswork. This is how optimized creative actually gets built.
+          <p className="font-serif-thin italic text-sm md:text-base text-blood-orange max-w-lg mx-auto">
+            Three phases. Every time. No shortcuts. No guesswork.
           </p>
         </div>
       </ScrollReveal>

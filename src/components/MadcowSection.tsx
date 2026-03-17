@@ -361,10 +361,8 @@ const MadcowSection = () => {
                 3 PERSONAS MINIMUM · 100+ USPS PER PERSONA · ZERO GENERIC COPY
               </span>
             </div>
-            <p className="font-serif-thin text-foreground italic text-base md:text-lg leading-relaxed max-w-sm text-right">
-              "When you write to everyone, you move no one.
-              <br />
-              When you write to one person, you move thousands."
+            <p className="font-serif-thin text-blood-orange italic text-base md:text-lg leading-relaxed max-w-sm text-right">
+              "When you write to everyone, you move no one. When you write to one person, you move thousands."
             </p>
           </div>
         </div>
