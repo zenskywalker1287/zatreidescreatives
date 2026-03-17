@@ -114,9 +114,8 @@ const HeroSection = () => {
   const [showCTAs, setShowCTAs] = useState(false);
   const [showLine, setShowLine] = useState(false);
 
-  const line1 = useTextScramble("CREATIVE STRATEGIST", 200);
-  const line2 = useTextScramble("FOR 6, 7 & 8-FIGURE", 400);
-  const line3 = useTextScramble("DTC BRANDS.", 600);
+  const line1 = useTextScramble("IN-HOUSE CREATIVE STRATEGIST FOR", 200);
+  const line2 = useTextScramble("DTC BRANDS.", 400);
 
   useEffect(() => {
     setShowContent(true);
