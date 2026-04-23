@@ -35,7 +35,7 @@ const TouchpointsSection = () => {
       <div className="px-6 md:px-12 lg:px-20 py-20 md:py-32">
         <span className="meta-label text-primary">SCIENCE</span>
         <h2 className="font-display text-[clamp(2rem,5vw,5rem)] leading-[0.95] text-pure-white mt-4 mb-4">
-          WHY 30 TOUCHPOINTS<br />IS THE MINIMUM IN 2026.
+          WHY 30 TOUCHPOINTS <span className="block md:inline">IS THE MINIMUM IN 2026.</span>
         </h2>
         <p className="font-serif-thin text-lg text-muted-foreground italic mb-16">
           A psychology textbook designed by a film director.

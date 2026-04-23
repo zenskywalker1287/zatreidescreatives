@@ -26,7 +26,7 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
   const [hasEntered, setHasEntered] = useState(false);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 240;
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 220;
   const CARD_GAP = isMobile ? 10 : 24;
   const TOTAL_WIDTH = cards.length * (CARD_WIDTH + CARD_GAP);
   const AUTO_SPEED = direction === "left" ? -0.5 : 0.5;
@@ -122,9 +122,12 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
     rafRef.current = requestAnimationFrame(decay);
   }, [wrapScroll]);
 
+  // Only hijack wheel for clearly horizontal intent — otherwise let the page scroll vertically
   const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    setScrollX((prev) => wrapScroll(prev - e.deltaY * 1.5));
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      setScrollX((prev) => wrapScroll(prev - e.deltaX * 1.2));
+    }
   }, [wrapScroll]);
 
   const centerOffset = containerWidth / 2;
@@ -204,18 +207,16 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
                   backgroundColor: "#0a0a0a",
                   borderRadius: isMobile ? "20px" : "16px",
                   border: "1px solid hsl(var(--foreground) / 0.2)",
-                  aspectRatio: isMobile ? "9 / 16" : undefined,
+                  aspectRatio: "9 / 16",
                 }}
               >
                 <img
                   src={card.image}
                   alt={`Email creative ${card.id}`}
-                  className="w-full block"
+                  className="w-full h-full block"
                   style={{
-                    height: isMobile ? "100%" : "auto",
-                    objectFit: isMobile ? "cover" : undefined,
+                    objectFit: "cover",
                     objectPosition: "top center",
-                    maxHeight: isMobile ? undefined : "500px",
                   }}
                   loading="lazy"
                   draggable={false}
