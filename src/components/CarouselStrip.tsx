@@ -122,9 +122,12 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
     rafRef.current = requestAnimationFrame(decay);
   }, [wrapScroll]);
 
+  // Only hijack wheel for clearly horizontal intent — otherwise let the page scroll vertically
   const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    setScrollX((prev) => wrapScroll(prev - e.deltaY * 1.5));
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      setScrollX((prev) => wrapScroll(prev - e.deltaX * 1.2));
+    }
   }, [wrapScroll]);
 
   const centerOffset = containerWidth / 2;
