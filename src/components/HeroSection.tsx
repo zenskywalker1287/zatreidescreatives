@@ -204,7 +204,7 @@ const HeroSection = () => {
       ))}
 
       {/* CAROUSEL — shows first on mobile */}
-      <div className="relative z-10 md:hidden order-first pt-24 pb-4">
+      <div className="relative z-10 md:hidden order-first pt-20">
         <CarouselStrip cards={heroCards} direction="right" />
       </div>
 
