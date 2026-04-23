@@ -26,7 +26,7 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
   const [hasEntered, setHasEntered] = useState(false);
 
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 240;
+  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 220;
   const CARD_GAP = isMobile ? 10 : 24;
   const TOTAL_WIDTH = cards.length * (CARD_WIDTH + CARD_GAP);
   const AUTO_SPEED = direction === "left" ? -0.5 : 0.5;
