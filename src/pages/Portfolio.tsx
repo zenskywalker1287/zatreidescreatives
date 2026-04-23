@@ -82,8 +82,7 @@ const Portfolio = () => {
           THE WORK.
         </h1>
         <p className="font-serif-thin text-lg md:text-xl text-foreground italic mt-4 max-w-lg mx-auto">
-          1,200+ emails and creatives shipped<br />
-          across 6, 7 and 8-figure DTC brands.
+          1,200+ emails and creatives shipped across 6, 7 and 8-figure DTC brands.
         </p>
       </div>
 
