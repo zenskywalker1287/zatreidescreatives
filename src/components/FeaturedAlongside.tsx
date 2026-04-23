@@ -35,14 +35,13 @@ const FeaturedAlongside = () => {
 
         <ScrollReveal variant="blur" delay={100}>
           <h3 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-pure-white leading-[0.95] mb-6">
-            FEATURED ON<br />REALLY GOOD EMAILS.
+            FEATURED ON <span className="block md:inline">REALLY GOOD EMAILS.</span>
           </h3>
         </ScrollReveal>
 
         <ScrollReveal variant="fade-up" delay={200}>
           <span className="meta-label text-foreground/50 mb-6 block leading-relaxed">
-            ALONGSIDE NIKE · CHIPOTLE · GYMSHARK<br />
-            AND 10,000+ OF THE BEST EMAILS ON THE INTERNET
+            ALONGSIDE NIKE · CHIPOTLE · GYMSHARK <span className="block md:inline">AND 10,000+ OF THE BEST EMAILS ON THE INTERNET</span>
           </span>
         </ScrollReveal>
 
