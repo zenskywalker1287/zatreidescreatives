@@ -250,7 +250,7 @@ const HeroSection = () => {
 
           {/* Subheadline — blood orange, more readable */}
           <div
-            className="font-body text-blood-orange text-sm md:text-base max-w-xl mb-8 leading-relaxed"
+            className="font-body text-blood-orange text-base md:text-lg max-w-2xl mb-8 leading-relaxed"
             style={{
               opacity: showSub ? 1 : 0,
               transform: showSub ? "translateY(0)" : "translateY(20px)",
@@ -258,7 +258,7 @@ const HeroSection = () => {
             }}
           >
             <TypingAnimation
-              text="$2M+ in revenue generated. 1,200+ creatives shipped. Worked inside 8-figure agencies. This is how we demystify 'the creative' and actually drive conversions."
+              text="$2M+ generated. 1,200+ creatives shipped. Built inside 8-figure agencies — now driving conversions for DTC brands that actually want to scale."
               duration={20}
               delay={1800}
               className="text-blood-orange"
