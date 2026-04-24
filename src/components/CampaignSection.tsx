@@ -228,12 +228,8 @@ const CampaignSection = () => {
               3 LANES · 1 SYSTEM · ZERO GUESSWORK
             </span>
 
-            <p className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white text-center leading-[1.05]">
-              SAME ANGLES.
-              <br />
-              EVERY CHANNEL.
-              <br />
-              NOTHING WASTED.
+            <p className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white text-center leading-[1.1]">
+              SAME ANGLES. EVERY CHANNEL. NOTHING WASTED.
             </p>
 
             <a
