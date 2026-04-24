@@ -14,6 +14,13 @@ import healthmateWelcome from "@/assets/portfolio/healthmate-welcome.png";
 import refreshWhy from "@/assets/portfolio/refresh-why.png";
 import refreshWithout from "@/assets/portfolio/refresh-without.png";
 import minikatanaBf from "@/assets/portfolio/minikatana-bf.png";
+import sowell from "@/assets/portfolio/sowell.png";
+import battlehawk from "@/assets/portfolio/battlehawk.png";
+import buckedup from "@/assets/portfolio/buckedup.png";
+import petePedro from "@/assets/portfolio/pete-pedro.png";
+import saunabox from "@/assets/portfolio/saunabox.png";
+import suspicious from "@/assets/portfolio/suspicious.png";
+import twistedDough from "@/assets/portfolio/twisted-dough.png";
 
 type PortfolioItem = {
   id: number;
@@ -35,6 +42,13 @@ const items: PortfolioItem[] = [
   { id: 10, image: refreshWhy, brand: "REFRESH", tag: "BRAND STORY" },
   { id: 11, image: refreshWithout, brand: "REFRESH", tag: "US VS THEM" },
   { id: 12, image: minikatanaBf, brand: "MINI KATANA", tag: "BLACK FRIDAY" },
+  { id: 13, image: sowell, brand: "SOWELL", tag: "EDUCATION" },
+  { id: 14, image: battlehawk, brand: "BATTLEHAWK", tag: "BLACK FRIDAY" },
+  { id: 15, image: buckedup, brand: "BUCKED UP", tag: "PRODUCT LAUNCH" },
+  { id: 16, image: petePedro, brand: "PETE & PEDRO", tag: "MYTH BUSTING" },
+  { id: 17, image: saunabox, brand: "SAUNABOX", tag: "PROBLEM/SOLUTION" },
+  { id: 18, image: suspicious, brand: "SUSPICIOUS", tag: "WELCOME" },
+  { id: 19, image: twistedDough, brand: "TWISTED DOUGH", tag: "PROMO" },
 ];
 
 const Portfolio = () => {
