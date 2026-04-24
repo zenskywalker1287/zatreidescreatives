@@ -366,9 +366,9 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom metadata */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-4 md:gap-8">
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-2 md:gap-8 text-center md:text-left items-center md:items-start">
         <span className="meta-label">EST. CREATIVE BACKEND SYSTEMS</span>
-        <span className="meta-label">SPECIALITY: EMAIL · ADS · STRATEGY</span>
+        <span className="meta-label">EMAIL · ADS · STRATEGY</span>
       </div>
     </section>
   );
