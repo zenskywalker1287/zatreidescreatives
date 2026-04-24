@@ -40,7 +40,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="border-t border-foreground/5 px-6 md:px-12 lg:px-20 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <span className="meta-label text-primary">CMD.CTRL</span>
+        <span className="meta-label text-primary">ZATREIDES</span>
         <span className="meta-label text-muted-foreground/40">
           © 2026 — CREATIVE BACKEND SYSTEMS
         </span>
