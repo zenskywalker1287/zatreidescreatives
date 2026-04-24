@@ -214,7 +214,7 @@ const HeroSection = () => {
         <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           {/* Small label */}
           <span
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-blood-orange mb-8"
+            className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] md:tracking-[0.3em] text-blood-orange mb-8 max-w-[90vw] text-center leading-relaxed"
             style={{
               opacity: showContent ? 0.7 : 0,
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
