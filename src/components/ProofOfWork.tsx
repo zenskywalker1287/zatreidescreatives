@@ -3,14 +3,14 @@ import { useInView } from "../hooks/useInView";
 import ScrollReveal from "./ScrollReveal";
 
 const cards = [
-  { id: 1, span: "col-span-2", image: "/images/klaviyo-01.png", label: "NZ$489K TOTAL · NZ$126K FROM EMAIL · 83% UP" },
+  { id: 1, span: "md:col-span-2", image: "/images/klaviyo-01.png", label: "NZ$489K TOTAL · NZ$126K FROM EMAIL · 83% UP" },
   { id: 2, span: "", image: "/images/klaviyo-02.png", label: "A$400K TOTAL · A$112K EMAIL · 554% INCREASE" },
   { id: 3, span: "", image: "/images/klaviyo-03.png", label: "$76K TOTAL · $25K FROM EMAIL · 124% UP" },
   { id: 4, span: "", image: "/images/klaviyo-04.png", label: "$42K TOTAL · $13K EMAIL · 926% INCREASE" },
-  { id: 5, span: "col-span-2", image: "/images/klaviyo-05.png", label: "50–72% OPEN RATES · CONSISTENT ACROSS CAMPAIGNS" },
+  { id: 5, span: "md:col-span-2", image: "/images/klaviyo-05.png", label: "50–72% OPEN RATES · CONSISTENT ACROSS CAMPAIGNS" },
   { id: 6, span: "", image: "/images/klaviyo-06.png", label: "54–62% OPEN RATES · MULTIPLE BRANDS" },
   { id: 7, span: "", image: "/images/klaviyo-07.png", label: "70%+ OPEN RATES · FASHION BRAND · MULTIPLE CAMPAIGNS" },
-  { id: 8, span: "col-span-2", image: "/images/klaviyo-08.png", label: "DIRECT SLACK FEEDBACK · CEO · MKTG EMAILS · UNSOLICITED" },
+  { id: 8, span: "md:col-span-2", image: "/images/klaviyo-08.png", label: "DIRECT SLACK FEEDBACK · CEO · MKTG EMAILS · UNSOLICITED" },
   { id: 9, span: "", image: "/images/klaviyo-09.png", label: "NZ$ PER EMAIL REVENUE · BLACK FRIDAY CAMPAIGNS" },
   { id: 10, span: "", image: "/images/klaviyo-10.png", label: "48–55% OPEN RATES · A$ CAMPAIGNS · CONSISTENT" },
   { id: 11, span: "", image: "/images/klaviyo-11.png", label: "54–62% OPEN RATES · A$8,354 SINGLE EMAIL · FLOWS" },

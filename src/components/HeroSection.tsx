@@ -214,7 +214,7 @@ const HeroSection = () => {
         <div className="max-w-[1400px] w-full flex flex-col items-center text-center">
           {/* Small label */}
           <span
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-blood-orange mb-8"
+            className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.25em] md:tracking-[0.3em] text-blood-orange mb-8 max-w-[90vw] text-center leading-relaxed"
             style={{
               opacity: showContent ? 0.7 : 0,
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -317,32 +317,34 @@ const HeroSection = () => {
 
           {/* Pills */}
           <div
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+            className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-3"
             style={{
               opacity: showCTAs ? 1 : 0,
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
             }}
           >
-            <span className="meta-label text-blood-orange mr-1">WHAT WE DO</span>
-            {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
-              <span
-                key={pill}
-                className="border-2 border-foreground/15 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
-                style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--blood-orange))";
-                  e.currentTarget.style.backgroundColor = "hsl(18 90% 52% / 0.1)";
-                  e.currentTarget.style.boxShadow = "0 0 20px hsl(18 90% 52% / 0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                {pill}
-              </span>
-            ))}
+            <span className="meta-label text-blood-orange sm:mr-1">WHAT WE DO</span>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
+                <span
+                  key={pill}
+                  className="border-2 border-foreground/15 px-3 sm:px-4 py-1.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-foreground"
+                  style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--blood-orange))";
+                    e.currentTarget.style.backgroundColor = "hsl(18 90% 52% / 0.1)";
+                    e.currentTarget.style.boxShadow = "0 0 20px hsl(18 90% 52% / 0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -366,9 +368,9 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom metadata */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-4 md:gap-8">
+      <div className="relative z-10 px-6 md:px-12 lg:px-20 pb-8 pt-4 flex flex-col md:flex-row gap-2 md:gap-8 text-center md:text-left items-center md:items-start">
         <span className="meta-label">EST. CREATIVE BACKEND SYSTEMS</span>
-        <span className="meta-label">SPECIALITY: EMAIL · ADS · STRATEGY</span>
+        <span className="meta-label">EMAIL · ADS · STRATEGY</span>
       </div>
     </section>
   );

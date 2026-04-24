@@ -78,11 +78,7 @@ const CampaignSection = () => {
 
           <ScrollReveal variant="blur" delay={100}>
             <h2 className="font-display text-[clamp(2.2rem,6vw,5.5rem)] leading-[0.95] text-pure-white">
-              ONE BRAND.
-              <br />
-              THREE LANES.
-              <br />
-              ZERO GAPS.
+              ONE BRAND. THREE LANES. ZERO GAPS.
             </h2>
           </ScrollReveal>
 
@@ -97,12 +93,8 @@ const CampaignSection = () => {
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={400}>
-            <p className="font-display text-[clamp(1.1rem,2.5vw,2rem)] leading-[1.1] text-primary">
-              THE FRONT END FILLS IT.
-              <br />
-              THE BACKEND KEEPS IT.
-              <br />
-              THE IN-HOUSE RUNS IT.
+            <p className="font-display text-[clamp(1.1rem,2.5vw,2rem)] leading-[1.15] text-primary">
+              THE FRONT END FILLS IT. THE BACKEND KEEPS IT. THE IN-HOUSE RUNS IT.
             </p>
           </ScrollReveal>
 
@@ -236,12 +228,8 @@ const CampaignSection = () => {
               3 LANES · 1 SYSTEM · ZERO GUESSWORK
             </span>
 
-            <p className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white text-center leading-[1.05]">
-              SAME ANGLES.
-              <br />
-              EVERY CHANNEL.
-              <br />
-              NOTHING WASTED.
+            <p className="font-display text-xl md:text-2xl lg:text-3xl text-pure-white text-center leading-[1.1]">
+              SAME ANGLES. EVERY CHANNEL. NOTHING WASTED.
             </p>
 
             <a
