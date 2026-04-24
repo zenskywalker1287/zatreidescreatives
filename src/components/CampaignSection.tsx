@@ -93,12 +93,8 @@ const CampaignSection = () => {
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={400}>
-            <p className="font-display text-[clamp(1.1rem,2.5vw,2rem)] leading-[1.1] text-primary">
-              THE FRONT END FILLS IT.
-              <br />
-              THE BACKEND KEEPS IT.
-              <br />
-              THE IN-HOUSE RUNS IT.
+            <p className="font-display text-[clamp(1.1rem,2.5vw,2rem)] leading-[1.15] text-primary">
+              THE FRONT END FILLS IT. THE BACKEND KEEPS IT. THE IN-HOUSE RUNS IT.
             </p>
           </ScrollReveal>
 
