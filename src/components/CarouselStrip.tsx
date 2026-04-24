@@ -96,7 +96,9 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
     lastTimeRef.current = Date.now();
     velocityRef.current = 0;
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    try {
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
   }, [scrollX]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -107,8 +109,9 @@ const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
     if (dt > 0) velocityRef.current = dx / dt;
     lastXRef.current = e.clientX;
     lastTimeRef.current = now;
-    setScrollX(wrapScroll(scrollStart + (e.clientX - startX)));
-  }, [isDragging, scrollStart, startX, wrapScroll]);
+    // Apply delta incrementally — avoids jump-glitch when wrapScroll loops position
+    setScrollX((prev) => wrapScroll(prev + dx));
+  }, [isDragging, wrapScroll]);
 
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);

@@ -54,7 +54,9 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
     lastTimeRef.current = Date.now();
     velocityRef.current = 0;
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    try {
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
   }, [scrollX]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -65,8 +67,9 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
     if (dt > 0) velocityRef.current = dx / dt;
     lastXRef.current = e.clientX;
     lastTimeRef.current = now;
-    setScrollX(wrapScroll(scrollStart + (e.clientX - startX)));
-  }, [isDragging, scrollStart, startX, wrapScroll]);
+    // Incremental delta — eliminates wrap jump glitch
+    setScrollX((prev) => wrapScroll(prev + dx));
+  }, [isDragging, wrapScroll]);
 
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);
@@ -80,9 +83,12 @@ const HeroCarousel = ({ images }: { images: string[] }) => {
     rafRef.current = requestAnimationFrame(decay);
   }, [wrapScroll]);
 
+  // Only hijack wheel when intent is clearly horizontal
   const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    setScrollX((prev) => wrapScroll(prev - e.deltaY * 1.5));
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      setScrollX((prev) => wrapScroll(prev - e.deltaX * 1.2));
+    }
   }, [wrapScroll]);
 
   if (!images.length) return null;
