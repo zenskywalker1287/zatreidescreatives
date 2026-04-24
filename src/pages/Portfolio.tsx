@@ -1,189 +1,143 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import Nav from "../components/Nav";
+
+import flyingFlea from "@/assets/portfolio/flying-flea.png";
+import timebeam from "@/assets/portfolio/timebeam.png";
+import eskiin from "@/assets/portfolio/eskiin.png";
+import gruns from "@/assets/portfolio/gruns.png";
+import healthmateInitiation from "@/assets/portfolio/healthmate-initiation.png";
+import junk from "@/assets/portfolio/junk.png";
+import healthmateRitual from "@/assets/portfolio/healthmate-ritual.png";
+import healthmateHierarchy from "@/assets/portfolio/healthmate-hierarchy.png";
 
 type PortfolioItem = {
   id: number;
   image: string;
   brand: string;
   tag: string;
-  category: "EMAIL" | "ADS" | "SHORT FORM";
 };
 
-const items: PortfolioItem[] = Array.from({ length: 42 }, (_, i) => ({
-  id: i + 1,
-  image: `/images/slice${i + 1}.png`,
-  brand: ["MADCOW", "4AMSKIN", "XYKO", "FLATPACK"][i % 4],
-  tag: ["WELCOME FLOW", "CAMPAIGN", "ABANDONED CART", "WINBACK", "LAUNCH"][i % 5],
-  category: "EMAIL",
-}));
-
-const tabs = [
-  { id: "ALL", label: "ALL" },
-  { id: "EMAIL", label: "EMAIL" },
-  { id: "ADS", label: "ADS" },
-  { id: "SHORT FORM", label: "SHORT FORM" },
-  { id: "CREATIVE_WORLD", label: "✦ LATEST CREATIVE WORLD" },
+const items: PortfolioItem[] = [
+  { id: 1, image: flyingFlea, brand: "FLYING FLEA", tag: "PRODUCT LAUNCH" },
+  { id: 2, image: timebeam, brand: "TIMEBEAM", tag: "PROBLEM/SOLUTION" },
+  { id: 3, image: eskiin, brand: "ESKIIN", tag: "EDUCATION" },
+  { id: 4, image: gruns, brand: "GRUNS", tag: "US VS THEM" },
+  { id: 5, image: healthmateInitiation, brand: "HEALTH MATE", tag: "INITIATION" },
+  { id: 6, image: junk, brand: "JUNK BRANDS", tag: "LIFESTYLE" },
+  { id: 7, image: healthmateRitual, brand: "HEALTH MATE", tag: "RITUAL" },
+  { id: 8, image: healthmateHierarchy, brand: "HEALTH MATE", tag: "HIERARCHY" },
 ];
 
 const Portfolio = () => {
-  const [activeTab, setActiveTab] = useState("ALL");
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
-  const [creativeWorldOpen, setCreativeWorldOpen] = useState(false);
 
-  const filtered =
-    activeTab === "ALL"
-      ? items
-      : activeTab === "EMAIL"
-        ? items.filter((i) => i.category === "EMAIL")
-        : [];
-
-  const showEmpty = activeTab === "ADS" || activeTab === "SHORT FORM";
-
-  const handleTabClick = (id: string) => {
-    if (id === "CREATIVE_WORLD") {
-      setCreativeWorldOpen(true);
-      return;
-    }
-    setActiveTab(id);
-  };
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedItem(null);
-        setCreativeWorldOpen(false);
-      }
-    },
-    []
-  );
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") setSelectedItem(null);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    document.body.style.overflow = selectedItem ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedItem]);
+
   return (
     <div className="min-h-screen bg-background relative">
       <div className="film-grain" />
+      <Nav />
 
       {/* Header */}
-      <div className="pt-20 pb-8 text-center px-6">
-        <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary">
-          [ZEN RICHARDS · PORTFOLIO]
+      <div className="pt-32 md:pt-40 pb-12 text-center px-6">
+        <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-blood-orange">
+          ZATREIDES · PORTFOLIO
         </span>
-        <h1 className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.95] text-pure-white mt-4">
+        <h1 className="font-display text-[clamp(3.5rem,12vw,10rem)] leading-[0.95] text-pure-white mt-4">
           THE WORK.
         </h1>
-        <p className="font-serif-thin text-lg md:text-xl text-foreground italic mt-4 max-w-lg mx-auto">
-          1,200+ emails and creatives shipped across 6, 7 and 8-figure DTC brands.
+        <p className="font-serif-thin text-base md:text-xl text-foreground italic mt-4 max-w-xl mx-auto">
+          Full-length emails shipped for 6, 7 and 8-figure DTC brands.
         </p>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap justify-center gap-2 px-6 pb-10">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabClick(tab.id)}
-            className={`font-mono text-[11px] uppercase tracking-[0.15em] rounded-full px-6 py-2.5 border transition-all duration-200 cursor-pointer ${
-              activeTab === tab.id
-                ? "bg-primary border-primary text-pure-white"
-                : "border-foreground/30 text-foreground hover:border-foreground/60"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Grid or Empty State */}
-      <div className="px-4 md:px-8 lg:px-12 pb-20">
-        {showEmpty ? (
-          <div className="text-center py-32">
-            <span className="font-mono text-sm text-foreground">
-              MORE CREATIVE COMING SOON.
-            </span>
-            <div className="mt-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary border border-primary/40 px-3 py-1">
-                [CHECK BACK]
-              </span>
-            </div>
-          </div>
-        ) : (
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-3">
-            {filtered.map((item) => (
+      {/* Grid: 1 col mobile, 2 col sm, 3 col lg */}
+      <div className="px-4 sm:px-6 md:px-10 lg:px-16 pb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-[1600px] mx-auto">
+          {items.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setSelectedItem(item)}
+              className="group relative block overflow-hidden border border-foreground/10 bg-[#0a0a0a] text-left transition-all duration-300 hover:border-primary/60"
+              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+            >
+              <img
+                src={item.image}
+                alt={`${item.brand} — ${item.tag}`}
+                className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]"
+                style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+                loading="lazy"
+              />
+              {/* Hover overlay */}
               <div
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                className="mb-3 break-inside-avoid cursor-pointer group overflow-hidden rounded-lg border border-transparent hover:border-foreground/40 transition-all duration-200 hover:scale-[1.02]"
+                className="absolute inset-0 flex items-end p-4 md:p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85) 100%)",
+                }}
               >
-                <img
-                  src={item.image}
-                  alt={`${item.brand} ${item.tag}`}
-                  className="w-full h-auto block"
-                  loading="lazy"
-                />
+                <div className="flex items-center justify-between w-full">
+                  <span className="font-display text-base md:text-lg tracking-[0.15em] text-pure-white">
+                    {item.brand}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-blood-orange">
+                    {item.tag}
+                  </span>
+                </div>
               </div>
-            ))}
-          </div>
-        )}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Lightbox */}
       {selectedItem && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
+          className="fixed inset-0 z-[100] flex items-start md:items-center justify-center p-4 md:p-8"
           style={{ backgroundColor: "rgba(0,0,0,0.96)" }}
           onClick={() => setSelectedItem(null)}
         >
           <button
             onClick={() => setSelectedItem(null)}
-            className="absolute top-6 right-6 font-mono text-foreground text-lg hover:text-primary transition-colors z-10"
+            className="fixed top-4 right-4 md:top-6 md:right-6 font-mono text-pure-white text-sm hover:text-primary transition-colors z-[110] border border-foreground/30 px-3 py-1.5"
           >
-            [✕]
+            CLOSE ✕
           </button>
           <div
-            className="bg-white rounded-xl overflow-y-auto w-full max-w-[600px] max-h-[85vh] relative"
+            className="bg-white overflow-y-auto w-full max-w-[640px] max-h-[92vh] relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 z-10 bg-white border-b border-black/10 px-4 py-3 flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-black/60">
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/70">
                 {selectedItem.brand}
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#FF2400]">
-                [{selectedItem.tag}]
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#FF2400]">
+                {selectedItem.tag}
               </span>
             </div>
             <img
               src={selectedItem.image}
-              alt={`${selectedItem.brand} ${selectedItem.tag}`}
+              alt={`${selectedItem.brand} — ${selectedItem.tag}`}
               className="w-full h-auto block"
             />
           </div>
         </div>
       )}
-
-      {/* Creative World Modal */}
-      <Dialog open={creativeWorldOpen} onOpenChange={setCreativeWorldOpen}>
-        <DialogContent className="bg-background border-foreground/10 max-w-xl text-center">
-          <DialogHeader>
-            <DialogTitle className="font-display text-4xl md:text-5xl text-pure-white">
-              CREATIVE WORLD 01 — COMING SOON.
-            </DialogTitle>
-            <DialogDescription className="font-serif-thin text-lg text-foreground italic mt-4">
-              Our first brand universe is in production.<br />
-              Check back soon.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
 
       {/* Bottom CTA */}
       <div className="border-t border-foreground/20">
@@ -191,12 +145,12 @@ const Portfolio = () => {
           <h2 className="font-display text-[clamp(3rem,8vw,6rem)] leading-[0.95] text-pure-white">
             SEEN ENOUGH?
           </h2>
-          <p className="font-serif-thin text-lg text-foreground italic mt-4 max-w-md mx-auto">
+          <p className="font-serif-thin text-base md:text-lg text-foreground italic mt-4 max-w-md mx-auto">
             Let's talk about what we can build for your brand.
           </p>
           <Link
             to="/#contact"
-            className="inline-block mt-8 font-mono text-[11px] uppercase tracking-[0.25em] bg-pure-white text-background px-8 py-4 rounded-none transition-all duration-200 hover:bg-background hover:text-foreground border border-foreground/20"
+            className="inline-block mt-8 font-display text-sm uppercase tracking-[0.2em] bg-primary text-primary-foreground px-10 py-4 transition-all duration-300 hover:opacity-90"
           >
             START THE CONVERSATION →
           </Link>

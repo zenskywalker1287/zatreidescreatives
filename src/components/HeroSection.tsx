@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import CarouselStrip from "./CarouselStrip";
 import TypingAnimation from "./TypingAnimation";
 
@@ -297,8 +298,8 @@ const HeroSection = () => {
             >
               BOOK A CALL
             </a>
-            <a
-              href="#portfolio"
+            <Link
+              to="/portfolio"
               className="px-10 py-3.5 font-display text-base uppercase tracking-[0.15em] text-primary border border-primary inline-block text-center"
               style={{ transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={(e) => {
@@ -311,7 +312,7 @@ const HeroSection = () => {
               }}
             >
               SEE THE WORK
-            </a>
+            </Link>
           </div>
 
           {/* Pills */}
