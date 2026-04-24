@@ -78,11 +78,7 @@ const CampaignSection = () => {
 
           <ScrollReveal variant="blur" delay={100}>
             <h2 className="font-display text-[clamp(2.2rem,6vw,5.5rem)] leading-[0.95] text-pure-white">
-              ONE BRAND.
-              <br />
-              THREE LANES.
-              <br />
-              ZERO GAPS.
+              ONE BRAND. THREE LANES. ZERO GAPS.
             </h2>
           </ScrollReveal>
 
