@@ -14,6 +14,13 @@ import healthmateWelcome from "@/assets/portfolio/healthmate-welcome.png";
 import refreshWhy from "@/assets/portfolio/refresh-why.png";
 import refreshWithout from "@/assets/portfolio/refresh-without.png";
 import minikatanaBf from "@/assets/portfolio/minikatana-bf.png";
+import sowell from "@/assets/portfolio/sowell.png";
+import battlehawk from "@/assets/portfolio/battlehawk.png";
+import buckedup from "@/assets/portfolio/buckedup.png";
+import petePedro from "@/assets/portfolio/pete-pedro.png";
+import saunabox from "@/assets/portfolio/saunabox.png";
+import suspicious from "@/assets/portfolio/suspicious.png";
+import twistedDough from "@/assets/portfolio/twisted-dough.png";
 
 type PortfolioItem = {
   id: number;
