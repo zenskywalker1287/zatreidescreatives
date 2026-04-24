@@ -223,17 +223,23 @@ const HeroSection = () => {
           </span>
 
           {/* Headline with scramble */}
-          <h1 className="leading-[0.9] tracking-[-0.02em] mb-2 relative">
+          <h1 className="leading-[0.9] tracking-[-0.02em] mb-2 relative w-full">
             {/* Spray paint glow */}
             <div
               className="absolute -inset-20 blur-[200px] opacity-30 pointer-events-none"
               style={{ background: "radial-gradient(ellipse at center, hsl(var(--primary)), transparent 50%)" }}
             />
 
-            <span className="relative z-10 font-display text-[clamp(48px,8vw,120px)] text-foreground block" style={{ textShadow: "0 0 80px hsl(var(--primary) / 0.15)" }}>
+            <span
+              className="relative z-10 font-display text-[clamp(28px,7vw,120px)] text-foreground block leading-[1]"
+              style={{ textShadow: "0 0 80px hsl(var(--primary) / 0.15)" }}
+            >
               {line1}
             </span>
-            <span className="relative z-10 font-display text-[clamp(90px,15vw,200px)] text-primary block" style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.5), 0 0 100px hsl(var(--primary) / 0.3)" }}>
+            <span
+              className="relative z-10 font-display text-[clamp(64px,14vw,200px)] text-primary block leading-[0.9] mt-1"
+              style={{ textShadow: "0 0 40px hsl(var(--primary) / 0.5), 0 0 100px hsl(var(--primary) / 0.3)" }}
+            >
               {line2}
             </span>
           </h1>
