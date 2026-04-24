@@ -317,32 +317,34 @@ const HeroSection = () => {
 
           {/* Pills */}
           <div
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+            className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-3"
             style={{
               opacity: showCTAs ? 1 : 0,
               transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
             }}
           >
-            <span className="meta-label text-blood-orange mr-1">WHAT WE DO</span>
-            {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
-              <span
-                key={pill}
-                className="border-2 border-foreground/15 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground"
-                style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--blood-orange))";
-                  e.currentTarget.style.backgroundColor = "hsl(18 90% 52% / 0.1)";
-                  e.currentTarget.style.boxShadow = "0 0 20px hsl(18 90% 52% / 0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                {pill}
-              </span>
-            ))}
+            <span className="meta-label text-blood-orange sm:mr-1">WHAT WE DO</span>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {["EMAIL & RETENTION", "AD CREATIVE", "SHORT FORM & HOOKS", "SCRIPTING & BRIEFS"].map((pill) => (
+                <span
+                  key={pill}
+                  className="border-2 border-foreground/15 px-3 sm:px-4 py-1.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.12em] text-foreground"
+                  style={{ transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--blood-orange))";
+                    e.currentTarget.style.backgroundColor = "hsl(18 90% 52% / 0.1)";
+                    e.currentTarget.style.boxShadow = "0 0 20px hsl(18 90% 52% / 0.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--foreground) / 0.15)";
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
