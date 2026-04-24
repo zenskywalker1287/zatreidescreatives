@@ -10,6 +10,10 @@ import healthmateInitiation from "@/assets/portfolio/healthmate-initiation.png";
 import junk from "@/assets/portfolio/junk.png";
 import healthmateRitual from "@/assets/portfolio/healthmate-ritual.png";
 import healthmateHierarchy from "@/assets/portfolio/healthmate-hierarchy.png";
+import healthmateWelcome from "@/assets/portfolio/healthmate-welcome.png";
+import refreshWhy from "@/assets/portfolio/refresh-why.png";
+import refreshWithout from "@/assets/portfolio/refresh-without.png";
+import minikatanaBf from "@/assets/portfolio/minikatana-bf.png";
 
 type PortfolioItem = {
   id: number;
@@ -27,6 +31,10 @@ const items: PortfolioItem[] = [
   { id: 6, image: junk, brand: "JUNK BRANDS", tag: "LIFESTYLE" },
   { id: 7, image: healthmateRitual, brand: "HEALTH MATE", tag: "RITUAL" },
   { id: 8, image: healthmateHierarchy, brand: "HEALTH MATE", tag: "HIERARCHY" },
+  { id: 9, image: healthmateWelcome, brand: "HEALTH MATE", tag: "WELCOME" },
+  { id: 10, image: refreshWhy, brand: "REFRESH", tag: "BRAND STORY" },
+  { id: 11, image: refreshWithout, brand: "REFRESH", tag: "US VS THEM" },
+  { id: 12, image: minikatanaBf, brand: "MINI KATANA", tag: "BLACK FRIDAY" },
 ];
 
 const Portfolio = () => {
