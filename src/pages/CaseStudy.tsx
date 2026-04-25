@@ -151,6 +151,28 @@ const CaseStudy = () => {
             >
               [IN COLLABORATION WITH ADSUMO DIGITAL]
             </p>
+            {study.videoUrl && (
+              <div className="max-w-[900px] mx-auto mb-16">
+                <span className="meta-label text-primary block mb-4">[CASE STUDY VIDEO]</span>
+                <div
+                  className="relative w-full"
+                  style={{
+                    paddingBottom: "56.25%",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "#0a0a0a",
+                  }}
+                >
+                  <iframe
+                    src={study.videoUrl}
+                    title="Adsumo Digital Case Study"
+                    className="absolute inset-0 w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-[1200px] mx-auto">
               {[
                 "/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png", "/images/greengoo-05.png",
