@@ -155,20 +155,17 @@ const CaseStudy = () => {
               <div className="max-w-[900px] mx-auto mb-16">
                 <span className="meta-label text-primary block mb-4">[CASE STUDY VIDEO]</span>
                 <div
-                  className="relative w-full"
+                  className="relative w-full bg-[#0a0a0a]"
                   style={{
-                    paddingBottom: "56.25%",
                     border: "1px solid rgba(255,255,255,0.1)",
-                    background: "#0a0a0a",
                   }}
                 >
-                  <iframe
+                  <video
                     src={study.videoUrl}
-                    title="Adsumo Digital Case Study"
-                    className="absolute inset-0 w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-auto block"
                   />
                 </div>
               </div>

@@ -205,7 +205,7 @@ export const caseStudies: CaseStudy[] = [
     context: "Adsumo Digital is a performance agency. We partnered with them to produce campaign and flow copy across multiple DTC brands.",
     image: null,
     heroImages: ["/images/greengoo-01.png", "/images/greengoo-02.png", "/images/greengoo-03.png", "/images/greengoo-05.png", "/images/whiskeyballs-01.png", "/images/whiskeyballs-02.png", "/images/whiskeyballs-03.png", "/images/whiskeyballs-04.png", "/images/upairy-01.png", "/images/upairy-02.png"],
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    videoUrl: "/videos/adsumo-testimonial.mov",
     deliverables: [
       { icon: Sun, label: "SUMMER CAMPAIGNS" },
       { icon: RefreshCw, label: "FLOW COPY" },
