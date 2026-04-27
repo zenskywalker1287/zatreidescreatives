@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CarouselStrip from "./CarouselStrip";
 import TypingAnimation from "./TypingAnimation";
@@ -31,9 +31,9 @@ const heroCards = [
   { id: 125, image: "/images/slice45.png" },
 ];
 
-const row1 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 1}.png`);
-const row2 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 15}.png`);
-const row3 = Array.from({ length: 14 }, (_, i) => `/images/slice${i + 29}.png`);
+const row1 = Array.from({ length: 7 }, (_, i) => `/images/slice${i + 1}.png`);
+const row2 = Array.from({ length: 7 }, (_, i) => `/images/slice${i + 15}.png`);
+const row3 = Array.from({ length: 7 }, (_, i) => `/images/slice${i + 29}.png`);
 
 const SCRAMBLE_CHARS = "XØΔΛ█▓░!<>-_\\/[]{}—=+";
 
@@ -78,7 +78,7 @@ const MarqueeRow = ({
   direction: "left" | "right";
   speed: number;
 }) => {
-  const duration = (images.length * 286) / speed;
+  const duration = (images.length * 226) / speed;
   return (
     <div className="flex overflow-hidden whitespace-nowrap mb-1.5">
       <div
@@ -95,7 +95,7 @@ const MarqueeRow = ({
             loading="lazy"
             className="shrink-0 object-cover"
             style={{
-              height: 280,
+              height: 220,
               width: "auto",
               borderRadius: 8,
               margin: "0 6px",
@@ -127,47 +127,6 @@ const HeroSection = () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
-    };
-  }, []);
-
-  // Feather trail
-  const feathers = useRef<HTMLDivElement[]>([]);
-  const featherPositions = useRef(
-    Array.from({ length: 4 }, () => ({ x: 0, y: 0 }))
-  );
-  const mouseRef = useRef({ x: 0, y: 0 });
-
-  const setFeatherRef = useCallback((el: HTMLDivElement | null, i: number) => {
-    if (el) feathers.current[i] = el;
-  }, []);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener("mousemove", onMove);
-
-    let rafId: number;
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-    const animate = () => {
-      featherPositions.current.forEach((pos, i) => {
-        const target = i === 0 ? mouseRef.current : featherPositions.current[i - 1];
-        pos.x = lerp(pos.x, target.x, 0.08 - i * 0.015);
-        pos.y = lerp(pos.y, target.y + i * 5, 0.08 - i * 0.015);
-
-        if (feathers.current[i]) {
-          feathers.current[i].style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`;
-          feathers.current[i].style.opacity = `${0.6 - i * 0.12}`;
-        }
-      });
-      rafId = requestAnimationFrame(animate);
-    };
-    rafId = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(rafId);
     };
   }, []);
 
