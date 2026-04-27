@@ -142,27 +142,6 @@ const HeroSection = () => {
       {/* Dark concrete overlay */}
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.65) 50%, rgba(8,8,8,0.9) 100%)" }} />
 
-      {/* Feather trail */}
-      {[0, 1, 2, 3].map((i) => (
-        <div
-          key={i}
-          ref={(el) => setFeatherRef(el, i)}
-          className="hidden md:block"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            pointerEvents: "none",
-            zIndex: 99997,
-            opacity: 0,
-          }}
-        >
-          <svg width="8" height="12" viewBox="0 0 8 12" fill="none">
-            <path d="M4 0C4 0 8 4 8 8C8 10.2 6.2 12 4 12C1.8 12 0 10.2 0 8C0 4 4 0 4 0Z" fill="hsl(10 75% 44%)" />
-          </svg>
-        </div>
-      ))}
-
       {/* CAROUSEL — shows first on mobile */}
       <div className="relative z-10 md:hidden order-first pt-20">
         <CarouselStrip cards={heroCards} direction="right" />
