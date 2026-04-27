@@ -43,7 +43,7 @@ const testimonials = [
     name: "ADSUMO DIGITAL",
     role: "CEO · AGENCY PARTNER",
     isVideo: true,
-    videoSrc: "/images/ADSUMO_DIGITAL_VIDEO_TESTIMONIAL.MOV",
+    videoSrc: "/videos/adsumo-testimonial.mp4",
     quote: "",
   },
 ];
@@ -146,6 +146,7 @@ const SocialProofCarousel = () => {
                         muted
                         loop
                         playsInline
+                        preload={isActive ? "metadata" : "none"}
                         autoPlay={isActive}
                         ref={(el) => {
                           if (el) {
