@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export interface CarouselCard {
   id: number;
@@ -8,28 +8,37 @@ export interface CarouselCard {
 interface CarouselStripProps {
   cards: CarouselCard[];
   direction: "left" | "right";
+  autoScroll?: boolean;
+  className?: string;
+  desktopCardWidth?: number;
 }
 
-const CarouselStrip = ({ cards, direction }: CarouselStripProps) => {
-  const stripRef = useRef<HTMLDivElement>(null);
-  const [scrollX, setScrollX] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollStart, setScrollStart] = useState(0);
+const CarouselStrip = ({ cards, direction, autoScroll = true, className, desktopCardWidth = 220 }: CarouselStripProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const positionRef = useRef(0);
   const velocityRef = useRef(0);
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   const rafRef = useRef<number>(0);
   const autoScrollRef = useRef<number>(0);
+  const isDraggingRef = useRef(false);
+  const pauseUntilRef = useRef(0);
+  const [metrics, setMetrics] = useState({ containerWidth: 0, cardWidth: desktopCardWidth, gap: 24 });
+  const [isDragging, setIsDragging] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
 
+  const { containerWidth, cardWidth: CARD_WIDTH, gap: CARD_GAP } = metrics;
   const isMobile = containerWidth < 640;
-  const CARD_WIDTH = isMobile ? Math.round(containerWidth * 0.58) : 220;
-  const CARD_GAP = isMobile ? 10 : 24;
-  const TOTAL_WIDTH = cards.length * (CARD_WIDTH + CARD_GAP);
-  const AUTO_SPEED = direction === "left" ? -0.5 : 0.5;
+  const STEP = CARD_WIDTH + CARD_GAP;
+  const TOTAL_WIDTH = cards.length * STEP;
+  const AUTO_SPEED = direction === "left" ? -32 : 32;
+  const displayCards = useMemo(
+    () => [0, 1, 2].flatMap((repeat) => cards.map((card) => ({ ...card, repeat, key: `${repeat}-${card.id}` }))),
+    [cards]
+  );
 
   // Bounce entrance on scroll into view
   useEffect(() => {
